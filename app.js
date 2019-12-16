@@ -1,16 +1,18 @@
 'use strict';
 
+/*loading up the modules that will need  */
 const dialogflow = require('dialogflow');
-const config = require('./config');
+const config = require('./config'); //load the config file
 const express = require('express');
-const crypto = require('crypto');
-const bodyParser = require('body-parser');
+const crypto = require('crypto'); //crypto will need for verifying request signature
+const bodyParser = require('body-parser'); //body parser is for parsing request data. Request for making request
 const request = require('request');
-const app = express();
+const app = express(); //here create the app with express //exprese is a node.js application framework that provides a robust set of features for applications. In other words, it speed up application development.
 const uuid = require('uuid');
 
 
 // Messenger API parameters
+/* here verify the config variables. If they're not, will throw an error */
 if (!config.FB_PAGE_TOKEN) {
     throw new Error('missing FB_PAGE_TOKEN');
 }
@@ -37,16 +39,16 @@ if (!config.SERVER_URL) { //used for ink to static files
 }
 
 
-
+//set the port to 5000
 app.set('port', (process.env.PORT || 5000))
 
 //verify request came from facebook
 app.use(bodyParser.json({
-    verify: verifyRequestSignature
+    verify: verifyRequestSignature //verifyRequestSignature is a function that verify request came from facebook, from the right application
 }));
 
 //serve static files in the public directory
-app.use(express.static('public'));
+app.use(express.static('public')); //means set the folder public where we store images, videos or anything we want to share with the user. Basically this line makes the folder visible, so it is accessible via the http
 
 // Process application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -54,15 +56,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Process application/json
-app.use(bodyParser.json());
+app.use(bodyParser.json()); //this body parser module helps to parses requests
 
 
 
 
-
-
+/*set up the dialog flow client here. I create a credentials object that consists of google
+email and private key, then pass both the credentials and google project id 
+to dialogflow session client, this is how the authenticate dialogflow client*/
 const credentials = {
-    client_email: config.GOOGLE_CLIENT_EMAIL,
+    client_email: config.GOOGLE_CLIENT_EMAIL, //client email and private key came from service account
     private_key: config.GOOGLE_PRIVATE_KEY,
 };
 
@@ -83,7 +86,7 @@ app.get('/', function (req, res) {
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
-    console.log("request");
+    console.log("request");                            //the token is verified. This is the secret heroku app and fb app share and validate
     if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === config.FB_VERIFY_TOKEN) {
         res.status(200).send(req.query['hub.challenge']);
     } else {
@@ -94,18 +97,17 @@ app.get('/webhook/', function (req, res) {
 
 /*
  * All callbacks for Messenger are POST-ed. They will be sent to the same
- * webhook. Be sure to subscribe your app to your page to receive callbacks
- * for your page. 
+ * webhook. Need to be sure to subscribe the app to the page to receive callbacks
+ * for the page. 
  * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
  *
  */
+ //this part is where we catch events, that will come to webhook
 app.post('/webhook/', function (req, res) {
     var data = req.body;
     console.log(JSON.stringify(data));
 
-
-
-    // Make sure this is a page subscription
+    // Make sure this is a page subscription, then iterate thru each messaging event. For each messaging event, check what kind of event it is
     if (data.object == 'page') {
         // Iterate over each entry
         // There may be multiple if batched
@@ -113,21 +115,24 @@ app.post('/webhook/', function (req, res) {
             var pageID = pageEntry.id;
             var timeOfEvent = pageEntry.time;
 
+            /*In the webhook, I subscribed to the messages and messaging postbacks*/
+            /*Messages are the text user send us and postbacks are the triggered when user clicks on a button or clicks on the item in the menu, or get started button or any other button  */
+
             // Iterate over each messaging event
             pageEntry.messaging.forEach(function (messagingEvent) {
-                if (messagingEvent.optin) {
+                if (messagingEvent.optin) { //first one is optin, that is authentication
                     receivedAuthentication(messagingEvent);
-                } else if (messagingEvent.message) {
+                } else if (messagingEvent.message) { //message, the one we will be listening for, includes text messages, quick replies, and attachments
                     receivedMessage(messagingEvent);
-                } else if (messagingEvent.delivery) {
+                } else if (messagingEvent.delivery) { //delivery confirmation
                     receivedDeliveryConfirmation(messagingEvent);
-                } else if (messagingEvent.postback) {
-                    receivedPostback(messagingEvent);
-                } else if (messagingEvent.read) {
+                } else if (messagingEvent.postback) { //a postback can be a click on button, menu or structured message. We need to catch it if we want to perform any action after the event is triggered.
+                    receivedPostback(messagingEvent); // the button wont work if dont catch button click and trigger, for instance another intent in the code
+                } else if (messagingEvent.read) { //message read
                     receivedMessageRead(messagingEvent);
-                } else if (messagingEvent.account_linking) {
+                } else if (messagingEvent.account_linking) { //account linking
                     receivedAccountLink(messagingEvent);
-                } else {
+                } else { //unknown event, catch the event I didnt subscribe to
                     console.log("Webhook received unknown messagingEvent: ", messagingEvent);
                 }
             });
@@ -142,12 +147,12 @@ app.post('/webhook/', function (req, res) {
 
 
 
-
+//handle everything user write to the bot
 function receivedMessage(event) {
 
-    var senderID = event.sender.id;
+    var senderID = event.sender.id; //first extract data from the request, so we read the sender and receiver
     var recipientID = event.recipient.id;
-    var timeOfMessage = event.timestamp;
+    var timeOfMessage = event.timestamp; //then we read the time of the message and the message itself
     var message = event.message;
 
     if (!sessionIds.has(senderID)) {
@@ -156,39 +161,40 @@ function receivedMessage(event) {
     //console.log("Received message for user %d and page %d at %d with message:", senderID, recipientID, timeOfMessage);
     //console.log(JSON.stringify(message));
 
-    var isEcho = message.is_echo;
-    var messageId = message.mid;
+    var isEcho = message.is_echo; //check if the message is an echo. That is the message sent by my page
+    var messageId = message.mid; //then read messageID, appId, and metadata
     var appId = message.app_id;
     var metadata = message.metadata;
 
-    // You may get a text or attachment but not both
-    var messageText = message.text;
+    //We may get a text or attachment but not both (only one of these 3 can be sent at once)
+    var messageText = message.text; //the message, attachments and the quick reply
     var messageAttachments = message.attachments;
     var quickReply = message.quick_reply;
 
-    if (isEcho) {
+    if (isEcho) { //if this is an echo, call handleEcho, that just logs data to log
         handleEcho(messageId, appId, metadata);
         return;
-    } else if (quickReply) {
+    } else if (quickReply) {//if is quickReply, call handleQuickReply
         handleQuickReply(senderID, quickReply, messageId);
         return;
     }
 
 
     if (messageText) {
-        //send message to api.ai
+        //if it is a text message, send it to dialogflow
         sendToDialogFlow(senderID, messageText);
-    } else if (messageAttachments) {
+    } else if (messageAttachments) { //if it is attachment(file, image, sticker, video), then call the handleMessageAttachments
         handleMessageAttachments(messageAttachments, senderID);
     }
 }
 
 
 function handleMessageAttachments(messageAttachments, senderID){
-    //for now just reply
+    //send back to user's response 'attachment received'
     sendTextMessage(senderID, "Attachment received. Thank you.");
 }
 
+//send the quick reply to Dialogflow to handle it for us
 function handleQuickReply(senderID, quickReply, messageId) {
     var quickReplyPayload = quickReply.payload;
     console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
@@ -215,7 +221,7 @@ function handleMessage(message, sender) {
         case "text": //text
             message.text.text.forEach((text) => {
                 if (text !== '') {
-                    sendTextMessage(sender, text);
+                    sendTextMessage(sender, text); //display all the messages 
                 }
             });
             break;
@@ -230,9 +236,9 @@ function handleMessage(message, sender) {
                     }
                 replies.push(reply);
             });
-            sendQuickReply(sender, message.quickReplies.title, replies);
+            sendQuickReply(sender, message.quickReplies.title, replies); //use this method to send quick replies
             break;
-        case "image": //image
+        case "image": //send image
             sendImageMessage(sender, message.image.imageUri);
             break;
     }
@@ -276,29 +282,31 @@ function handleCardMessages(messages, sender) {
     sendGenericMessage(sender, elements);
 }
 
-
+//loop thru all the messages and check for the message type
 function handleMessages(messages, sender) {
     let timeoutInterval = 1100;
     let previousType ;
     let cardTypes = [];
     let timeout = 0;
     for (var i = 0; i < messages.length; i++) {
-
+      
+        //check if the previous message was card so that it can display a gallery. If the previous was card and now this one is not, means the gallery is over and we need to display it
         if ( previousType == "card" && (messages[i].message != "card" || i == messages.length - 1)) {
             timeout = (i - 1) * timeoutInterval;
-            setTimeout(handleCardMessages.bind(null, cardTypes, sender), timeout);
-            cardTypes = [];
+            setTimeout(handleCardMessages.bind(null, cardTypes, sender), timeout);//if the type of message is card, call the handleCardMessage
+            cardTypes = []; 
             timeout = i * timeoutInterval;
             setTimeout(handleMessage.bind(null, messages[i], sender), timeout);
-        } else if ( messages[i].message == "card" && i == messages.length - 1) {
+        } //if the message is card and it is the last message that arrived from dialogflow, then display the gallery
+        else if ( messages[i].message == "card" && i == messages.length - 1) {
             cardTypes.push(messages[i]);
             timeout = (i - 1) * timeoutInterval;
             setTimeout(handleCardMessages.bind(null, cardTypes, sender), timeout);
             cardTypes = [];
-        } else if ( messages[i].message == "card") {
+        } else if ( messages[i].message == "card") { //if this message is card, then push it to the card gallery
             cardTypes.push(messages[i]);
         } else  {
-
+            //if the message is text or any other type , call handleMessage
             timeout = i * timeoutInterval;
             setTimeout(handleMessage.bind(null, messages[i], sender), timeout);
         }
@@ -308,38 +316,41 @@ function handleMessages(messages, sender) {
     }
 }
 
+//get the response text and data
 function handleDialogFlowResponse(sender, response) {
     let responseText = response.fulfillmentMessages.fulfillmentText;
 
     let messages = response.fulfillmentMessages;
-    let action = response.action;
-    let contexts = response.outputContexts;
-    let parameters = response.parameters;
+    let action = response.action; //if there is a corresponding action and  
+    let contexts = response.outputContexts; //if we were in the middle of any kind of dialog, that is if there is a dialog context
+    let parameters = response.parameters; //we can also see the parameters, that were read from the conversation
 
     sendTypingOff(sender);
 
-    if (isDefined(action)) {
-        handleDialogFlowAction(sender, action, messages, contexts, parameters);
-    } else if (isDefined(messages)) {
-        handleMessages(messages, sender);
+    if (isDefined(action)) { //if action is defined, then see what it is and handle it
+        handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
+    } else if (isDefined(messages)) { //if there is no action, we need to handle messages we received from Dialogflow
+        handleMessages(messages, sender);//the responses we set in dialogflow will be handle in handleMessages method
     } else if (responseText == '' && !isDefined(action)) {
-        //dialogflow could not evaluate input.
-        sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?");
+        //dialogflow could not evaluate input. If there was error and we didnt get any data, than we still provide an answer to the user
+        sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?"); //this will only happen if you dont hv the default fallback intent
     } else if (isDefined(responseText)) {
         sendTextMessage(sender, responseText);
     }
 }
 
+//function that makes a request to dialogflow
 async function sendToDialogFlow(sender, textString, params) {
 
-    sendTypingOn(sender);
+    sendTypingOn(sender); //2.) after we have have the proper session, we set typing on. This function tells messenger to show dots, as if someone is typing
 
-    try {
+    try { //1.) firstly set the approriate session, so dialogflow can track conversation with this particular user
         const sessionPath = sessionClient.sessionPath(
             config.GOOGLE_PROJECT_ID,
-            sessionIds.get(sender)
-        );
-
+            sessionIds.get(sender) //track by its session, so pass in the sender id
+        );                         //we get userid from sessionid, and we also pass in google project id
+            
+        //3.) then we make the text request, sends text to dialogflow
         const request = {
             session: sessionPath,
             queryInput: {
@@ -354,10 +365,10 @@ async function sendToDialogFlow(sender, textString, params) {
                 }
             }
         };
-        const responses = await sessionClient.detectIntent(request);
+        const responses = await sessionClient.detectIntent(request); //we wait for response
 
-        const result = responses[0].queryResult;
-        handleDialogFlowResponse(sender, result);
+        const result = responses[0].queryResult; //when it happens, we handle it
+        handleDialogFlowResponse(sender, result); //dialogflow get the response for us
     } catch (e) {
         console.log('error');
         console.log(e);
@@ -705,6 +716,7 @@ function callSendAPI(messageData) {
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback-received
  * 
  */
+//the payload field in the callback is defined on the button
 function receivedPostback(event) {
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
@@ -714,6 +726,7 @@ function receivedPostback(event) {
     // button for Structured Messages.
     var payload = event.postback.payload;
 
+    //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
         default:
             //unindentified payload
@@ -735,6 +748,8 @@ function receivedPostback(event) {
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-read
  * 
  */
+//this function get the relevent data from the request and log them into the console
+//also do the same logging in receivedAuthentication, receivedDeliveryConfirmation, receivedMessageRead and in receiveAccountLink
 function receivedMessageRead(event) {
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
@@ -828,21 +843,22 @@ function receivedAuthentication(event) {
  * https://developers.facebook.com/docs/graph-api/webhooks#setup
  *
  */
+//here validate the request came from fb, and from the right aplication
 function verifyRequestSignature(req, res, buf) {
-    var signature = req.headers["x-hub-signature"];
+    var signature = req.headers["x-hub-signature"]; //read the signature from the request's header
 
     if (!signature) {
-        throw new Error('Couldn\'t validate the signature.');
+        throw new Error('Couldn\'t validate the signature.'); //if ther is no signature, throw an error
     } else {
         var elements = signature.split('=');
         var method = elements[0];
         var signatureHash = elements[1];
 
-        var expectedHash = crypto.createHmac('sha1', config.FB_APP_SECRET)
+        var expectedHash = crypto.createHmac('sha1', config.FB_APP_SECRET) //compare the signaturehash with the encryted app secret from the config file
             .update(buf)
             .digest('hex');
 
-        if (signatureHash != expectedHash) {
+        if (signatureHash != expectedHash) { //if doesn't match, will throw an error
             throw new Error("Couldn't validate the request signature.");
         }
     }
