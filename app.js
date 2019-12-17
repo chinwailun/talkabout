@@ -10,7 +10,7 @@ const request = require('request');
 const app = express(); //here create the app with express //exprese is a node.js application framework that provides a robust set of features for applications. In other words, it speed up application development.
 const uuid = require('uuid');
 
-
+ 
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
 if (!config.FB_PAGE_TOKEN) {
@@ -210,6 +210,72 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
+
+        case "faq-delivery":
+
+            handleMessages(messages, sender); //display the speech response we got from dialogflow
+
+            sendTypingOn(sender); //wait 3 seconds and in the meantime show typing indicator
+
+            //ask what user wants to do next
+            setTimeout(function() {
+                let buttons = [
+                    {
+                        type:"web_url",
+                        url:"https://www.myapple.com/track_order",
+                        title:"Track my order"
+                    },
+                    {
+                        type:"phone_number",
+                        title:"Call us",
+                        payload:"+16505551234",
+                    },
+                    {
+                        type:"postback",
+                        title:"Keep on Chatting",
+                        payload:"CHAT"
+                    }
+                ];
+
+                sendButtonMessage(sender, "What would you like to do next?", buttons);
+            }, 3000)
+
+        break;
+
+       /* case "detailed-application": //catch detailed-application action and then check for context
+            let filteredContexts = contexts.filter(function (el) { //filter the context and see if there is a job_application context among them or job-application-details_dialog_context
+                return el.name.includes('job_application') || //get filteredcontexts array of these two if they exist
+                    el.name.includes('job-application-details_dialog_context')
+            });
+            if (filteredContexts.length > 0 && contexts[0].parameters) { //if length of filterContexts >0 and have array of paramters, then start checking if the parameters are collected.
+                //at the beginning parameters will be all empty
+                let user_name = (isDefined(contexts[0].parameters.fields['user-name'])
+                    && contexts[0].parameters.fields['user-name'] != '') ? contexts[0].parameters.fields['user-name'].stringValue : '';
+                
+                let previous_job = (isDefined(contexts[0].parameters.fields['previous-job'])
+                    && contexts[0].parameters.fields['previous-job'] != '') ? contexts[0].parameters.fields['previous-job'].stringValue : '';            
+                
+                let years_of_experience = (isDefined(contexts[0].parameters.fields['years-of-experience'])
+                    && contexts[0].parameters.fields['years-of-experience'] != '') ? contexts[0].parameters.fields['years-of-experience'].stringValue : '';
+                
+                let job_vacancy = (isDefined(contexts[0].parameters.fields['job-vacancy'])
+                    && contexts[0].parameters.fields['job-vacancy'] != '') ? contexts[0].parameters.fields['job-vacancy'].stringValue : '';
+            }
+            if (user_name != '' && previous_job != '' && years_of_experience != '' && job_vacancy != '') {
+
+                let emailContent = 'A new job enquiery from ' + user_name + ' for the job: ' + job_vacancy +
+                '.<br> Previous job position: ' + previous_job + '.' +
+                '.<br> Years of experience: ' + years_of_experience + '.';
+              
+            sendEmail('New job application', emailContent);
+
+            handleMessages(messages, sender); //after sent email will also send response message back to messenger
+
+            } else {
+                    handleMessages(messages, sender); //we need to send response back to messenger with a question for the next paramter
+            }
+                
+            break;*/
         default:
             //unhandled action, just send back the text
             handleMessages(messages, sender);
@@ -728,6 +794,11 @@ function receivedPostback(event) {
 
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
+        case 'CHAT':
+            //user wants to chat
+            sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
+            break;
+            
         default:
             //unindentified payload
             sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
