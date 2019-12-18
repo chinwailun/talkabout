@@ -215,14 +215,14 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
             handleMessages(messages, sender); //display the speech response we got from dialogflow
 
-            sendTypingOn(sender); //wait 3 seconds and in the meantime show typing indicator
+            sendTypingOn(sender); //wait 2 seconds and in the meantime show typing indicator
 
             //ask what user wants to do next
             setTimeout(function() {
                 let buttons = [
                     {
                         type:"web_url",
-                        url:"https://www.myapple.com/track_order",
+                        url:"https://www.malaysiastock.biz/Latest-Announcement.aspx",
                         title:"Track my order"
                     },
                     {
@@ -238,7 +238,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 ];
 
                 sendButtonMessage(sender, "What would you like to do next?", buttons);
-            }, 3000)
+            }, 2000)
 
         break;
 
@@ -794,11 +794,16 @@ function receivedPostback(event) {
 
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
+        case 'JOB_APPLY':
+            //get feedback with new jobs
+			sendToDialogFlow(senderID, 'job openings');
+            break;
+
         case 'CHAT':
             //user wants to chat
             sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
             break;
-            
+
         default:
             //unindentified payload
             sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
