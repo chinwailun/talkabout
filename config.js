@@ -7,4 +7,5 @@ module.exports = {
     DF_LANGUAGE_CODE: process.env.DF_LANGUAGE_CODE,
     GOOGLE_CLIENT_EMAIL: process.env.GOOGLE_CLIENT_EMAIL,
     GOOGLE_PRIVATE_KEY: JSON.parse(process.env.GOOGLE_PRIVATE_KEY),
+    WEATHER_API_KEY: process.env.WEATHER_API_KEY,
 };

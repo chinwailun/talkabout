@@ -211,6 +211,35 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "get-current-weather":
+            //first check if geo-city paramter is set up. If paramters has geo-city and if it is not empty, then call service
+        	if ( parameters.fields.hasOwnProperty('geo-city') && parameters.fields['geo-city'].stringValue!='') {
+            	request({
+					url: 'http://api.openweathermap.org/data/2.5/weather', //URL to hit
+                	qs: { //pass in query part paramter and appId parameter
+                		appid: config.WEATHER_API_KEY,
+						q: parameters.fields['geo-city'].stringValue //query string for city (got from dialogflow parameter)
+                	}, //Query string data
+            	}, function(error, response, body){
+					if( response.statusCode === 200) { //if response code is 200, means request was successful
+                        //parse the json from the response
+                    	let weather = JSON.parse(body);
+                    	if (weather.hasOwnProperty("weather")) {
+                        	let reply = `${messages[0].text.text} ${weather["weather"][0]["description"]}`; //the reply becomes the description in the weather array
+                        	sendTextMessage(sender, reply);
+                    	} else {
+                        	sendTextMessage(sender,
+								`No weather forecast available for ${parameters.fields['geo-city'].stringValue}`);
+                        }
+                    } else {
+						sendTextMessage(sender, 'Weather forecast is not available');
+                    }
+                });
+            } else {
+            	handleMessages(messages, sender); //cant call service jiu send response back to fb (user not enter the city, the bot will send question asking for city)
+            }
+            break;
+            
         case "faq-delivery":
 
             handleMessages(messages, sender); //display the speech response we got from dialogflow
@@ -241,8 +270,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             }, 2000)
 
         break;
-
-       /* case "detailed-application": //catch detailed-application action and then check for context
+/*
+        case "detailed-application": //catch detailed-application action and then check for context
             let filteredContexts = contexts.filter(function (el) { //filter the context and see if there is a job_application context among them or job-application-details_dialog_context
                 return el.name.includes('job_application') || //get filteredcontexts array of these two if they exist
                     el.name.includes('job-application-details_dialog_context')
@@ -981,7 +1010,7 @@ function greetUserText(userId) {
 
 				sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
                     'I can answer questions related to certain point of interests ' +
-                    'and be your travel assistent. What can I help you with?');
+                    'and be your travel assistant. What can I help you with?');
 			} else {
 				console.log("Cannot get data for fb user with id",
 					userId);
