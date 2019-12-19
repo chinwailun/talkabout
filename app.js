@@ -794,6 +794,11 @@ function receivedPostback(event) {
 
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
+
+        case 'GET_STARTED':
+            greetUserText(senderID);
+            break;
+
         case 'JOB_APPLY':
             //get feedback with new jobs
 			sendToDialogFlow(senderID, 'job openings');
@@ -956,3 +961,34 @@ function isDefined(obj) {
 app.listen(app.get('port'), function () {
     console.log('running on port', app.get('port'))
 })
+
+function greetUserText(userId) {
+	//first read user firstname
+	request({ //make a request to facebook graph API and pass access token
+		uri: 'https://graph.facebook.com/v3.2/' + userId, 
+		qs: {
+			access_token: config.FB_PAGE_TOKEN 
+		}
+
+	}, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+
+			var user = JSON.parse(body);
+			console.log('getUserData: ' + user); //when get the response, read the user object and send a message to the user
+			if (user.first_name) { 
+				console.log("FB user: %s %s, %s",
+					user.first_name, user.last_name, user.profile_pic);
+
+				sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
+                    'I can answer questions related to certain point of interests ' +
+                    'and be your travel assistent. What can I help you with?');
+			} else {
+				console.log("Cannot get data for fb user with id",
+					userId);
+			}
+		} else {
+			console.error(response.error);
+		}
+
+	});
+}
