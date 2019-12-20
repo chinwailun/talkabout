@@ -10,6 +10,9 @@ const request = require('request');
 const app = express(); //here create the app with express //exprese is a node.js application framework that provides a robust set of features for applications. In other words, it speed up application development.
 const uuid = require('uuid');
 
+const pg = require('pg');
+pg.defaults.ssl = true;
+
  
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
@@ -37,7 +40,12 @@ if (!config.FB_APP_SECRET) {
 if (!config.SERVER_URL) { //used for ink to static files
     throw new Error('missing SERVER_URL');
 }
-
+if (!config.WEATHER_API_KEY) { //weather api key
+    throw new Error('missing WEATHER_API_KEY');
+}
+if (!config.PG_CONFIG) { //pg config
+    throw new Error('missing PG_CONFIG');
+}
 
 //set the port to 5000
 app.set('port', (process.env.PORT || 5000))
@@ -1005,9 +1013,41 @@ function greetUserText(userId) {
 			var user = JSON.parse(body);
 			console.log('getUserData: ' + user); //when get the response, read the user object and send a message to the user
 			if (user.first_name) { 
-				console.log("FB user: %s %s, %s",
-					user.first_name, user.last_name, user.profile_pic);
 
+                /*****************************************************/
+                /*insert user into database table==========start here*/ 
+				//console.log("FB user: %s %s, %s", user.first_name, user.last_name, user.profile_pic);
+
+                var pool = new pg.Pool(config.PG_CONFIG); //create a connection pool (connection pool is a group of database connections setting around, waiting to be handed out and used) , this means when a request comes, a connection is already there and given to the application for that specific request.  
+                pool.connect(function(err, client, done) { //without any connection pooling, the application will have to reach out to the database to establish a connection
+                    if (err) {
+                        return console.error('Error acquiring client', err.stack);
+                    }
+                    var rows = [];
+                    client.query(`SELECT fb_id FROM users WHERE fb_id='${userId}' LIMIT 1`, //search for a user with the facebook id, we've gotten from the facebook graph
+                        function(err, result) {
+                            if (err) {
+                                console.log('Query error: ' + err);
+                            } else {
+
+                                if (result.rows.length === 0) {
+                                    let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic) ' + //if there is no entry in a database, then make it by executing the insert statament
+										'VALUES ($1, $2, $3, $4)'; 
+                                    client.query(sql,
+                                        [
+                                            userId,
+                                            user.first_name,
+                                            user.last_name,
+                                            user.profile_pic
+                                        ]);
+                                }
+                            }
+                        });
+
+                });
+                pool.end();
+                /*insert user into database table ========= end here */
+                /*****************************************************/
 				sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
                     'I can answer questions related to certain point of interests ' +
                     'and be your travel assistant. What can I help you with?');
