@@ -233,7 +233,7 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
-        case "iphone_colors.fovourite": //here catch the fallback's intent action
+        case "iphone_colors.favourite": //here catch the fallback's intent action
             colors.updateUserColor(parameters.fields['color'].stringValue, sender); //color will be in parameters.fields['color'].stringValue. After read the paramter then call the updateUserColor function
             let reply = `Oh, I like it, too. I'll remember that.`; 
             sendTextMessage(sender, reply);
