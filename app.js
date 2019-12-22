@@ -1039,7 +1039,7 @@ function greetUserText(userId) {
 
 	}, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-
+ 
 			var user = JSON.parse(body);
 			console.log('getUserData: ' + user); //when get the response, read the user object and send a message to the user
 			if (user.first_name) { 
@@ -1047,8 +1047,7 @@ function greetUserText(userId) {
                 /*****************************************************/
                 /*insert user into database table==========start here*/ 
 				//console.log("FB user: %s %s, %s", user.first_name, user.last_name, user.profile_pic);
-
-               /* var pool = new pg.Pool(config.PG_CONFIG); //create a connection pool (connection pool is a group of database connections setting around, waiting to be handed out and used) , this means when a request comes, a connection is already there and given to the application for that specific request.  
+               /*var pool = new pg.Pool(config.PG_CONFIG); //create a connection pool (connection pool is a group of database connections setting around, waiting to be handed out and used) , this means when a request comes, a connection is already there and given to the application for that specific request.  
                 pool.connect(function(err, client, done) { //without any connection pooling, the application will have to reach out to the database to establish a connection
                     if (err) {
                         return console.error('Error acquiring client', err.stack);
