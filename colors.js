@@ -55,6 +55,7 @@ module.exports = {
         pool.end();
     },
 
+    //perform a simple update on the user's table. It update the color field with the new favourite color
     updateUserColor: function(color, userId) {
         var pool = new pg.Pool(config.PG_CONFIG);
         pool.connect(function(err, client, done) {

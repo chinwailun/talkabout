@@ -233,6 +233,12 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "iphone_colors.fovourite": //here catch the fallback's intent action
+            colors.updateUserColor(parameters.fields['color'].stringValue, sender); //color will be in parameters.fields['color'].stringValue. After read the paramter then call the updateUserColor function
+            let reply = `Oh, I like it, too. I'll remember that.`; 
+            sendTextMessage(sender, reply);
+            break;
+
         case "iphone_colors":
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
                 let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
