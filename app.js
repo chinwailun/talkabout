@@ -321,7 +321,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             }, 2000)
 
         break;
-/*
+
         case "detailed-application": //catch detailed-application action and then check for context
             let filteredContexts = contexts.filter(function (el) { //filter the context and see if there is a job_application context among them or job-application-details_dialog_context
                 return el.name.includes('job_application') || //get filteredcontexts array of these two if they exist
@@ -349,13 +349,40 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               
             sendEmail('New job application', emailContent);
 
+            /***************database stuff starts here***********************/
+
+            var pool = new pg.Pool(config.PG_CONFIG);
+            pool.connect(function(err, client, done){
+                if(err){
+                    return console.error('Error acquiring client',err.stack);
+                }
+                client
+                    .query(
+                        'INSERT into job ' +
+                        '(user_name, previous_job, years_of_experience, ) ' +
+                        'VALUES($1,$2,$3) RETURNING id',
+                        [user_name, previous_job, years_of_experience],
+                        function(err, result){
+                            if(err){
+                                console.log(err);
+                            } else{
+                                console.log('row inserted with id: ' + result.rows[0].id);
+                            }
+                        });
+                    
+            });
+            pool.end();
+
+
+            /***************database stuff starts here***********************/
+
             handleMessages(messages, sender); //after sent email will also send response message back to messenger
 
             } else {
                     handleMessages(messages, sender); //we need to send response back to messenger with a question for the next paramter
             }
                 
-            break;*/
+            break;
         default:
             //unhandled action, just send back the text
             handleMessages(messages, sender);
