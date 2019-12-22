@@ -31,7 +31,7 @@ module.exports = {
         pool.end();
     },
 
-
+    //this function will call the callback with the favourite color or with an empty string
     readUserColor: function(callback, userId) {
         var pool = new pg.Pool(config.PG_CONFIG);
         pool.connect(function(err, client, done) {
@@ -40,12 +40,12 @@ module.exports = {
             }
             client
                 .query(
-                    'SELECT color FROM public.users WHERE fb_id=$1',
+                    'SELECT color FROM public.users WHERE fb_id=$1',   //get the favourite color from the user
                     [userId],
                     function(err, result) {
                         if (err) {
                             console.log(err);
-                            callback('');
+                            callback(''); //if it doesn't exist, it call the callback with an empty string
                         } else {
                             callback(result.rows[0]['color']);
                         };

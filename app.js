@@ -233,6 +233,21 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "buy.iphone":
+            //we call readUserColor. We pass in callback function and the sender. In the callback function we get color from readUserColor
+            colors.readUserColor(function(color) {
+                    let reply;
+                    if (color === '') { //if the returned color is empty, means user did not tell us his/her favourite color
+                        reply = 'In what color would you like to have it?';
+                    } else {
+                        reply = `Would you like to order it in your favourite color ${color}?`;
+                    }
+                    sendTextMessage(sender, reply);
+
+                }, sender
+            )
+            break;
+
         case "iphone_colors.favourite": //here catch the fallback's intent action
             colors.updateUserColor(parameters.fields['color'].stringValue, sender); //color will be in parameters.fields['color'].stringValue. After read the paramter then call the updateUserColor function
             let reply = `Oh, I like it, too. I'll remember that.`; 
