@@ -2,18 +2,17 @@
 
 /*loading up the modules that will need  */
 const dialogflow = require('dialogflow');
-const config = require('./config'); //load the config file that is in the same directory as app.js
+const config = require('./config'); //load the config file
 const express = require('express');
 const crypto = require('crypto'); //crypto will need for verifying request signature
-const bodyParser = require('body-parser'); //body parser is for parsing request data. 
-const request = require('request'); //Request for making request
+const bodyParser = require('body-parser'); //body parser is for parsing request data. Request for making request
+const request = require('request');
 const app = express(); //here create the app with express //exprese is a node.js application framework that provides a robust set of features for applications. In other words, it speed up application development.
 const uuid = require('uuid');
 
 const pg = require('pg');
 pg.defaults.ssl = true;
 
-const userService = require('./user');
  
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
@@ -57,7 +56,7 @@ app.use(bodyParser.json({
 }));
 
 //serve static files in the public directory
-app.use(express.static('public')); //means set the folder 'public' where we store images, videos or anything we want to share with the user. Basically this line makes the folder visible, so it is accessible via the http
+app.use(express.static('public')); //means set the folder public where we store images, videos or anything we want to share with the user. Basically this line makes the folder visible, so it is accessible via the http
 
 // Process application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -148,8 +147,8 @@ app.post('/webhook/', function (req, res) {
             });
         });
 
-        //Assume all went well.
-        //must send back a 200, within 20 seconds
+        // Assume all went well.
+        // You must send back a 200, within 20 seconds
         res.sendStatus(200);
     }
 });
@@ -158,12 +157,6 @@ app.post('/webhook/', function (req, res) {
 function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
-    }
-
-    if (!usersMap.has(senderID)) { //check if userMap contains a key senderID
-        userService.addUser(function(user){ //first paramter is callback 
-            usersMap.set(senderID, user); //in the userMap we store the object that we get from the module (that is the object retrieved from FB graph API) //store it under the key 'senderID'. Here we call it senderID, in the module we call it userID and in fact, it's a FB ID
-        }, senderID);  //second paramter is userID                    
     }
 }
 
@@ -219,14 +212,14 @@ function receivedMessage(event) {
 
 function handleMessageAttachments(messageAttachments, senderID){
     //send back to user's response 'attachment received'
-    sendTextMessage(senderID, "Attachment received. Thank you :)");
+    sendTextMessage(senderID, "Attachment received. Thank you.");
 }
 
 //send the quick reply to Dialogflow to handle it for us
 function handleQuickReply(senderID, quickReply, messageId) {
     var quickReplyPayload = quickReply.payload;
     console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
-    //send payload to dialogflow
+    //send payload to api.ai
     sendToDialogFlow(senderID, quickReplyPayload);
 }
 
@@ -1021,14 +1014,6 @@ app.listen(app.get('port'), function () {
     console.log('running on port', app.get('port'))
 })
 
-async function resolveAfterXSeconds(x) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve(x);
-        }, x * 1000);
-    });
-}
-/*
 function greetUserText(userId) {
 	//first read user firstname
 	request({ //make a request to facebook graph API and pass access token
@@ -1039,7 +1024,7 @@ function greetUserText(userId) {
 
 	}, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
- 
+
 			var user = JSON.parse(body);
 			console.log('getUserData: ' + user); //when get the response, read the user object and send a message to the user
 			if (user.first_name) { 
@@ -1047,7 +1032,8 @@ function greetUserText(userId) {
                 /*****************************************************/
                 /*insert user into database table==========start here*/ 
 				//console.log("FB user: %s %s, %s", user.first_name, user.last_name, user.profile_pic);
-               /*var pool = new pg.Pool(config.PG_CONFIG); //create a connection pool (connection pool is a group of database connections setting around, waiting to be handed out and used) , this means when a request comes, a connection is already there and given to the application for that specific request.  
+
+                var pool = new pg.Pool(config.PG_CONFIG); //create a connection pool (connection pool is a group of database connections setting around, waiting to be handed out and used) , this means when a request comes, a connection is already there and given to the application for that specific request.  
                 pool.connect(function(err, client, done) { //without any connection pooling, the application will have to reach out to the database to establish a connection
                     if (err) {
                         return console.error('Error acquiring client', err.stack);
@@ -1074,10 +1060,10 @@ function greetUserText(userId) {
                         });
 
                 });
-                pool.end();*/
+                pool.end();
                 /*insert user into database table ========= end here */
-                /*****************************************************/    
-			/*	sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
+                /*****************************************************/
+				sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
                     'I can answer questions related to certain point of interests ' +
                     'and be your travel assistant. What can I help you with?');
 			} else {
@@ -1089,21 +1075,4 @@ function greetUserText(userId) {
 		}
 
 	});
-}*/
-
-async function greetUserText(userId) {
-    let user = usersMap.get(userId);
-    if (!user) {
-        await resolveAfterXSeconds(2);
-        user = usersMap.get(userId);
-    }
-    if (user) {
-        sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
-            'I can answer questions related to certain point of interests ' +
-            'and be your travel assistant. What can I help you with?');
-    } else {
-        sendTextMessage(userId, 'Welcome! ' +
-            'I can answer questions related to certain point of interests ' +
-            'and be your travel assistant. What can I help you with?');
-    }
 }
