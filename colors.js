@@ -27,7 +27,6 @@ module.exports = {
                             callback(colors); //when the query returns, it calls a callback we passed to the function, with the result
                         };
                     });
-            done();
         });
         pool.end();
     },
@@ -41,7 +40,7 @@ module.exports = {
             }
             client
                 .query(
-                    'SELECT color FROM public.user_color WHERE fb_id=$1',
+                    'SELECT color FROM public.users WHERE fb_id=$1',
                     [userId],
                     function(err, result) {
                         if (err) {
@@ -51,7 +50,7 @@ module.exports = {
                             callback(result.rows[0]['color']);
                         };
                     });
-            done();
+
         });
         pool.end();
     },
@@ -62,30 +61,13 @@ module.exports = {
             if (err) {
                 return console.error('Error acquiring client', err.stack);
             }
+            let sql = 'UPDATE public.users SET color=$1 WHERE fb_id=$2';
+            client.query(sql,
+                [
+                    color,
+                    userId
+                ]);
 
-            let sql1 = `SELECT color FROM user_color WHERE fb_id='${userId}' LIMIT 1`;
-            client
-                .query(sql1,
-                    function(err, result) {
-                        if (err) {
-                            console.log('Query error: ' + err);
-                        } else {
-                            let sql;
-                            if (result.rows.length === 0) {
-                                sql = 'INSERT INTO public.user_color (color, fb_id) VALUES ($1, $2)';
-                            } else {
-                                sql = 'UPDATE public.user_color SET color=$1 WHERE fb_id=$2';
-                            }
-                            client.query(sql,
-                            [
-                                color,
-                                userId
-                            ]);
-                        }
-                    }
-                    );
-
-            done();
         });
         pool.end();
     }
