@@ -18,6 +18,7 @@ const colors = require('./colors');
 const Sentiment = require('sentiment');
 const sentiment = new Sentiment();
 
+let i=0;
  
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
@@ -265,8 +266,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         case "iphone_colors":
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
                // let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
-                let reply = `IPhone xxx is available in ${allColors[0]}. What is your favourite color?`;
-                sendTextMessage(sender, reply);
+                
+               let reply = `IPhone xxx is available in ${allColors[i]}. What is your favourite color?`;
+               i=i+1; 
+               console.log("inside de i is " + i);
+               sendTextMessage(sender, reply);
             });
             break;
 
