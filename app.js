@@ -14,6 +14,10 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 const colors = require('./colors');
+
+const Sentiment = require('sentiment');
+const sentiment = new Sentiment();
+
  
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
@@ -205,6 +209,10 @@ function receivedMessage(event) {
     if (messageText) {
         //if it is a text message, send it to dialogflow
         sendToDialogFlow(senderID, messageText);
+
+        let result = sentiment.analyze(messageText);
+        console.log(result);
+
     } else if (messageAttachments) { //if it is attachment(file, image, sticker, video), then call the handleMessageAttachments
         handleMessageAttachments(messageAttachments, senderID);
     }
@@ -256,8 +264,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "iphone_colors":
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
-                let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
-                let reply = `IPhone xxx is available in ${allColorsString}. What is your favourite color?`;
+               // let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
+                let reply = `IPhone xxx is available in ${allColors}. What is your favourite color?`;
                 sendTextMessage(sender, reply);
             });
             break;
