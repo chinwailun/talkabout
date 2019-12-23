@@ -231,6 +231,7 @@ function handleEcho(messageId, appId, metadata) {
 }
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
+    console.log("this is senderrrrrrrrrrrr" + sender);
     switch (action) {
 
         case "buy.iphone":
