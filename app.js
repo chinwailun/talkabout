@@ -163,8 +163,8 @@ function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
     }
-                s = senderID ;
-                console.log("s is 11111 " + s);
+                //s = senderID ;
+               // console.log("s is 11111 " + s);
 
 }
 
