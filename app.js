@@ -91,7 +91,8 @@ const sessionClient = new dialogflow.SessionsClient(
 const sessionIds = new Map();
 const usersMap = new Map();
 
-const s = new Map();
+const bg_s = new Map();
+const bg_f = new Map();
 
 // Index route
 app.get('/', function (req, res) {
@@ -162,9 +163,12 @@ app.post('/webhook/', function (req, res) {
 function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
+
+        bg_f= 0 ;
+        bg_s=0;
+       console.log("bg_f is 11111 " + bg_f);
     }
-                //s = senderID ;
-               // console.log("s is 11111 " + s);
+
 
 }
 
@@ -238,7 +242,7 @@ function handleEcho(messageId, appId, metadata) {
 }
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
-    console.log("this is senderrrrrrrrrrrr" + sender);
+    //console.log("this is senderrrrrrrrrrrr" + sender);
     switch (action) {
 
         case "buy.iphone":
@@ -266,7 +270,9 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
                 //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
                 //let s = sender +'white';
-                console.log("s is 22222222222" + s);
+                //console.log("s is 22222222222" + s);
+                
+               console.log("bg_f inside color is " + bg_f);
                //global[sender + 'white'] = 0;
                //let s = [sender + 'white'].text;
               // console.log("s issssssssssssss " + s);
