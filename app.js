@@ -260,8 +260,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
                 //let s = sender +'white';
                // console.log("s issssssssssssss " + s);
-               global[sender + 'white'] =0;
-               let s = [sender + 'white'].stringValue;
+               global[sender + 'white'] = 0;
+               let s = [sender + 'white'].text;
                console.log("s issssssssssssss " + s);
                 let reply = `IPhone xxx is available in ${allColors[0]}. What is your favourite color?`;
                 sendTextMessage(sender, reply);
