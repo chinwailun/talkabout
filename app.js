@@ -17,9 +17,9 @@ const colors = require('./colors');
 const botanical_garden = require('./botanical_garden');
 
 var bg_suggestion =0; 
-var bg_comparative =0;
-var bg_time =0;
-var bg_fee =0;
+var bg_comparative =21;
+var bg_time =17;
+var bg_fee =19;
 var bg_directory=0;
 
 // Messenger API parameters
@@ -239,13 +239,25 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
+
+        case "b-g-time":
+            botanical_garden.readAllOpinions(function (allOpinions) { 
+                let reply = `Opinion ${allOpinions[bg_comparative]}. OK?`;
+                sendTextMessage(sender, reply);
+                bg_comparative = bg_comparative + 1;
+                if(bg_comparative==19){
+                    bg_comparative = 17;
+                } 
+            });
+            break;
+
             
         case "b-g-suggestion":
             botanical_garden.readAllOpinions(function (allOpinions) { 
                 let reply = `Opinion ${allOpinions[bg_comparative]}. OK?`;
                 sendTextMessage(sender, reply);
                 bg_comparative = bg_comparative + 1;
-                if(bg_comparative==5){
+                if(bg_comparative==17){
                     bg_comparative = 0;
                 } 
             });
