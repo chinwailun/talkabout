@@ -14,8 +14,6 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 const colors = require('./colors');
-
-//let a = {};
  
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
@@ -160,7 +158,6 @@ app.post('/webhook/', function (req, res) {
 function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
-        
     }
 }
 
@@ -172,8 +169,6 @@ function receivedMessage(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp; //then we read the time of the message and the message itself
     var message = event.message;
-
-    //a[senderID]=0;
 
     setSessionAndUser(senderID); //use this line to replace the if block below so that it is global
     /*if (!sessionIds.has(senderID)) {
@@ -236,7 +231,6 @@ function handleEcho(messageId, appId, metadata) {
 }
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
-    console("what is sender " + sender);
     switch (action) {
 
         case "buy.iphone":
@@ -262,12 +256,9 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "iphone_colors":
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
-                //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
-               // let haha = a[senderID].stringValue;
-                let reply = `IPhone xxx is available in ${allColors[0]}. What is your favourite color?`;
-               // console.log("haha is this" + haha);
-                //a[senderID] = a[senderID] +1;
-                sendTextMessage(sender, reply); 
+                let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
+                let reply = `IPhone xxx is available in ${allColorsString}. What is your favourite color?`;
+                sendTextMessage(sender, reply);
             });
             break;
 
@@ -1136,7 +1127,7 @@ function greetUserText(userId) {
 				console.log("Cannot get data for fb user with id",
 					userId);
 			}
-		} else {
+		} else {  
 			console.error(response.error);
 		}
 
