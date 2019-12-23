@@ -159,6 +159,9 @@ function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
     }
+                let s = senderID +'white';
+                console.log("s issssssssssssss " + s);
+
 }
 
 
@@ -259,7 +262,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
                 //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
                 //let s = sender +'white';
-               // console.log("s issssssssssssss " + s);
+                console.log("s is 22222222222" + s);
                global[sender + 'white'] = 0;
                let s = [sender + 'white'].text;
                console.log("s issssssssssssss " + s);
