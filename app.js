@@ -13,10 +13,14 @@ const uuid = require('uuid');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
-
-
 const colors = require('./colors');
- 
+
+var bg_suggestion =0; 
+var bg_comparative =0;
+var bg_time =0;
+var bg_fee =0;
+var bg_directory=0;
+
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
 if (!config.FB_PAGE_TOKEN) {
@@ -91,9 +95,6 @@ const sessionClient = new dialogflow.SessionsClient(
 const sessionIds = new Map();
 const usersMap = new Map();
 
-const bg_s = new Map();
-const bg_f = new Map();
-
 // Index route
 app.get('/', function (req, res) {
     res.send('Hello world, I am a chat bot')
@@ -163,13 +164,7 @@ app.post('/webhook/', function (req, res) {
 function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
-
-        bg_f= 0 ;
-        bg_s=0;
-       console.log("bg_f is 11111 " + bg_f);
     }
-
-
 }
 
 
@@ -242,7 +237,6 @@ function handleEcho(messageId, appId, metadata) {
 }
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
-    //console.log("this is senderrrrrrrrrrrr" + sender);
     switch (action) {
 
         case "buy.iphone":
@@ -269,15 +263,12 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         case "iphone_colors":
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
                 //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
-                //let s = sender +'white';
-                //console.log("s is 22222222222" + s);
-                
-               console.log("bg_f inside color is " + bg_f);
-               //global[sender + 'white'] = 0;
-               //let s = [sender + 'white'].text;
-              // console.log("s issssssssssssss " + s);
-                let reply = `IPhone xxx is available in ${allColors[0]}. What is your favourite color?`;
+                let reply = `IPhone xxx is available in ${allColors[bg_comparative]}. What is your favourite color?`;
                 sendTextMessage(sender, reply);
+                bg_comparative = bg_comparative + 1;
+                if(bg_comparative==5){
+                    bg_comparative = 0;
+                }
             });
             break;
 
@@ -1146,7 +1137,7 @@ function greetUserText(userId) {
 				console.log("Cannot get data for fb user with id",
 					userId);
 			}
-		} else {  
+		} else {
 			console.error(response.error);
 		}
 
