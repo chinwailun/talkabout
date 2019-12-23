@@ -263,7 +263,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 let a = a[senderID];
                 let reply = `IPhone xxx is available in ${allColors[a]}. What is your favourite color?`;
                 console.log("a is this" + a);
-                a[senderID] = a[senderID] +1;
+                //a[senderID] = a[senderID] +1;
                 sendTextMessage(sender, reply); 
             });
             break;
