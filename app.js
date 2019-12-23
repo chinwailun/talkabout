@@ -260,7 +260,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         case "iphone_colors":
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
                 //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
-                let reply = `IPhone xxx is available in ${allColors[0]}. What is your favourite color?`;
+                let a = a[senderID];
+                let reply = `IPhone xxx is available in ${allColors[a]}. What is your favourite color?`;
+                console.log("a is this" + a);
+                a[senderID] = a[senderID] +1;
                 sendTextMessage(sender, reply); 
             });
             break;
