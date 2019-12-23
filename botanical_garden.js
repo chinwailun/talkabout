@@ -5,7 +5,7 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 module.exports = {
-    //this function read all the opinion from database
+    //this function read all the colors from database
     readAllOpinions: function(callback) {
         var pool = new pg.Pool(config.PG_CONFIG);
         pool.connect(function(err, client, done) {
@@ -30,6 +30,5 @@ module.exports = {
         });
         pool.end();
     }
-
 
 }
