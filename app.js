@@ -241,7 +241,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
     switch (action) {
             
         case "b-g-suggestion":
-            readAllOpinions(function (allOpinions) { 
+            botanical_garden.readAllOpinions(function (allOpinions) { 
                 let reply = `Opinion ${allOpinions[bg_comparative]}. OK?`;
                 sendTextMessage(sender, reply);
                 bg_comparative = bg_comparative + 1;
