@@ -13,7 +13,7 @@ const uuid = require('uuid');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
-var s;
+
 
 const colors = require('./colors');
  
@@ -91,6 +91,8 @@ const sessionClient = new dialogflow.SessionsClient(
 const sessionIds = new Map();
 const usersMap = new Map();
 
+const s = new Map();
+
 // Index route
 app.get('/', function (req, res) {
     res.send('Hello world, I am a chat bot')
@@ -162,7 +164,7 @@ function setSessionAndUser(senderID) {
         sessionIds.set(senderID, uuid.v1());
     }
                 s = senderID ;
-                console.log("s issssssssssssss " + s);
+                console.log("s is 11111 " + s);
 
 }
 
@@ -265,9 +267,9 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
                 //let s = sender +'white';
                 console.log("s is 22222222222" + s);
-               global[sender + 'white'] = 0;
-               let s = [sender + 'white'].text;
-               console.log("s issssssssssssss " + s);
+               //global[sender + 'white'] = 0;
+               //let s = [sender + 'white'].text;
+              // console.log("s issssssssssssss " + s);
                 let reply = `IPhone xxx is available in ${allColors[0]}. What is your favourite color?`;
                 sendTextMessage(sender, reply);
             });
