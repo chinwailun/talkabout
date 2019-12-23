@@ -14,6 +14,8 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 const colors = require('./colors');
+
+let a = {};
  
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
@@ -158,6 +160,7 @@ app.post('/webhook/', function (req, res) {
 function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
+        a[senderID]=0;
     }
 }
 
