@@ -13,6 +13,8 @@ const uuid = require('uuid');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
+var s;
+
 const colors = require('./colors');
  
 // Messenger API parameters
@@ -159,7 +161,7 @@ function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
     }
-                let s = senderID +'white';
+                s = senderID ;
                 console.log("s issssssssssssss " + s);
 
 }
