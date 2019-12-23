@@ -14,6 +14,7 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 const colors = require('./colors');
+const botanical_garden = require('./botanical_garden');
 
 var bg_suggestion =0; 
 var bg_comparative =0;
@@ -238,6 +239,20 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
+
+        case "b-g-suggestion":
+            colors.readAllOpinions(function (allOpinions) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
+                //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
+                let reply = `My Opinion ${allOpinions[bg_suggestion]}. Okkk?`;
+                sendTextMessage(sender, reply);
+                bg_suggestion = bg_suggestion + 1;
+                if(bg_suggestion==5){
+                    bg_suggestion = 0;
+                }
+            });
+            break;
+
+            
 
         case "buy.iphone":
             //we call readUserColor. We pass in callback function and the sender. In the callback function we get color from readUserColor
