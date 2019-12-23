@@ -242,7 +242,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "b-g-time":
             botanical_garden.readAllOpinions(function (allOpinions) { 
-                let reply = `About time ~ ${allOpinions[bg_time]}. OK?`;
+                //let reply = `About time ~ ${allOpinions[bg_time]}. OK?`;
+                let reply = `${messages[0].text.text}     ${allOpinions[bg_time]}. OK?`;
                 sendTextMessage(sender, reply);
                 bg_time = bg_time + 1;
                 if(bg_time==19){
