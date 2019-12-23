@@ -86,7 +86,9 @@ const sessionClient = new dialogflow.SessionsClient(
     {
         projectId: config.GOOGLE_PROJECT_ID,
         credentials
-    }
+
+        
+    } 
 );
 
 
