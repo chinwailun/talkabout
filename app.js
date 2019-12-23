@@ -162,7 +162,7 @@ app.post('/webhook/', function (req, res) {
 function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
-        sessionIds.set(a,0);
+        //sessionIds.set(a,0);
     }
 }
 
@@ -174,7 +174,7 @@ function receivedMessage(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp; //then we read the time of the message and the message itself
     var message = event.message;
-    var a = 0;  
+    //var a = 0;  
 
     setSessionAndUser(senderID); //use this line to replace the if block below so that it is global
     /*if (!sessionIds.has(senderID)) {
@@ -268,9 +268,9 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
                // let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
                 
-               let reply = `IPhone xxx is available in ${allColors[a]}. What is your favourite color?`;
-               a=a+1; 
-               console.log("inside de a is " + a);
+               let reply = `IPhone xxx is available in ${allColors[1]}. What is your favourite color?`;
+              // a=a+1; 
+               //console.log("inside de a is " + a);
                sendTextMessage(sender, reply);
             });
             break;
