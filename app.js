@@ -242,11 +242,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "b-g-time":
             botanical_garden.readAllOpinions(function (allOpinions) { 
-                let reply = `Opinion ${allOpinions[bg_comparative]}. OK?`;
+                let reply = `About time ~ ${allOpinions[bg_time]}. OK?`;
                 sendTextMessage(sender, reply);
-                bg_comparative = bg_comparative + 1;
-                if(bg_comparative==19){
-                    bg_comparative = 17;
+                bg_time = bg_time + 1;
+                if(bg_time==19){
+                    bg_time = 17;
                 } 
             });
             break;
@@ -254,11 +254,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             
         case "b-g-suggestion":
             botanical_garden.readAllOpinions(function (allOpinions) { 
-                let reply = `Opinion ${allOpinions[bg_comparative]}. OK?`;
+                let reply = `Suggestion from me: ${allOpinions[bg_suggestion]}. OK?`;
                 sendTextMessage(sender, reply);
-                bg_comparative = bg_comparative + 1;
-                if(bg_comparative==17){
-                    bg_comparative = 0;
+                bg_suggestion = bg_suggestion + 1;
+                if(bg_suggestion==17){
+                    bg_suggestion = 0;
                 } 
             });
             break;
