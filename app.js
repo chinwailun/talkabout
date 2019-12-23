@@ -174,7 +174,7 @@ function receivedMessage(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp; //then we read the time of the message and the message itself
     var message = event.message;
-    var a = 0;
+    var a = 0;  
 
     setSessionAndUser(senderID); //use this line to replace the if block below so that it is global
     /*if (!sessionIds.has(senderID)) {
