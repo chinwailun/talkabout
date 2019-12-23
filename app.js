@@ -85,8 +85,7 @@ const credentials = {
 const sessionClient = new dialogflow.SessionsClient(
     {
         projectId: config.GOOGLE_PROJECT_ID,
-        credentials,
-        a=0
+        credentials
     }
 );
 
@@ -163,6 +162,7 @@ app.post('/webhook/', function (req, res) {
 function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
+        sessionIds.set(a,0);
     }
 }
 
@@ -174,6 +174,7 @@ function receivedMessage(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp; //then we read the time of the message and the message itself
     var message = event.message;
+    var a = 0;
 
     setSessionAndUser(senderID); //use this line to replace the if block below so that it is global
     /*if (!sessionIds.has(senderID)) {
