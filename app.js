@@ -18,7 +18,6 @@ const colors = require('./colors');
 const Sentiment = require('sentiment');
 const sentiment = new Sentiment();
 
-let i=0;
  
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
@@ -86,7 +85,8 @@ const credentials = {
 const sessionClient = new dialogflow.SessionsClient(
     {
         projectId: config.GOOGLE_PROJECT_ID,
-        credentials
+        credentials,
+        a=0
     }
 );
 
@@ -267,9 +267,9 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
                // let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
                 
-               let reply = `IPhone xxx is available in ${allColors[i]}. What is your favourite color?`;
-               i=i+1; 
-               console.log("inside de i is " + i);
+               let reply = `IPhone xxx is available in ${allColors[a]}. What is your favourite color?`;
+               a=a+1; 
+               console.log("inside de a is " + a);
                sendTextMessage(sender, reply);
             });
             break;
