@@ -14,13 +14,13 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 const colors = require('./colors');
-const botanical_garden = require('./botanical_garden');
+const entopia = require('./entopia');
 
-var bg_suggestion =0; 
-var bg_comparative =21;
-var bg_time =17;
-var bg_fee =19;
-var bg_directory=0;
+var entopia_suggestion =0; 
+var entopia_comparative =21;
+var entopia_time =17;
+var entopia_fee =19;
+var entopia_directory=0;
 
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
@@ -241,25 +241,25 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
     switch (action) {
 
         case "b-g-time":
-            botanical_garden.readAllOpinions(function (allOpinions) { 
-                //let reply = `About time ~ ${allOpinions[bg_time]}. OK?`;
-                let reply = `${messages[0].text.text}     ${allOpinions[bg_time]}. OK?`;
+            entopia.readAllOpinions(function (allOpinions) { 
+                //let reply = `About time ~ ${allOpinions[entopia_time]}. OK?`;
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}. OK?`;
                 sendTextMessage(sender, reply);
-                bg_time = bg_time + 1;
-                if(bg_time==19){
-                    bg_time = 17;
+                entopia_time = entopia_time + 1;
+                if(entopia_time==19){
+                    entopia_time = 17;
                 } 
             });
             break;
 
             
         case "b-g-suggestion":
-            botanical_garden.readAllOpinions(function (allOpinions) { 
-                let reply = `Suggestion from me: ${allOpinions[bg_suggestion]}. OK?`;
+            entopia.readAllOpinions(function (allOpinions) { 
+                let reply = `Suggestion from me: ${allOpinions[entopia_suggestion]}. OK?`;
                 sendTextMessage(sender, reply);
-                bg_suggestion = bg_suggestion + 1;
-                if(bg_suggestion==17){
-                    bg_suggestion = 0;
+                entopia_suggestion = entopia_suggestion + 1;
+                if(entopia_suggestion==17){
+                    entopia_suggestion = 0;
                 } 
             });
             break;
@@ -290,11 +290,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         case "iphone_colors":
             colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
                 //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
-                let reply = `IPhone xxx is available in ${allColors[bg_comparative]}. What is your favourite color?`;
+                let reply = `IPhone xxx is available in ${allColors[entopia_comparative]}. What is your favourite color?`;
                 sendTextMessage(sender, reply);
-                bg_comparative = bg_comparative + 1;
-                if(bg_comparative==5){
-                    bg_comparative = 0;
+                entopia_comparative = entopia_comparative + 1;
+                if(entopia_comparative==5){
+                    entopia_comparative = 0;
                 }
             });
             break;

@@ -5,7 +5,7 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 module.exports = {
-    //this function read all the colors from database
+    //this function read all the opinions from database
     readAllOpinions: function(callback) {
         var pool = new pg.Pool(config.PG_CONFIG);
         pool.connect(function(err, client, done) {
@@ -14,7 +14,7 @@ module.exports = {
             }
             client
                 .query(
-                    'SELECT word FROM public.botanical_garden_opinion',
+                    'SELECT word FROM public.entopia_opinion',
                     function(err, result) {
                         if (err) {
                             console.log(err);
