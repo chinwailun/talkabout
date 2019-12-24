@@ -240,6 +240,28 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "entopia-comparative":
+            entopia.readAllOpinions(function (allOpinions) { 
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_comparative]}`;
+                sendTextMessage(sender, reply);
+                entopia_comparative = entopia_comparative + 1;
+                if(entopia_comparative==21){
+                    entopia_comparative = 23;
+                } 
+            });
+            break;
+
+        case "entopia-fee":
+            entopia.readAllOpinions(function (allOpinions) { 
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_fee]}`;
+                sendTextMessage(sender, reply);
+                entopia_fee = entopia_fee + 1;
+                if(entopia_fee==21){
+                    entopia_fee = 19;
+                } 
+            });
+            break;
+
         case "entopia-time":
             entopia.readAllOpinions(function (allOpinions) { 
                 //let reply = `About time ~ ${allOpinions[entopia_time]}. OK?`;
