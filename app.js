@@ -245,8 +245,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 let reply = `${messages[0].text.text} ${allOpinions[entopia_comparative]}`;
                 sendTextMessage(sender, reply);
                 entopia_comparative = entopia_comparative + 1;
-                if(entopia_comparative==21){
-                    entopia_comparative = 23;
+                if(entopia_comparative==23){
+                    entopia_comparative = 21;
                 } 
             });
             break;
