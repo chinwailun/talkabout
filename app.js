@@ -249,6 +249,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     entopia_comparative = 21;
                 } 
             });
+            console.log("compareeeeeeeeeeeeeeee" + entopia_comparative);
             break;
 
         case "entopia-fee":
@@ -260,6 +261,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     entopia_fee = 19;
                 } 
             });
+            console.log("feeeeeeeeeeeeeeee" + entopia_fee);
             break;
 
         case "entopia-time":
@@ -273,6 +275,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     entopia_time = 17;
                 } 
             });
+            console.log("time" + entopia_time);
             break;
 
             
@@ -286,6 +289,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     entopia_suggestion = 0;
                 } 
             });
+            console.log("suggestionnnnnnnnnnnn" + entopia_suggestion);
             break;
 
             
