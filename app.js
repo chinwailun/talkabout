@@ -240,7 +240,7 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
-        case "b-g-time":
+        case "entopia-time":
             entopia.readAllOpinions(function (allOpinions) { 
                 //let reply = `About time ~ ${allOpinions[entopia_time]}. OK?`;
                 let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}. OK?`;
@@ -253,7 +253,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             break;
 
             
-        case "b-g-suggestion":
+        case "entopia-suggestion":
             entopia.readAllOpinions(function (allOpinions) { 
                 let reply = `Suggestion from me: ${allOpinions[entopia_suggestion]}. OK?`;
                 sendTextMessage(sender, reply);
