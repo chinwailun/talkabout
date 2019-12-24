@@ -243,7 +243,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         case "entopia-time":
             entopia.readAllOpinions(function (allOpinions) { 
                 //let reply = `About time ~ ${allOpinions[entopia_time]}. OK?`;
-                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}. OK?`;
+               // let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}. OK?`;
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}`;
                 sendTextMessage(sender, reply);
                 entopia_time = entopia_time + 1;
                 if(entopia_time==19){
@@ -255,7 +256,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             
         case "entopia-suggestion":
             entopia.readAllOpinions(function (allOpinions) { 
-                let reply = `Suggestion from me: ${allOpinions[entopia_suggestion]}. OK?`;
+               // let reply = `Suggestion from me: ${allOpinions[entopia_suggestion]}. OK?`;
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_suggestion]}`;
                 sendTextMessage(sender, reply);
                 entopia_suggestion = entopia_suggestion + 1;
                 if(entopia_suggestion==17){
