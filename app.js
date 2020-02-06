@@ -13,6 +13,8 @@ const uuid = require('uuid');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
+
+
 const colors = require('./colors');
 const entopia = require('./entopia');
 
@@ -68,8 +70,8 @@ app.use(express.static('public')); //means set the folder public where we store 
 
 // Process application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
-    extended: false
-}));
+    extended: false //this body parser module helps to parses requests
+})); 
 
 // Process application/json
 app.use(bodyParser.json()); //this body parser module helps to parses requests
@@ -97,8 +99,8 @@ const sessionIds = new Map();
 const usersMap = new Map();
 
 // Index route
-app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot')
+app.get('/', function (req, res) { //go browser open https://talk-about-app.herokuapp.com/
+    res.send('Hello world, I am a chat bot') //when open app URL, this will be shown. 
 })
 
 // for Facebook verification
@@ -119,7 +121,7 @@ app.get('/webhook/', function (req, res) {
  * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
  *
  */
- //this part is where we catch events, that will come to webhook
+ //this part is where we catch events, that come/send to webhook, then call appropriate function
 app.post('/webhook/', function (req, res) {
     var data = req.body;
     console.log(JSON.stringify(data));
@@ -136,12 +138,12 @@ app.post('/webhook/', function (req, res) {
             /*Messages are the text user send us and postbacks are the triggered when user clicks on a button or clicks on the item in the menu, or get started button or any other button  */
 
             // Iterate over each messaging event
-            pageEntry.messaging.forEach(function (messagingEvent) {
+            pageEntry.messaging.forEach(function (messagingEvent) { 
                 if (messagingEvent.optin) { //first one is optin, that is authentication
                     receivedAuthentication(messagingEvent);
                 } else if (messagingEvent.message) { //message, the one we will be listening for, includes text messages, quick replies, and attachments
                     receivedMessage(messagingEvent);
-                } else if (messagingEvent.delivery) { //delivery confirmation
+                } else if (messagingEvent.delivery) { //delivery confirmation. We won't be listening for this one
                     receivedDeliveryConfirmation(messagingEvent);
                 } else if (messagingEvent.postback) { //a postback can be a click on button, menu or structured message. We need to catch it if we want to perform any action after the event is triggered.
                     receivedPostback(messagingEvent); // the button wont work if dont catch button click and trigger, for instance another intent in the code
@@ -151,7 +153,7 @@ app.post('/webhook/', function (req, res) {
                     receivedAccountLink(messagingEvent);
                 } else { //unknown event, catch the event I didnt subscribe to
                     console.log("Webhook received unknown messagingEvent: ", messagingEvent);
-                }
+                } //so far I only using messages and postbacks.
             });
         });
 
@@ -190,7 +192,7 @@ function receivedMessage(event) {
     
 
 
-    var isEcho = message.is_echo; //check if the message is an echo. That is the message sent by my page
+    var isEcho = message.is_echo; //check if the message is an echo. That is the message sent by my page. So far Im not listening to this kind of messages. 
     var messageId = message.mid; //then read messageID, appId, and metadata
     var appId = message.app_id;
     var metadata = message.metadata;
@@ -558,6 +560,7 @@ function handleMessages(messages, sender) {
 function handleDialogFlowResponse(sender, response) {
     let responseText = response.fulfillmentMessages.fulfillmentText;
 
+    //these 4 are the data we get from dialogflow
     let messages = response.fulfillmentMessages;
     let action = response.action; //if there is a corresponding action and  
     let contexts = response.outputContexts; //if we were in the middle of any kind of dialog, that is if there is a dialog context
@@ -603,10 +606,10 @@ async function sendToDialogFlow(sender, textString, params) {
                 }
             }
         };
-        const responses = await sessionClient.detectIntent(request); //we wait for response
+        const responses = await sessionClient.detectIntent(request); //4.) we wait for response
 
         const result = responses[0].queryResult; //when it happens, we handle it
-        handleDialogFlowResponse(sender, result); //dialogflow get the response for us
+        handleDialogFlowResponse(sender, result); //dialogflow get the response for us, this is where we read what dialogflow found for us
     } catch (e) {
         console.log('error');
         console.log(e);
@@ -969,6 +972,11 @@ function receivedPostback(event) {
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
 
+        case 'CHAT':
+            //user wants to chat
+            sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
+            break;
+
         case 'GET_STARTED':
             greetUserText(senderID);
             break;
@@ -978,10 +986,7 @@ function receivedPostback(event) {
 			sendToDialogFlow(senderID, 'job openings');
             break;
 
-        case 'CHAT':
-            //user wants to chat
-            sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
-            break;
+
 
         default:
             //unindentified payload
@@ -1161,14 +1166,14 @@ function greetUserText(userId) {
                         return console.error('Error acquiring client', err.stack);
                     }
                     var rows = [];
-                    client.query(`SELECT fb_id FROM users WHERE fb_id='${userId}' LIMIT 1`, //search for a user with the facebook id, we've gotten from the facebook graph
+                    client.query(`SELECT fb_id FROM users WHERE fb_id='${userId}' LIMIT 1`, //1. search for a user with the facebook id we've gotten from the facebook graph
                         function(err, result) {
                             if (err) {
                                 console.log('Query error: ' + err);
                             } else {
 
                                 if (result.rows.length === 0) {
-                                    let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic) ' + //if there is no entry in a database, then make it by executing the insert statament
+                                    let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic) ' + //2. if there is no entry in a database, then make it by executing the insert statament
 										'VALUES ($1, $2, $3, $4)'; 
                                     client.query(sql,
                                         [
@@ -1185,6 +1190,9 @@ function greetUserText(userId) {
                 pool.end();
                 /*insert user into database table ========= end here */
                 /*****************************************************/
+
+
+
 				sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
                     'I can answer questions related to certain point of interests ' +
                     'and be your travel assistant. What can I help you with?');

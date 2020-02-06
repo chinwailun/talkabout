@@ -1,0 +1,14 @@
+{
+  "greeting":[
+  {
+    "locale":"default",
+    "text":"Hello, I'm here to assist your tour!"
+  }, {
+    "locale":"en_US",
+    "text":"Hello, I'm here to assist your tour!"
+  }
+]
+}
+
+Use chrome extension: Servistate
+access_token EAAGPnjwktEsBAJkbDI3g35gZA5YHMy5jPrxahhT7V2skesAXKA3WD8LzqIZCwTyrMxMvjUiRUy9Js7c01ZAFlH49PQyF4E9GHVtizuSZCZByseJB4cRYhlYcZAdPSu0P6bO8gmBKAB6kmFZBbkdPRDY3gWQ0wFl51GnIvX8Hciaytrh4VLpxaRRqZBi1ofZCDRHUZD

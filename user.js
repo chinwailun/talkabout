@@ -4,9 +4,13 @@ const config = require('./config'); //need to access data in the config
 const pg = require('pg'); //access database
 pg.defaults.ssl = true;
 
+/*now using module.exports to create a module and export functions.
+I've added a function called addUser and it is a function that will take the 
+callback functioin and the userId (that is fb id).*/ 
 module.exports = {
     //this addUser function make a request to Fb graph and make database queries
-    addUser: function(callback, userId) { 
+    //what Im not sending here is the message, that is what the greet function will do
+    addUser: function(callback, userId) {  //this function takes a callback and the userId
         request({
             uri: 'https://graph.facebook.com/v3.2/' + userId,
             qs: {
