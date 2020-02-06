@@ -2,28 +2,22 @@
 
 /*loading up the modules that will need  */
 const dialogflow = require('dialogflow');
-const config = require('./config'); //load the config file
+const config = require('./config'); //load the config file that is in the same directory as app.js
 const express = require('express');
 const crypto = require('crypto'); //crypto will need for verifying request signature
-const bodyParser = require('body-parser'); //body parser is for parsing request data. Request for making request
-const request = require('request');
+const bodyParser = require('body-parser'); //body parser is for parsing request data. 
+const request = require('request'); //Request for making request
 const app = express(); //here create the app with express //exprese is a node.js application framework that provides a robust set of features for applications. In other words, it speed up application development.
 const uuid = require('uuid');
 
 const pg = require('pg');
 pg.defaults.ssl = true;
 
+const userService = require('./user');
 
-
-const colors = require('./colors');
-const entopia = require('./entopia');
-
-var entopia_suggestion =0; 
-var entopia_comparative =21;
-var entopia_time =17;
-var entopia_fee =19;
-var entopia_directory=0;
-
+const Sentiment = require('sentiment');
+const sentiment = new Sentiment();
+ 
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
 if (!config.FB_PAGE_TOKEN) {
@@ -66,12 +60,12 @@ app.use(bodyParser.json({
 }));
 
 //serve static files in the public directory
-app.use(express.static('public')); //means set the folder public where we store images, videos or anything we want to share with the user. Basically this line makes the folder visible, so it is accessible via the http
+app.use(express.static('public')); //means set the folder 'public' where we store images, videos or anything we want to share with the user. Basically this line makes the folder visible, so it is accessible via the http
 
 // Process application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
-    extended: false //this body parser module helps to parses requests
-})); 
+    extended: false
+}));
 
 // Process application/json
 app.use(bodyParser.json()); //this body parser module helps to parses requests
@@ -92,15 +86,15 @@ const sessionClient = new dialogflow.SessionsClient(
         projectId: config.GOOGLE_PROJECT_ID,
         credentials
     }
-); 
+);
 
 
 const sessionIds = new Map();
 const usersMap = new Map();
 
 // Index route
-app.get('/', function (req, res) { //go browser open https://talk-about-app.herokuapp.com/
-    res.send('Hello world, I am a chat bot') //when open app URL, this will be shown. 
+app.get('/', function (req, res) {
+    res.send('Hello world, I am a chat bot')
 })
 
 // for Facebook verification
@@ -121,7 +115,7 @@ app.get('/webhook/', function (req, res) {
  * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
  *
  */
- //this part is where we catch events, that come/send to webhook, then call appropriate function
+ //this part is where we catch events, that will come to webhook
 app.post('/webhook/', function (req, res) {
     var data = req.body;
     console.log(JSON.stringify(data));
@@ -138,12 +132,12 @@ app.post('/webhook/', function (req, res) {
             /*Messages are the text user send us and postbacks are the triggered when user clicks on a button or clicks on the item in the menu, or get started button or any other button  */
 
             // Iterate over each messaging event
-            pageEntry.messaging.forEach(function (messagingEvent) { 
+            pageEntry.messaging.forEach(function (messagingEvent) {
                 if (messagingEvent.optin) { //first one is optin, that is authentication
                     receivedAuthentication(messagingEvent);
                 } else if (messagingEvent.message) { //message, the one we will be listening for, includes text messages, quick replies, and attachments
                     receivedMessage(messagingEvent);
-                } else if (messagingEvent.delivery) { //delivery confirmation. We won't be listening for this one
+                } else if (messagingEvent.delivery) { //delivery confirmation
                     receivedDeliveryConfirmation(messagingEvent);
                 } else if (messagingEvent.postback) { //a postback can be a click on button, menu or structured message. We need to catch it if we want to perform any action after the event is triggered.
                     receivedPostback(messagingEvent); // the button wont work if dont catch button click and trigger, for instance another intent in the code
@@ -153,12 +147,12 @@ app.post('/webhook/', function (req, res) {
                     receivedAccountLink(messagingEvent);
                 } else { //unknown event, catch the event I didnt subscribe to
                     console.log("Webhook received unknown messagingEvent: ", messagingEvent);
-                } //so far I only using messages and postbacks.
+                }
             });
         });
 
-        // Assume all went well.
-        // You must send back a 200, within 20 seconds
+        //Assume all went well.
+        //must send back a 200, within 20 seconds
         res.sendStatus(200);
     }
 });
@@ -167,6 +161,12 @@ app.post('/webhook/', function (req, res) {
 function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
+    }
+
+    if (!usersMap.has(senderID)) { //check if userMap contains a key senderID
+        userService.addUser(function(user){ //first paramter is callback 
+            usersMap.set(senderID, user); //in the userMap we store the object that we get from the module (that is the object retrieved from FB graph API) //store it under the key 'senderID'. Here we call it senderID, in the module we call it userID and in fact, it's a FB ID
+        }, senderID);  //second paramter is userID                    
     }
 }
 
@@ -192,7 +192,7 @@ function receivedMessage(event) {
     
 
 
-    var isEcho = message.is_echo; //check if the message is an echo. That is the message sent by my page. So far Im not listening to this kind of messages. 
+    var isEcho = message.is_echo; //check if the message is an echo. That is the message sent by my page
     var messageId = message.mid; //then read messageID, appId, and metadata
     var appId = message.app_id;
     var metadata = message.metadata;
@@ -213,7 +213,12 @@ function receivedMessage(event) {
 
     if (messageText) {
         //if it is a text message, send it to dialogflow
-        sendToDialogFlow(senderID, messageText);
+        sendToDialogFlow(senderID, messageText); 
+
+        //read sentiment analysis
+        let result = sentiment.analyze(messageText);
+        console.log(result); 
+
     } else if (messageAttachments) { //if it is attachment(file, image, sticker, video), then call the handleMessageAttachments
         handleMessageAttachments(messageAttachments, senderID);
     }
@@ -222,14 +227,14 @@ function receivedMessage(event) {
 
 function handleMessageAttachments(messageAttachments, senderID){
     //send back to user's response 'attachment received'
-    sendTextMessage(senderID, "Attachment received. Thank you.");
+    sendTextMessage(senderID, "Attachment received. Thank you :)");
 }
 
 //send the quick reply to Dialogflow to handle it for us
 function handleQuickReply(senderID, quickReply, messageId) {
     var quickReplyPayload = quickReply.payload;
     console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
-    //send payload to api.ai
+    //send payload to dialogflow
     sendToDialogFlow(senderID, quickReplyPayload);
 }
 
@@ -241,93 +246,6 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
-
-        case "entopia-comparative":
-            entopia.readAllOpinions(function (allOpinions) { 
-                let reply = `${messages[0].text.text} ${allOpinions[entopia_comparative]}`;
-                sendTextMessage(sender, reply);
-                entopia_comparative = entopia_comparative + 1;
-                if(entopia_comparative==23){
-                    entopia_comparative = 21;
-                } 
-            });
-            console.log("compareeeeeeeeeeeeeeee" + entopia_comparative);
-            break;
-
-        case "entopia-fee":
-            entopia.readAllOpinions(function (allOpinions) { 
-                let reply = `${messages[0].text.text} ${allOpinions[entopia_fee]}`;
-                sendTextMessage(sender, reply);
-                entopia_fee = entopia_fee + 1;
-                if(entopia_fee==21){
-                    entopia_fee = 19;
-                } 
-            });
-            console.log("feeeeeeeeeeeeeeee" + entopia_fee);
-            break;
-
-        case "entopia-time":
-            entopia.readAllOpinions(function (allOpinions) { 
-                //let reply = `About time ~ ${allOpinions[entopia_time]}. OK?`;
-               // let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}. OK?`;
-                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}`;
-                sendTextMessage(sender, reply);
-                entopia_time = entopia_time + 1;
-                if(entopia_time==19){
-                    entopia_time = 17;
-                } 
-            });
-            console.log("time" + entopia_time);
-            break;
-
-            
-        case "entopia-suggestion":
-            entopia.readAllOpinions(function (allOpinions) { 
-               // let reply = `Suggestion from me: ${allOpinions[entopia_suggestion]}. OK?`;
-                let reply = `${messages[0].text.text} ${allOpinions[entopia_suggestion]}`;
-                sendTextMessage(sender, reply);
-                entopia_suggestion = entopia_suggestion + 1;
-                if(entopia_suggestion==17){
-                    entopia_suggestion = 0;
-                } 
-            });
-            console.log("suggestionnnnnnnnnnnn" + entopia_suggestion);
-            break;
-
-            
-
-        case "buy.iphone":
-            //we call readUserColor. We pass in callback function and the sender. In the callback function we get color from readUserColor
-            colors.readUserColor(function(color) {
-                    let reply;
-                    if (color === '') { //if the returned color is empty, means user did not tell us his/her favourite color
-                        reply = 'In what color would you like to have it?';
-                    } else {
-                        reply = `Would you like to order it in your favourite color ${color}?`;
-                    }
-                    sendTextMessage(sender, reply);
-
-                }, sender
-            )
-            break;
-
-        case "iphone_colors.favourite": //here catch the fallback's intent action
-            colors.updateUserColor(parameters.fields['color'].stringValue, sender); //color will be in parameters.fields['color'].stringValue. After read the paramter then call the updateUserColor function
-            let reply = `Oh, I like it, too. I'll remember that.`; 
-            sendTextMessage(sender, reply);
-            break;
-
-        case "iphone_colors":
-            colors.readAllColors(function (allColors) { //call the function readAllColors, pass in the callback (this is a function that will be called when the colors are returned). Here callback with the paramter allColors, this is an array, array of colors read from database
-                //let allColorsString = allColors.join(', '); //change it to string with a join method, now we have colored separated with a comma in a string
-                let reply = `IPhone xxx is available in ${allColors[entopia_comparative]}. What is your favourite color?`;
-                sendTextMessage(sender, reply);
-                entopia_comparative = entopia_comparative + 1;
-                if(entopia_comparative==5){
-                    entopia_comparative = 0;
-                }
-            });
-            break;
 
         case "get-current-weather":
             //first check if geo-city paramter is set up. If paramters has geo-city and if it is not empty, then call service
@@ -388,7 +306,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             }, 2000)
 
         break;
-              /*
+/*
         case "detailed-application": //catch detailed-application action and then check for context
             let filteredContexts = contexts.filter(function (el) { //filter the context and see if there is a job_application context among them or job-application-details_dialog_context
                 return el.name.includes('job_application') || //get filteredcontexts array of these two if they exist
@@ -414,35 +332,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 '.<br> Previous job position: ' + previous_job + '.' +
                 '.<br> Years of experience: ' + years_of_experience + '.';
               
-            sendEmail('New job application', emailContent);*/
+            sendEmail('New job application', emailContent);
 
-            /***************database stuff starts here***********************/
-
-            /*var pool = new pg.Pool(config.PG_CONFIG);
-            pool.connect(function(err, client, done){
-                if(err){
-                    return console.error('Error acquiring client',err.stack);
-                }
-                client
-                    .query(
-                        'INSERT into job ' +
-                        '(user_name, previous_job, years_of_experience, ) ' +
-                        'VALUES($1,$2,$3) RETURNING id',
-                        [user_name, previous_job, years_of_experience],
-                        function(err, result){
-                            if(err){
-                                console.log(err);
-                            } else{
-                                console.log('row inserted with id: ' + result.rows[0].id);
-                            }
-                        });
-                    
-            });
-            pool.end();*/
-
-
-            /***************database stuff starts here***********************/
-/*
             handleMessages(messages, sender); //after sent email will also send response message back to messenger
 
             } else {
@@ -560,7 +451,6 @@ function handleMessages(messages, sender) {
 function handleDialogFlowResponse(sender, response) {
     let responseText = response.fulfillmentMessages.fulfillmentText;
 
-    //these 4 are the data we get from dialogflow
     let messages = response.fulfillmentMessages;
     let action = response.action; //if there is a corresponding action and  
     let contexts = response.outputContexts; //if we were in the middle of any kind of dialog, that is if there is a dialog context
@@ -606,10 +496,10 @@ async function sendToDialogFlow(sender, textString, params) {
                 }
             }
         };
-        const responses = await sessionClient.detectIntent(request); //4.) we wait for response
+        const responses = await sessionClient.detectIntent(request); //we wait for response
 
         const result = responses[0].queryResult; //when it happens, we handle it
-        handleDialogFlowResponse(sender, result); //dialogflow get the response for us, this is where we read what dialogflow found for us
+        handleDialogFlowResponse(sender, result); //dialogflow get the response for us
     } catch (e) {
         console.log('error');
         console.log(e);
@@ -972,11 +862,6 @@ function receivedPostback(event) {
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
 
-        case 'CHAT':
-            //user wants to chat
-            sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
-            break;
-
         case 'GET_STARTED':
             greetUserText(senderID);
             break;
@@ -986,7 +871,10 @@ function receivedPostback(event) {
 			sendToDialogFlow(senderID, 'job openings');
             break;
 
-
+        case 'CHAT':
+            //user wants to chat
+            sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
+            break;
 
         default:
             //unindentified payload
@@ -1141,68 +1029,28 @@ app.listen(app.get('port'), function () {
     console.log('running on port', app.get('port'))
 })
 
-function greetUserText(userId) {
-	//first read user firstname
-	request({ //make a request to facebook graph API and pass access token
-		uri: 'https://graph.facebook.com/v3.2/' + userId, 
-		qs: {
-			access_token: config.FB_PAGE_TOKEN 
-		}
-
-	}, function (error, response, body) {
-		if (!error && response.statusCode == 200) {
-
-			var user = JSON.parse(body);
-			console.log('getUserData: ' + user); //when get the response, read the user object and send a message to the user
-			if (user.first_name) { 
-
-                /*****************************************************/
-                /*insert user into database table==========start here*/ 
-				//console.log("FB user: %s %s, %s", user.first_name, user.last_name, user.profile_pic);
-
-                var pool = new pg.Pool(config.PG_CONFIG); //create a connection pool (connection pool is a group of database connections setting around, waiting to be handed out and used) , this means when a request comes, a connection is already there and given to the application for that specific request.  
-                pool.connect(function(err, client, done) { //without any connection pooling, the application will have to reach out to the database to establish a connection
-                    if (err) {
-                        return console.error('Error acquiring client', err.stack);
-                    }
-                    var rows = [];
-                    client.query(`SELECT fb_id FROM users WHERE fb_id='${userId}' LIMIT 1`, //1. search for a user with the facebook id we've gotten from the facebook graph
-                        function(err, result) {
-                            if (err) {
-                                console.log('Query error: ' + err);
-                            } else {
-
-                                if (result.rows.length === 0) {
-                                    let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic) ' + //2. if there is no entry in a database, then make it by executing the insert statament
-										'VALUES ($1, $2, $3, $4)'; 
-                                    client.query(sql,
-                                        [
-                                            userId,
-                                            user.first_name,
-                                            user.last_name,
-                                            user.profile_pic
-                                        ]);
-                                }
-                            }
-                        });
-
-                });
-                pool.end();
-                /*insert user into database table ========= end here */
-                /*****************************************************/
+async function resolveAfterXSeconds(x) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(x);
+        }, x * 1000);
+    });
+}
 
 
-
-				sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
-                    'I can answer questions related to certain point of interests ' +
-                    'and be your travel assistant. What can I help you with?');
-			} else {
-				console.log("Cannot get data for fb user with id",
-					userId);
-			}
-		} else {
-			console.error(response.error);
-		}
-
-	});
+async function greetUserText(userId) {
+    let user = usersMap.get(userId);
+    if (!user) {
+        await resolveAfterXSeconds(2);
+        user = usersMap.get(userId);
+    }
+    if (user) {
+        sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
+            'I can answer questions related to certain point of interests ' +
+            'and be your travel assistant. What can I help you with?');
+    } else {
+        sendTextMessage(userId, 'Welcome! ' +
+            'I can answer questions related to certain point of interests ' +
+            'and be your travel assistant. What can I help you with?');
+    }
 }
