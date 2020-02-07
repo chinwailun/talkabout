@@ -492,6 +492,8 @@ function handleDialogFlowResponse(sender, response) {
         'Let me call my boss for you. He should be here ASAP.');
         console.log("lastSentiment.score is "+ lastSentiment.score);
         console.log("beforeSentiment is "+ beforeSentiment);
+        console.log("beforeSentiment.score is "+ beforeSentiment.score);
+        console.log("lastSentiment is "+ lastSentiment);
         sendPassThread(sender);//pass the control
     }
     else if (isDefined(action)) { //if action is defined, then see what it is and handle it
