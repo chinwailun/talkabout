@@ -10,8 +10,8 @@ module.exports = {
 
         //read sentiment analysis
         let result = sentiment.analyze(messageText);
-        //console.log('sentiment analysis:');
-        //console.log(result); 
+        console.log('sentiment analysis:');
+        console.log(result); 
 
         //create an object to which i store the following data
         let sentimentResult = {
