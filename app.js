@@ -487,13 +487,15 @@ function handleDialogFlowResponse(sender, response) {
     //let differenceInScore = (beforeSentiment === undefined) ? 0 : Math.abs(beforeSentiment.score - lastSentiment.score)
 
     //look at the score of the last sentiment, also check if the last sentiment exists
-    if (lastSentiment!==undefined && textSentiment.score < -2){ //if the score < -2, pass the control to human
+    if (lastSentiment!==undefined && textSentiment.score < 10){ //if the score < -2, pass the control to human
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
         'Let me call my boss for you. He should be here ASAP.');
         console.log("lastSentiment.score is "+ lastSentiment.score);
         console.log("beforeSentiment is "+ beforeSentiment);
         console.log("beforeSentiment.score is "+ beforeSentiment.score);
         console.log("lastSentiment is "+ lastSentiment);
+        console.log("textSentiment is "+ textSentiment);
+        console.log("textSentiment.score is "+ textSentiment.score);
         sendPassThread(sender);//pass the control
     }
     else if (isDefined(action)) { //if action is defined, then see what it is and handle it
