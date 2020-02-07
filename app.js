@@ -484,7 +484,7 @@ function handleDialogFlowResponse(sender, response) {
     let lastSentiment = textSentiment[keys[keys.length - 1]];//the last key is the last sentiment. Since timestamp is a number, it will be in the right order.
 
     //look at the score of the last sentiment, also check if the last sentiment exists
-    if (lastSentiment!==undefined && lastSentiment.score < -2){ //if the score < -2, pass the control to human
+    /*if (lastSentiment!==undefined && lastSentiment.score < -2){ //if the score < -2, pass the control to human
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
         'Let me call my boss for you. He should be here ASAP.');
 
@@ -499,6 +499,12 @@ function handleDialogFlowResponse(sender, response) {
         sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?"); //this will only happen if you dont hv the default fallback intent
     } else if (isDefined(responseText)) {
         sendTextMessage(sender, responseText);
+    }*/
+    if (lastSentiment!==undefined){ //if the score < -2, pass the control to human
+        sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
+        'Let me call my boss for you. He should be here ASAP.');
+
+        sendPassThread(sender);//pass the control
     }
 }
 
