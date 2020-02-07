@@ -482,12 +482,16 @@ function handleDialogFlowResponse(sender, response) {
     let keys = Object.keys(textSentiment); //to get the last sentiment from all of them, so now read the keys of the object. Keys are timestamps of the sentiment.
 
     let lastSentiment = textSentiment[keys[keys.length - 1]];//the last key is the last sentiment. Since timestamp is a number, it will be in the right order.
+    let beforeSentiment = textSentiment[keys[keys.length - 2]];
+
+    //let differenceInScore = (beforeSentiment === undefined) ? 0 : Math.abs(beforeSentiment.score - lastSentiment.score)
 
     //look at the score of the last sentiment, also check if the last sentiment exists
     if (lastSentiment!==undefined && textSentiment.score < -2){ //if the score < -2, pass the control to human
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
         'Let me call my boss for you. He should be here ASAP.');
-
+        console.log("lastSentiment.score is "+ lastSentiment.score);
+        console.log("beforeSentiment is "+ beforeSentiment);
         sendPassThread(sender);//pass the control
     }
     else if (isDefined(action)) { //if action is defined, then see what it is and handle it
