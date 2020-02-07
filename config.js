@@ -16,5 +16,6 @@ module.exports = {
         port: 5432,
         max: 10,
         idleTimeoutMillis: 30000,
-    }
+    },
+    FB_PAGE_INBOX_ID: process.env.FB_PAGE_INBOX_ID
 };

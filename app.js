@@ -15,8 +15,8 @@ pg.defaults.ssl = true;
 
 const userService = require('./user');
 
-const Sentiment = require('sentiment');
-const sentiment = new Sentiment();
+let sentimentService = require('./sentiment-service');
+
  
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
@@ -49,6 +49,9 @@ if (!config.WEATHER_API_KEY) { //weather api key
 }
 if (!config.PG_CONFIG) { //pg config
     throw new Error('missing PG_CONFIG');
+}
+if (!config.FB_PAGE_INBOX_ID) { //page inbox id - the receiver app
+    throw new Error('missing FB_PAGE_INBOX_ID');
 }
 
 //set the port to 5000
@@ -131,24 +134,38 @@ app.post('/webhook/', function (req, res) {
             /*In the webhook, I subscribed to the messages and messaging postbacks*/
             /*Messages are the text user send us and postbacks are the triggered when user clicks on a button or clicks on the item in the menu, or get started button or any other button  */
 
-            // Iterate over each messaging event
-            pageEntry.messaging.forEach(function (messagingEvent) {
-                if (messagingEvent.optin) { //first one is optin, that is authentication
-                    receivedAuthentication(messagingEvent);
-                } else if (messagingEvent.message) { //message, the one we will be listening for, includes text messages, quick replies, and attachments
-                    receivedMessage(messagingEvent);
-                } else if (messagingEvent.delivery) { //delivery confirmation
-                    receivedDeliveryConfirmation(messagingEvent);
-                } else if (messagingEvent.postback) { //a postback can be a click on button, menu or structured message. We need to catch it if we want to perform any action after the event is triggered.
-                    receivedPostback(messagingEvent); // the button wont work if dont catch button click and trigger, for instance another intent in the code
-                } else if (messagingEvent.read) { //message read
-                    receivedMessageRead(messagingEvent);
-                } else if (messagingEvent.account_linking) { //account linking
-                    receivedAccountLink(messagingEvent);
-                } else { //unknown event, catch the event I didnt subscribe to
-                    console.log("Webhook received unknown messagingEvent: ", messagingEvent);
-                }
-            });
+            //Secondary Receiver is in control - listen on standby channel
+            if (pageEntry.standby) { //here the messages will come when the bots is not in control, when user is talking to live agent
+                //iterate webhook events from standby channel
+                pageEntry.standby.forEach(event => {//loop thru standby messages
+                    const psid = event.sender.id; //read the senderid and the message sent
+                    const message = event.message;
+                    console.log('message from: ', psid);
+                    console.log('message to inbox: ', message);
+                });
+            }
+
+            //Bot is in control - listen for messages
+            if (pageEntry.messaging){ //checking if I have messaging
+                //Iterate over each messaging event
+                pageEntry.messaging.forEach(function (messagingEvent) {
+                    if (messagingEvent.optin) { //first one is optin, that is authentication
+                        receivedAuthentication(messagingEvent);
+                    } else if (messagingEvent.message) { //message, the one we will be listening for, includes text messages, quick replies, and attachments
+                        receivedMessage(messagingEvent);
+                    } else if (messagingEvent.delivery) { //delivery confirmation
+                        receivedDeliveryConfirmation(messagingEvent);
+                    } else if (messagingEvent.postback) { //a postback can be a click on button, menu or structured message. We need to catch it if we want to perform any action after the event is triggered.
+                        receivedPostback(messagingEvent); // the button wont work if dont catch button click and trigger, for instance another intent in the code
+                    } else if (messagingEvent.read) { //message read
+                        receivedMessageRead(messagingEvent);
+                    } else if (messagingEvent.account_linking) { //account linking
+                        receivedAccountLink(messagingEvent);
+                    } else { //unknown event, catch the event I didnt subscribe to
+                        console.log("Webhook received unknown messagingEvent: ", messagingEvent);
+                    }
+                });
+            }
         });
 
         //Assume all went well.
@@ -215,9 +232,7 @@ function receivedMessage(event) {
         //if it is a text message, send it to dialogflow
         sendToDialogFlow(senderID, messageText); 
 
-        //read sentiment analysis
-        let result = sentiment.analyze(messageText);
-        console.log(result); 
+        sentimentService.addUserSentiment(senderID, messageText);
 
     } else if (messageAttachments) { //if it is attachment(file, image, sticker, video), then call the handleMessageAttachments
         handleMessageAttachments(messageAttachments, senderID);
@@ -246,6 +261,10 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
+
+        case "talk.human":
+            sendPassThread(sender);
+            break;
 
         case "get-current-weather":
             //first check if geo-city paramter is set up. If paramters has geo-city and if it is not empty, then call service
@@ -458,7 +477,20 @@ function handleDialogFlowResponse(sender, response) {
 
     sendTypingOff(sender);
 
-    if (isDefined(action)) { //if action is defined, then see what it is and handle it
+    //check sentiment before you do anything else
+    let textSentiment = sentimentService.getUserSentiment(sender); //get user sentiment from userSentiment map
+    let keys = Object.keys(textSentiment); //to get the last sentiment from all of them, so now read the keys of the object. Keys are timestamps of the sentiment.
+
+    let lastSentiment = textSentiment[keys[keys.length - 1]];//the last key is the last sentiment. Since timestamp is a number, it will be in the right order.
+
+    //look at the score of the last sentiment, also check if the last sentiment exists
+    if (lastSentiment!==undefined && lastSentiment.score < -2){ //if the score < -2, pass the control to human
+        sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
+        'Let me call my boss for you. He should be here ASAP.');
+
+        sendPassThread(sender);//pass the control
+    }
+    else if (isDefined(action)) { //if action is defined, then see what it is and handle it
         handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
     } else if (isDefined(messages)) { //if there is no action, we need to handle messages we received from Dialogflow
         handleMessages(messages, sender);//the responses we set in dialogflow will be handle in handleMessages method
@@ -1053,4 +1085,22 @@ async function greetUserText(userId) {
             'I can answer questions related to certain point of interests ' +
             'and be your travel assistant. What can I help you with?');
     }
+}
+
+//passing the control of the conversation to a page inbox
+function sendPassThread(senderID){
+    request(
+        {
+            uri: "https://graph.facebook.com/v2.6/me/pass_thread_control",
+            qs: { access_token: config.FB_PAGE_TOKEN },
+            method: "POST",
+            json: {
+                recipient: {
+                    id: senderID
+                },
+                target_app_id: config.FB_PAGE_INBOX_ID // ID in the page inbox setting under messenger platform
+            }
+        }
+    );
+
 }
