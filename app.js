@@ -500,7 +500,7 @@ function handleDialogFlowResponse(sender, response) {
     } else if (isDefined(responseText)) {
         sendTextMessage(sender, responseText);
     }*/
-    if (lastSentiment!==undefined && lastSentiment.score < 10){ //if the score < -2, pass the control to human
+    if (lastSentiment!==undefined ){ //if the score < -2, pass the control to human
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
         'Let me call my boss for you. He should be here ASAP.');
         console.log("sssssssssssentiment score is " + lastSentiment.score);
