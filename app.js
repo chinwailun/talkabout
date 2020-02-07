@@ -503,6 +503,7 @@ function handleDialogFlowResponse(sender, response) {
     if (lastSentiment!==undefined ){ //if the score < -2, pass the control to human
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
         'Let me call my boss for you. He should be here ASAP.');
+        console.log("lastSentiment is " + lastSentiment);
         console.log("sssssssssssentiment score is " + lastSentiment.score);
         sendPassThread(sender);//pass the control
     }
