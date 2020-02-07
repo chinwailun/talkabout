@@ -505,6 +505,7 @@ function handleDialogFlowResponse(sender, response) {
         'Let me call my boss for you. He should be here ASAP.');
         console.log("lastSentiment is " + lastSentiment);
         console.log("sssssssssssentiment score is " + lastSentiment.score);
+        console.log("textSentiment is " + textSentiment.score);
         sendPassThread(sender);//pass the control
     }
 }
