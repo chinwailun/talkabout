@@ -20,11 +20,11 @@ let sentimentService = require('./sentiment-service');
 
 const entopia = require('./entopia');
 
-var entopia_comparative =0; 
-var entopia_directory =0; 
-var entopia_time =5; 
-var entopia_fee =0; 
-var entopia_guidance =0; 
+var entopia_comparative =1; 
+var entopia_directory =3; 
+var entopia_time =15; 
+var entopia_fee =5; 
+var entopia_guidance =7; 
 
 
 // Messenger API parameters
@@ -277,15 +277,81 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "entopia-comparative":
+            entopia.readAllOpinions(function (allOpinions) { 
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_comparative]}`; 
+                sendTextMessage(sender, reply);
+                entopia_comparative = entopia_comparative + 1;
+                if(entopia_comparative==3){
+                    entopia_comparative = 1;
+                } 
+            });
+            break;
+
+            case "entopia-directory":
+                entopia.readAllOpinions(function (allOpinions) { 
+                    let reply = `${messages[0].text.text} ${allOpinions[entopia_directory]}`; 
+                    sendTextMessage(sender, reply);
+                    entopia_directory = entopia_directory + 1;
+                    if(entopia_directory==5){
+                        entopia_directory = 3;
+                    } 
+                });
+                break;
+
+            case "entopia-fee":
+                entopia.readAllOpinions(function (allOpinions) { 
+                    let reply = `${messages[0].text.text} ${allOpinions[entopia_fee]}`; 
+                    sendTextMessage(sender, reply);
+                    entopia_fee = entopia_fee + 1;
+                    if(entopia_fee==7){
+                        entopia_fee = 5;
+                    } 
+                 });
+                break;
+
+            case "entopia-guidance":
+                entopia.readAllOpinions(function (allOpinions) { 
+                    let reply = `${messages[0].text.text} ${allOpinions[entopia_guidance]}`; 
+                    sendTextMessage(sender, reply);
+                    entopia_guidance = entopia_guidance + 1;
+                    if(entopia_guidance==15){
+                        entopia_guidance = 7;
+                    } 
+                });
+                break;
+
+            case "entopia-time":
+            entopia.readAllOpinions(function (allOpinions) { 
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}`; 
+                sendTextMessage(sender, reply);
+                entopia_time = entopia_time + 1;
+                if(entopia_time==19){
+                    entopia_time = 15;
+                } 
+            });
+            break;
+            
+            case "entopia-time":
+            entopia.readAllOpinions(function (allOpinions) { 
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}`; 
+                sendTextMessage(sender, reply);
+                entopia_time = entopia_time + 1;
+                if(entopia_time==19){
+                    entopia_time = 15;
+                } 
+            });
+            break;
+
+
         case "entopia-time":
             entopia.readAllOpinions(function (allOpinions) { 
-                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]} OK?`; 
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}`; 
                 sendTextMessage(sender, reply);
-                console.log("entopia timeeeeeee is " + entopia_time);
-                /*entopia_time = entopia_time + 1;
-                if(entopia_time==1){
-                    entopia_time = 0;
-                } */
+                entopia_time = entopia_time + 1;
+                if(entopia_time==19){
+                    entopia_time = 15;
+                } 
             });
             break;
 
