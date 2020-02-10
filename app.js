@@ -18,7 +18,13 @@ const userService = require('./user');
 
 let sentimentService = require('./sentiment-service');
 
- 
+const entopia = require('./entopia');
+
+var entopia_comparative =0; 
+var entopia_directory =0; 
+var entopia_time =0; 
+var entopia_fee =0; 
+var entopia_guidance =0; 
 
 
 // Messenger API parameters
@@ -270,6 +276,17 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
+
+        case "entopia-time":
+            readAllOpinions(function (allOpinions) { 
+                let reply = `Opinion ${allOpinions[entopia_time]}. OK?`;
+                sendTextMessage(sender, reply);
+                entopia_time = entopia_time + 1;
+                if(entopia_time==1){
+                    entopia_time = 0;
+                } 
+            });
+            break;
 
         case "talk.human":
             sendPassThread(sender);
