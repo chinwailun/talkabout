@@ -22,7 +22,7 @@ const entopia = require('./entopia');
 
 var entopia_comparative =0; 
 var entopia_directory =0; 
-var entopia_time =0; 
+var entopia_time =5; 
 var entopia_fee =0; 
 var entopia_guidance =0; 
 
@@ -278,13 +278,14 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
     switch (action) {
 
         case "entopia-time":
-            readAllOpinions(function (allOpinions) { 
+            entopia.readAllOpinions(function (allOpinions) { 
                 let reply = `Opinion ${allOpinions[entopia_time]}. OK?`;
                 sendTextMessage(sender, reply);
-                entopia_time = entopia_time + 1;
+                console.log("entopia timeeeeeee is " + entopia_time);
+                /*entopia_time = entopia_time + 1;
                 if(entopia_time==1){
                     entopia_time = 0;
-                } 
+                } */
             });
             break;
 
