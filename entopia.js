@@ -14,7 +14,7 @@ module.exports = {
             }
             client
                 .query(
-                    'SELECT word FROM public.entopia_opinion',
+                    'SELECT text FROM public.entopia_opinion',
                     function(err, result) {
                         if (err) {
                             console.log(err);
@@ -22,7 +22,7 @@ module.exports = {
                         } else {
                             let opinions = [];
                             for (let i = 0; i < result.rows.length; i++) {
-                                opinions.push(result.rows[i]['word']);
+                                opinions.push(result.rows[i]['text']);
                             }
                             callback(opinions); //when the query returns, it calls a callback we passed to the function, with the result
                         };
