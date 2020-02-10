@@ -279,7 +279,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "entopia-time":
             entopia.readAllOpinions(function (allOpinions) { 
-                let reply = `Opinion ${allOpinions[entopia_time]}. OK?`;
+                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]} OK?`; 
                 sendTextMessage(sender, reply);
                 console.log("entopia timeeeeeee is " + entopia_time);
                 /*entopia_time = entopia_time + 1;
