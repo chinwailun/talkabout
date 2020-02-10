@@ -4,6 +4,8 @@ const config = require('./config');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
+
+
 module.exports = {
     //this function read all the colors from database
     readAllColors: function(callback) {
