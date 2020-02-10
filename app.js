@@ -19,6 +19,8 @@ const userService = require('./user');
 let sentimentService = require('./sentiment-service');
 
  
+
+
 // Messenger API parameters
 /* here verify the config variables. If they're not, will throw an error */
 if (!config.FB_PAGE_TOKEN) {
