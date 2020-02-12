@@ -287,6 +287,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 } 
                 let a = "okokoko wow";
                 sendTextMessage(sender, a);
+                sendToDialogFlow(sender, 'post com');
 
             });
             break;
