@@ -18,13 +18,13 @@ const userService = require('./user');
 
 let sentimentService = require('./sentiment-service');
 
-const entopia = require('./entopia');
+const ttp = require('./ttp');
 
-var entopia_comparative =0; 
-var entopia_directory =2; 
-var entopia_time =14; 
-var entopia_fee =4; 
-var entopia_guidance =6; 
+var ttp_comparative =0; 
+var ttp_directory =2; 
+var ttp_fee =9; 
+var ttp_guidance = 11; 
+var ttp_time =25; 
 
 
 // Messenger API parameters
@@ -277,57 +277,57 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
-        case "entopia-comparative":
-            entopia.readAllOpinions(function (allOpinions) { 
-                let reply = `${messages[0].text.text} ${allOpinions[entopia_comparative]}`; 
+        case "ttp-comparative":
+            ttp.readAllOpinions(function (allOpinions) { 
+                let reply = `${messages[0].text.text} ${allOpinions[ttp_comparative]}`; 
                 sendTextMessage(sender, reply);
-                entopia_comparative = entopia_comparative + 1;
-                if(entopia_comparative==2){
-                    entopia_comparative = 0;
+                ttp_comparative = ttp_comparative + 1;
+                if(ttp_comparative==2){
+                    ttp_comparative = 0;
                 } 
             });
             break;
 
-            case "entopia-directory":
-                entopia.readAllOpinions(function (allOpinions) { 
-                    let reply = `${messages[0].text.text} ${allOpinions[entopia_directory]}`; 
+            case "ttp-directory":
+                ttp.readAllOpinions(function (allOpinions) { 
+                    let reply = `${messages[0].text.text} ${allOpinions[ttp_directory]}`; 
                     sendTextMessage(sender, reply);
-                    entopia_directory = entopia_directory + 1;
-                    if(entopia_directory==4){
-                        entopia_directory = 2;
+                    ttp_directory = ttp_directory + 1;
+                    if(ttp_directory==9){
+                        ttp_directory = 2;
                     } 
                 });
                 break;
 
-            case "entopia-fee":
-                entopia.readAllOpinions(function (allOpinions) { 
-                    let reply = `${messages[0].text.text} ${allOpinions[entopia_fee]}`; 
+            case "ttp-fee":
+                ttp.readAllOpinions(function (allOpinions) { 
+                    let reply = `${messages[0].text.text} ${allOpinions[ttp_fee]}`; 
                     sendTextMessage(sender, reply);
-                    entopia_fee = entopia_fee + 1;
-                    if(entopia_fee==6){
-                        entopia_fee = 4;
+                    ttp_fee = ttp_fee + 1;
+                    if(ttp_fee==11){
+                        ttp_fee = 9;
                     } 
                  });
                 break;
 
-            case "entopia-guidance":
-                entopia.readAllOpinions(function (allOpinions) { 
-                    let reply = `${messages[0].text.text} ${allOpinions[entopia_guidance]}`; 
+            case "ttp-guidance":
+                ttp.readAllOpinions(function (allOpinions) { 
+                    let reply = `${messages[0].text.text} ${allOpinions[ttp_guidance]}`; 
                     sendTextMessage(sender, reply);
-                    entopia_guidance = entopia_guidance + 1;
-                    if(entopia_guidance==14){
-                        entopia_guidance = 6;
+                    ttp_guidance = ttp_guidance + 1;
+                    if(ttp_guidance==25){
+                        ttp_guidance = 11;
                     } 
                 });
                 break;
 
-            case "entopia-time":
-            entopia.readAllOpinions(function (allOpinions) { 
-                let reply = `${messages[0].text.text} ${allOpinions[entopia_time]}`; 
+            case "ttp-time":
+                ttp.readAllOpinions(function (allOpinions) { 
+                let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
                 sendTextMessage(sender, reply);
-                entopia_time = entopia_time + 1;
-                if(entopia_time==18){
-                    entopia_time = 14;
+                ttp_time = ttp_time + 1;
+                if(ttp_time==32){
+                    ttp_time = 25;
                 } 
             });
             break;

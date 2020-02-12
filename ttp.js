@@ -16,7 +16,7 @@ module.exports = {
             }
             client
                 .query(
-                    'SELECT text FROM public.entopia_opinion',
+                    'SELECT text FROM public.thetop_opinion',
                     function(err, result) {
                         if (err) {
                             console.log(err);
