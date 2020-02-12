@@ -299,7 +299,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 });
                 break;
 
-          /*  case "ttp-fee":
+            case "ttp-fee":
                 ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_fee]}`; 
                     sendTextMessage(sender, reply);
@@ -308,7 +308,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         ttp_fee = 9;
                     } 
                  });
-                break;*/
+                break;
 
             case "ttp-guidance":
                 ttp.readAllOpinions(function (allOpinions) { 
