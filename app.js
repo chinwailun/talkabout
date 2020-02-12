@@ -285,8 +285,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 if(ttp_comparative==2){
                     ttp_comparative = 0;
                 } 
-                let a = "okokoko wow";
-                sendTextMessage(sender, a);
+                //let a = "okokoko wow";
+                //sendTextMessage(sender, a);
                 sendToDialogFlow(sender, 'post com');
 
             });
@@ -300,6 +300,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     if(ttp_directory==9){
                         ttp_directory = 2;
                     } 
+                    sendToDialogFlow(sender, 'post dir');
                 });
                 break;
 
@@ -311,6 +312,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     if(ttp_fee==11){
                         ttp_fee = 9;
                     } 
+                    sendToDialogFlow(sender, 'post f');
                  });
                 break;
 
@@ -322,17 +324,19 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     if(ttp_guidance==25){
                         ttp_guidance = 11;
                     } 
+                    sendToDialogFlow(sender, 'post gui');
                 });
                 break;
 
             case "ttp-time":
                 ttp.readAllOpinions(function (allOpinions) { 
-                let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
-                sendTextMessage(sender, reply);
-                ttp_time = ttp_time + 1;
-                if(ttp_time==32){
-                    ttp_time = 25;
-                } 
+                    let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
+                    sendTextMessage(sender, reply);
+                    ttp_time = ttp_time + 1;
+                    if(ttp_time==32){
+                        ttp_time = 25;
+                    } 
+                    sendToDialogFlow(sender, 'post tim');
             });
             break;
             
