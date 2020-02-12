@@ -285,6 +285,9 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 if(ttp_comparative==2){
                     ttp_comparative = 0;
                 } 
+                let a = "okokoko wow";
+                sendTextMessage(sender, a);
+
             });
             break;
 
