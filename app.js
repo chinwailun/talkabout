@@ -1173,13 +1173,19 @@ async function greetUserText(userId) {
         user = usersMap.get(userId);
     }
     if (user) {
-        sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
-            'I can answer questions related to certain point of interests ' +
-            'and be your travel assistant. What can I help you with?');
+        sendTextMessage(userId, 'Hi ' + user.first_name + '! ' +
+            'Welcome to Talk About where you will find the summary of reviews ' +
+            'given by past tourists.');
+        sendTextMessage('At any time, use the menu below to navigate through the features :)');
+        //sendTextMessage('What we can do to help you today?');
+        sendToDialogFlow(userId, 'post gre');
     } else {
-        sendTextMessage(userId, 'Welcome! ' +
-            'I can answer questions related to certain point of interests ' +
-            'and be your travel assistant. What can I help you with?');
+        sendTextMessage(userId, 'Hi ' + user.first_name + '! ' +
+            'Welcome to Talk About where you will find the summary of reviews ' +
+            'given by past tourists.');
+        sendTextMessage('At any time, use the menu below to navigate through the features :)');
+        //sendTextMessage('What we can do to help you today?');
+        sendToDialogFlow(userId, 'post gre');
     }
 }
 
