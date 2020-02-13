@@ -319,6 +319,12 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                  sendToDialogFlow(sender, 'post f');
                 break;
 
+            case "fee_more_info":
+                sendTextMessage(sender, 'For MyKad holders, The Top Rainbow Skywalk costs RM48 per adult and RM28 per child, senior citizen or people with disabilities (OKU). Meanwhile, for foreigners, it costs RM68 per adult and RM48 per child, senior citizen or OKU.');
+                sendTextMessag(sender, 'For The Top Fun Pass, it costs RM78 per single adult, and RM48 per child, senior citizen or people with disabilities (OKU) for MyKad holders. For the standard rate (foreigner), it costs RM99 and RM58 respectively.');
+                sendToDialogFlow(sender, 'post fee_more_inf');
+                break;
+
             case "ttp-guidance":
                 ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_guidance]}`; 
@@ -992,6 +998,15 @@ function receivedPostback(event) {
 
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
+
+        case 'LOOK_FOR_THE_TOP_RAINBOW_SKYWALK':
+            greetUserText(senderID);
+            break;
+        
+
+        case 'ANOTHER_OPINION':
+            greetUserText(senderID);
+            break;
 
         case 'GET_STARTED':
             greetUserText(senderID);
