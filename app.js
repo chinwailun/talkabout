@@ -305,7 +305,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 break;
 
             case "ttp-fee":
-                ttp.readAllOpinions(function (allOpinions) { 
+                /*ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_fee]}`; 
                     sendTextMessage(sender, reply);
                     ttp_fee = ttp_fee + 1;
@@ -313,7 +313,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         ttp_fee = 9;
                     } 
                     sendToDialogFlow(sender, 'post f');
-                 });
+                 });*/
+                 sendToDialogFlow(sender, 'post f');
                 break;
 
             case "ttp-guidance":
@@ -1174,14 +1175,14 @@ async function greetUserText(userId) {
     }
     if (user) {
         sendTextMessage(userId, 'Hi ' + user.first_name + '! ' +
-            'Welcome to Talk About where you will find the summary of reviews ' +
+            'Welcome to Talk About where you will find the summary of reviews on The Top Penang ' +
             'given by past tourists.');
         sendTextMessage('At any time, use the menu below to navigate through the features :)');
         //sendTextMessage('What we can do to help you today?');
         sendToDialogFlow(userId, 'post gre');
     } else {
         sendTextMessage(userId, 'Hi ' + user.first_name + '! ' +
-            'Welcome to Talk About where you will find the summary of reviews ' +
+            'Welcome to Talk About where you will find the summary of reviews on The Top Penang ' +
             'given by past tourists.');
         sendTextMessage('At any time, use the menu below to navigate through the features :)');
         //sendTextMessage('What we can do to help you today?');
