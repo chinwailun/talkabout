@@ -1125,7 +1125,7 @@ function receivedPostback(event) {
     switch (payload) {
 
         case 'THE_TOP_FUN_PASS':
-            const elements = [{
+            const elementsTopFunPass = [{
                 "title": "The Top Fun Pass",
                 "subtitle": "Discover more than 18 themed attractions in one iconic destination!",
                 "imageUrl": "https://i.postimg.cc/XYNMnZ7r/Jurassic-Research-Center-Gallery-5.jpg",
@@ -1145,11 +1145,11 @@ function receivedPostback(event) {
                 ]
               }];
               
-              handleCardMessages(elements, senderID)
+              handleCardMessages(elementsTopFunPass, senderID)
             break;
 
         case 'RAINBOW_SKYWALK':
-            const elements = [{
+            const elementsRainbowSkywalk = [{
                 "title": "The Top Rainbow Skywalk",
                 "subtitle": "Here offers stunning seamless views of George Town and beyond!",
                 "imageUrl": "https://i.postimg.cc/Sx9ZFkcn/Rainbow-Walk-2.jpg",
@@ -1169,7 +1169,7 @@ function receivedPostback(event) {
                 ]
               }];
               
-              handleCardMessages(elements, senderID)
+              handleCardMessages(elementsRainbowSkywalk, senderID)
             break;
 
 
