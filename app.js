@@ -15,6 +15,7 @@ pg.defaults.ssl = true;
 
 const userService = require('./user');
 
+
 let sentimentService = require('./sentiment-service');
 
 const ttp = require('./ttp');
@@ -24,7 +25,6 @@ var ttp_directory =2;
 var ttp_fee =9; 
 var ttp_guidance = 11; 
 var ttp_time =25; 
-
 
 
 // Messenger API parameters
@@ -305,24 +305,21 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 break;
 
             case "ttp-fee":
-               /* ttp.readAllOpinions(function (allOpinions) { 
+                ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_fee]}`; 
                     sendTextMessage(sender, reply);
                     ttp_fee = ttp_fee + 1;
                     if(ttp_fee==11){
                         ttp_fee = 9;
                     } 
-                    sendToDialogFlow(sender, 'post f');
-                 });*/
-                 sendTextMessage(sender, 'There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
-                 sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
-                 sendToDialogFlow(sender, 'post f');
-                break;
+                    
+                    
+                    sendToDialogFlow(sender, 'fmi_card'); 
 
-            case "fee_more_info":
-                sendTextMessage(sender, 'For MyKad holders, The Top Rainbow Skywalk costs RM48 per adult and RM28 per child, senior citizen or people with disabilities (OKU). Meanwhile, for foreigners, it costs RM68 per adult and RM48 per child, senior citizen or OKU.');
-                sendTextMessage(sender, 'For The Top Fun Pass, it costs RM78 per single adult, and RM48 per child, senior citizen or people with disabilities (OKU) for MyKad holders. For the standard rate (foreigner), it costs RM99 and RM58 respectively.');
-                sendToDialogFlow(sender, 'fmi_card');
+                    
+                      
+
+                 });
                 break;
 
             case "ttp-guidance":
@@ -999,15 +996,6 @@ function receivedPostback(event) {
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
 
-        case 'LOOK_FOR_THE_TOP_RAINBOW_SKYWALK':
-            greetUserText(senderID);
-            break;
-        
-
-        case 'ANOTHER_OPINION':
-            greetUserText(senderID);
-            break;
-
         case 'GET_STARTED':
             greetUserText(senderID);
             break;
@@ -1191,19 +1179,13 @@ async function greetUserText(userId) {
         user = usersMap.get(userId);
     }
     if (user) {
-        sendTextMessage(userId, 'Hi ' + user.first_name + '! ' +
-            'Welcome to Talk About where you will find the summary of reviews on The Top Penang ' +
-            'given by past tourists.');
-        sendTextMessage('At any time, use the menu below to navigate through the features :)');
-        //sendTextMessage('What we can do to help you today?');
-        sendToDialogFlow(userId, 'post gre');
+        sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
+            'I can answer questions related to certain point of interests ' +
+            'and be your travel assistant. What can I help you with?');
     } else {
-        sendTextMessage(userId, 'Hi ' + user.first_name + '! ' +
-            'Welcome to Talk About where you will find the summary of reviews on The Top Penang ' +
-            'given by past tourists.');
-        sendTextMessage('At any time, use the menu below to navigate through the features :)');
-        //sendTextMessage('What we can do to help you today?');
-        sendToDialogFlow(userId, 'post gre');
+        sendTextMessage(userId, 'Welcome! ' +
+            'I can answer questions related to certain point of interests ' +
+            'and be your travel assistant. What can I help you with?');
     }
 }
 
