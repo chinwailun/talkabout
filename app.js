@@ -305,7 +305,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 break;
 
             case "ttp-fee":
-                ttp.readAllOpinions(function (allOpinions) { 
+                /*ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_fee]}`; 
                     sendTextMessage(sender, reply);
                     ttp_fee = ttp_fee + 1;
@@ -319,7 +319,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     
                       
 
-                 });
+                 });*/
                  var responseText = "Choose the options"
                     var replies = [{
                         "content_type": "text",
