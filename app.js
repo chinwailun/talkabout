@@ -320,11 +320,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                  sendTextMessage(sender, 'There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
                  sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
-                 var responseText = "What do you want to do next?"
+                 /*var responseText = "What do you want to do next?"
                  var replies = [{
                      "content_type": "text",
-                     "title": "View More Info",
-                     "postback": "GET_STARTED",
+                     "title": "View more info",
+                     "payload": "View more info",
                  },
                  {
                      "content_type": "text",
@@ -336,7 +336,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                      "title": "Rating",
                      "payload": "Example 3",
                  }];
-                 sendQuickReply(sender, responseText, replies)
+                 sendQuickReply(sender, responseText, replies)*/
                  
                  
                  //https://i.postimg.cc/Sx9ZFkcn/Rainbow-Walk-2.jpg
@@ -365,6 +365,27 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                  
 
 */
+                setTimeout(function() {
+                    let buttons = [
+                        {
+                            type:"postback",
+                            payload:"VIEW_MORE_INFO_FEE",
+                            title:"View More Info"
+                        },
+                        {
+                            type:"postback",
+                            title:"Another Opinion",
+                            payload:"ANOTHER_OPINION",
+                        },
+                        {
+                            type:"postback",
+                            title:"Rating",
+                            payload:"RATING"
+                        }
+                    ];
+
+                    sendButtonMessage(sender, "What would you like to do next?", buttons);
+                }, 2000)
 
 
                 break;
