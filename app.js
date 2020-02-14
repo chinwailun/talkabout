@@ -317,7 +317,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                  });*/
 
                  sendTextMessage(sender, 'There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
-                 await sleep(1000);
+                 sleep(1000);
                  sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
 
                  const elements = [{
