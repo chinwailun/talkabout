@@ -317,49 +317,23 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                  });*/
 
                  sendTextMessage(sender, 'There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
-                 sleep(1000);
                  sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
-
+              
+                 //https://i.postimg.cc/Sx9ZFkcn/Rainbow-Walk-2.jpg
                  const elements = [{
-                    "title": "Welcome!",
-                    "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
-                    "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
+                    "title": "The Top Fun Pass",
+                    "subtitle": "Discover more than 18 themed attractions in one iconic destination! It's where excitement and magic happen at once together!",
+                    "imageUrl": "https://i.postimg.cc/XYNMnZ7r/Jurassic-Research-Center-Gallery-5.jpg",
                     "buttons": [
                       {
-                        "postback": "https://f1948e04.ngrok.io",
+                        "postback": "https://thetop.com.my/",
                         "text": "View Website"
                       }, {
-                        "text": "Start Chatting",
-                        "postback": "PAYLOAD EXAMPLE"
+                        "text": "Purchase Ticket Now",
+                        "postback": "https://onlyticket.com.my/selection/110"
                       },
                       {
-                        "text": "Yeah",
-                        "postback": "PAYLOAD EXAMPLE"
-                      }
-                    ]
-                  }, {
-                    "title": "Welcome!",
-                    "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
-                    "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
-                    "buttons": [
-                      {
-                        "postback": "https://f1948e04.ngrok.io",
-                        "text": "View Website"
-                      }, {
-                        "text": "Start Chatting",
-                        "postback": "PAYLOAD EXAMPLE"
-                      }
-                    ]
-                  },{
-                    "title": "Welcome!",
-                    "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
-                    "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
-                    "buttons": [
-                      {
-                        "postback": "https://f1948e04.ngrok.io",
-                        "text": "View Website"
-                      }, {
-                        "text": "Start Chatting",
+                        "text": "Another Opinion",
                         "postback": "PAYLOAD EXAMPLE"
                       }
                     ]
