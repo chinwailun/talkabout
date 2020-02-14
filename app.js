@@ -300,7 +300,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 ];
 
                 sendButtonMessage(sender, "What would you like to do next?", buttons);
-            }, 2000)
+            }, 1000)
             
             
             break;
@@ -413,7 +413,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     ];
 
                     sendButtonMessage(sender, "What would you like to do next?", buttons);
-                }, 2000)
+                }, 1000)
 
 
                 break;
