@@ -336,6 +336,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                       {
                         "text": "Another Opinion",
                         "postback": "ANOTHER_OPINION"
+                                     
                       }
                     ]
                   }];
@@ -1070,7 +1071,7 @@ function receivedPostback(event) {
                 "title": "Example 3",
                 "payload": "Example 3",
             }];
-            sendQuickReply(sender, responseText, replies)
+            sendQuickReply(senderID, responseText, replies)
             break;
 
         case 'GET_STARTED':
