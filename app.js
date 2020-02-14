@@ -1144,7 +1144,31 @@ function receivedPostback(event) {
                   }
                 ]
               }];
-              console.log("here hereeeeeeeeeeeeeeee1");
+              
+              handleCardMessages(elements, senderID)
+            break;
+
+        case 'RAINBOW_SKYWALK':
+            const elements = [{
+                "title": "The Top Rainbow Skywalk",
+                "subtitle": "Here offers stunning seamless views of George Town and beyond!",
+                "imageUrl": "https://i.postimg.cc/Sx9ZFkcn/Rainbow-Walk-2.jpg",
+                "buttons": [
+                  {
+                    "postback": "https://thetop.com.my/",
+                    "text": "View Website"
+                  }, {
+                    "text": "Purchase Ticket Now",
+                    "postback": "https://onlyticket.com.my/selection/110"
+                  },
+                  {
+                    "text": "Another Opinion",
+                    "postback": "ANOTHER_OPINION"
+                                 
+                  }
+                ]
+              }];
+              
               handleCardMessages(elements, senderID)
             break;
 
