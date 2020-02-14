@@ -320,11 +320,27 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                  sendTextMessage(sender, 'There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
                  sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
-              
+                 var responseText = "What do you want to do next?"
+                 var replies = [{
+                     "content_type": "text",
+                     "title": "View More Info",
+                     "payload": "GET_STARTED",
+                 },
+                 {
+                     "content_type": "text",
+                     "title": "Another Opinion",
+                     "payload": "ANOTHER_OPINION",
+                 },
+                 {
+                     "content_type": "text",
+                     "title": "Rating",
+                     "payload": "Example 3",
+                 }];
+                 sendQuickReply(sender, responseText, replies)
                  
                  
                  //https://i.postimg.cc/Sx9ZFkcn/Rainbow-Walk-2.jpg
-
+/*
                  const elements = [{
                     "title": "The Top Fun Pass",
                     "subtitle": "Discover more than 18 themed attractions in one iconic destination!",
@@ -345,7 +361,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     ]
                   }];
                   console.log("here hereeeeeeeeeeeeeeee1");
-                  handleCardMessages(elements, sender)
+                  handleCardMessages(elements, sender)*/
                  
 
 
