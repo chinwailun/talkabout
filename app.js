@@ -320,7 +320,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                       
 
                  });*/
-                 var responseText = "Choose the options"
+                /* var responseText = "Choose the options"
                     var replies = [{
                         "content_type": "text",
                         "title": "Example 1",
@@ -336,7 +336,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "title": "Example 3",
                         "payload": "Example 3",
                     }];
-                    sendQuickReply(sender, responseText, replies);
+                    sendQuickReply(sender, responseText, replies);*/
 
 
                     const elements = [{
@@ -379,7 +379,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                           }
                         ]
                       }];
-                      handleCardMessages(elements, sender);
+                      handleCardMessages(elements, sender)
 
 
                 break;
