@@ -320,9 +320,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                  sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
               
                  //https://i.postimg.cc/Sx9ZFkcn/Rainbow-Walk-2.jpg
+
                  const elements = [{
                     "title": "The Top Fun Pass",
-                    "subtitle": "Discover more than 18 themed attractions in one iconic destination! It's where excitement and magic happen at once together!",
+                    "subtitle": "Discover more than 18 themed attractions in one iconic destination!",
                     "imageUrl": "https://i.postimg.cc/XYNMnZ7r/Jurassic-Research-Center-Gallery-5.jpg",
                     "buttons": [
                       {
@@ -334,12 +335,14 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                       },
                       {
                         "text": "Another Opinion",
-                        "postback": "PAYLOAD EXAMPLE"
+                        "postback": "ANOTHER_OPINION"
                       }
                     ]
                   }];
                   console.log("here hereeeeeeeeeeeeeeee1");
                   handleCardMessages(elements, sender)
+
+
 
 
                 break;
@@ -1049,6 +1052,26 @@ function receivedPostback(event) {
 
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
+
+        case 'ANOTHER_OPINION':
+            var responseText = "Choose the options"
+            var replies = [{
+                "content_type": "text",
+                "title": "Example 1",
+                "payload": "GET_STARTED",
+            },
+            {
+                "content_type": "text",
+                "title": "Example 2",
+                "payload": "Example 2",
+            },
+            {
+                "content_type": "text",
+                "title": "Example 3",
+                "payload": "Example 3",
+            }];
+            sendQuickReply(sender, responseText, replies)
+            break;
 
         case 'GET_STARTED':
             greetUserText(senderID);
