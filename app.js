@@ -277,6 +277,34 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "view-more-info-fee":
+            sendTextMessage(sender, 'For The Top Fun Pass, it costs RM78 per single adult, and RM48 per child, senior citizen or people with disabilities (OKU) for MyKad holders. For the standard rate (foreigner), it costs RM99 and RM58 respectively.');
+            sendTextMessage(sender,'For MyKad holders, The Top Rainbow Skywalk costs RM48 per adult and RM28 per child, senior citizen or people with disabilities (OKU). Meanwhile, for foreigners, it costs RM68 per adult and RM48 per child, senior citizen or OKU.');
+            setTimeout(function() {
+                let buttons = [
+                    {
+                        type:"postback",
+                        payload:"THE_TOP_FUN_PASS",
+                        title:"The Top Fun Pass"
+                    },
+                    {
+                        type:"postback",
+                        title:"The Top Rainbow Skywalk",
+                        payload:"RAINBOW_SKYWALK",
+                    },
+                    {
+                        type:"postback",
+                        title:"Another Opinion",
+                        payload:"ANOTHER_OPINION"
+                    }
+                ];
+
+                sendButtonMessage(sender, "What would you like to do next?", buttons);
+            }, 2000)
+            
+            
+            break;
+
         case "ttp-comparative":
             ttp.readAllOpinions(function (allOpinions) { 
                 let reply = `${messages[0].text.text} ${allOpinions[ttp_comparative]}`; 
@@ -1095,6 +1123,36 @@ function receivedPostback(event) {
 
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
+
+        case 'THE_TOP_FUN_PASS':
+            const elements = [{
+                "title": "The Top Fun Pass",
+                "subtitle": "Discover more than 18 themed attractions in one iconic destination!",
+                "imageUrl": "https://i.postimg.cc/XYNMnZ7r/Jurassic-Research-Center-Gallery-5.jpg",
+                "buttons": [
+                  {
+                    "postback": "https://thetop.com.my/",
+                    "text": "View Website"
+                  }, {
+                    "text": "Purchase Ticket Now",
+                    "postback": "https://onlyticket.com.my/selection/110"
+                  },
+                  {
+                    "text": "Another Opinion",
+                    "postback": "ANOTHER_OPINION"
+                                 
+                  }
+                ]
+              }];
+              console.log("here hereeeeeeeeeeeeeeee1");
+              handleCardMessages(elements, senderID)
+            break;
+
+
+        case 'VIEW_MORE_INFO_FEE':
+            sendToDialogFlow(senderID, 'vmif123');
+            break;
+
 
         case 'ANOTHER_OPINION':
             var responseText = "Choose the options"
