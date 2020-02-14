@@ -305,7 +305,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 break;
 
             case "ttp-fee":
-                ttp.readAllOpinions(function (allOpinions) { 
+                /*ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_fee]}`; 
                     sendTextMessage(sender, reply);
                     ttp_fee = ttp_fee + 1;
@@ -313,10 +313,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         ttp_fee = 9;
                     } 
                     
-                    sendToDialogFlow(sender, 'fmi_card'); 
+                    
 
 
-                 });
+                 });*/
+                 sendToDialogFlow(sender, 'fmi_card'); 
                 break;
 
             case "ttp-guidance":
