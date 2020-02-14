@@ -305,21 +305,22 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 break;
 
             case "ttp-fee":
-                ttp.readAllOpinions(function (allOpinions) { 
+                /*ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_fee]}`; 
                     sendTextMessage(sender, reply);
                     ttp_fee = ttp_fee + 1;
                     if(ttp_fee==11){
                         ttp_fee = 9;
-                    } 
-                    
-                    
-                    sendToDialogFlow(sender, 'fmi_card'); 
+                    }  });*/
+
+                    sendTextMessage(sender, 'There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).')
+                    sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.')
+                    sendToDialogFlow(sender, 'wywtdn'); 
 
                     
                       
 
-                 });
+                
                 break;
 
             case "ttp-guidance":
