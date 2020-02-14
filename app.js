@@ -314,7 +314,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     } 
                     //sendToDialogFlow(sender, 'fmi_card'); 
                     
-                    sendQuickReply(sender, responseText, replies)
+                    
 
                     
                       
@@ -336,6 +336,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "title": "Example 3",
                         "payload": "Example 3",
                     }];
+                    sendQuickReply(sender, responseText, replies)
                 break;
 
             case "ttp-guidance":
