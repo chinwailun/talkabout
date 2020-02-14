@@ -320,7 +320,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                       
 
                  });*/
-                /* var responseText = "Choose the options"
+                 var responseText = "Choose the options"
                     var replies = [{
                         "content_type": "text",
                         "title": "Example 1",
@@ -336,39 +336,13 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "title": "Example 3",
                         "payload": "Example 3",
                     }];
-                    sendQuickReply(sender, responseText, replies);*/
+                    sendQuickReply(sender, responseText, replies);
 
 
                     const elements = [{
                         "title": "Welcome!",
                         "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
                         "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
-                        "buttons": [
-                          {
-                            "postback": "https://f1948e04.ngrok.io",
-                            "text": "View Website"
-                          }, {
-                            "text": "Start Chatting",
-                            "postback": "PAYLOAD EXAMPLE"
-                          }
-                        ]
-                      }, {
-                        "title": "Welcome!",
-                        "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
-                        "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
-                        "buttons": [
-                          {
-                            "postback": "https://f1948e04.ngrok.io",
-                            "text": "View Website"
-                          }, {
-                            "text": "Start Chatting",
-                            "postback": "PAYLOAD EXAMPLE"
-                          }
-                        ]
-                      },{
-                        "title": "Welcome!",
-                        "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
-                        "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
                         "buttons": [
                           {
                             "postback": "https://f1948e04.ngrok.io",
