@@ -313,7 +313,14 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         ttp_fee = 9;
                     } 
                     //sendToDialogFlow(sender, 'fmi_card'); 
-                    var responseText = "Choose the options"
+                    
+                    sendQuickReply(sender, responseText, replies)
+
+                    
+                      
+
+                 });
+                 var responseText = "Choose the options"
                     var replies = [{
                         "content_type": "text",
                         "title": "Example 1",
@@ -329,12 +336,6 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "title": "Example 3",
                         "payload": "Example 3",
                     }];
-                    sendQuickReply(sender, responseText, replies)
-
-                    
-                      
-
-                 });
                 break;
 
             case "ttp-guidance":
