@@ -312,7 +312,24 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     if(ttp_fee==11){
                         ttp_fee = 9;
                     } 
-                    sendToDialogFlow(sender, 'fmi_card'); 
+                    //sendToDialogFlow(sender, 'fmi_card'); 
+                    var responseText = "Choose the options"
+                    var replies = [{
+                        "content_type": "text",
+                        "title": "Example 1",
+                        "payload": "Example 1",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Example 2",
+                        "payload": "Example 2",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Example 3",
+                        "payload": "Example 3",
+                    }];
+                    sendQuickReply(sender, responseText, replies)
 
                     
                       
