@@ -320,41 +320,48 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                       
 
                  });*/
-                 var responseText = "Choose the options"
-                    var replies = [{
-                        "content_type": "text",
-                        "title": "Example 1",
-                        "payload": "Example 1",
-                    },
-                    {
-                        "content_type": "text",
-                        "title": "Example 2",
-                        "payload": "Example 2",
-                    },
-                    {
-                        "content_type": "text",
-                        "title": "Example 3",
-                        "payload": "Example 3",
-                    }];
-                    sendQuickReply(sender, responseText, replies);
-
-
-                    const elements = [{
-                        "title": "Welcome!",
-                        "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
-                        "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
-                        "buttons": [
-                          {
-                            "postback": "https://f1948e04.ngrok.io",
-                            "text": "View Website"
-                          }, {
-                            "text": "Start Chatting",
-                            "postback": "PAYLOAD EXAMPLE"
-                          }
-                        ]
-                      }];
-                      console.log("here hereeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-                      handleCardMessages(elements, sender)
+                 const elements = [{
+                    "title": "Welcome!",
+                    "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
+                    "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
+                    "buttons": [
+                      {
+                        "postback": "https://f1948e04.ngrok.io",
+                        "text": "View Website"
+                      }, {
+                        "text": "Start Chatting",
+                        "postback": "PAYLOAD EXAMPLE"
+                      }
+                    ]
+                  }, {
+                    "title": "Welcome!",
+                    "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
+                    "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
+                    "buttons": [
+                      {
+                        "postback": "https://f1948e04.ngrok.io",
+                        "text": "View Website"
+                      }, {
+                        "text": "Start Chatting",
+                        "postback": "PAYLOAD EXAMPLE"
+                      }
+                    ]
+                  },{
+                    "title": "Welcome!",
+                    "imageUrl": "https://www.stepforwardmichigan.org/wp-content/uploads/2017/03/step-foward-fb-1200x628-house.jpg",
+                    "subtitle": "We have the right hat for everyone.We have the right hat for everyone.We have the right hat for everyone.",
+                    "buttons": [
+                      {
+                        "postback": "https://f1948e04.ngrok.io",
+                        "text": "View Website"
+                      }, {
+                        "text": "Start Chatting",
+                        "postback": "PAYLOAD EXAMPLE"
+                      }
+                    ]
+                  }];
+                  console.log("here hereeeeeeeeeeeeeeee1");
+                  handleCardMessages(elements, sender)
 
 
                 break;
@@ -517,7 +524,7 @@ function handleMessage(message, sender) {
 
 
 function handleCardMessages(messages, sender) {
-
+    console.log("here hereeeeeeeeeeeeeeee2");
     let elements = [];
     for (var m = 0; m < messages.length; m++) {
         let message = messages[m];
@@ -550,6 +557,7 @@ function handleCardMessages(messages, sender) {
         };
         elements.push(element);
     }
+    console.log("here hereeeeeeeeeeeeeeee3");
     sendGenericMessage(sender, elements);
 }
 
@@ -845,6 +853,7 @@ function sendGenericMessage(recipientId, elements) {
             }
         }
     };
+    console.log("here hereeeeeeeeeeeeeeee4");
 
     callSendAPI(messageData);
 }
