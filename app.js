@@ -15,7 +15,6 @@ pg.defaults.ssl = true;
 
 const userService = require('./user');
 
-
 let sentimentService = require('./sentiment-service');
 
 const ttp = require('./ttp');
@@ -25,6 +24,7 @@ var ttp_directory =2;
 var ttp_fee =9; 
 var ttp_guidance = 11; 
 var ttp_time =25; 
+
 
 
 // Messenger API parameters
