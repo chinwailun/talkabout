@@ -25,6 +25,7 @@ var ttp_directory =2;
 var ttp_fee =9; 
 var ttp_guidance = 11; 
 var ttp_time =25; 
+var touristSays = 1;
 
 
 // Messenger API parameters
@@ -279,7 +280,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "view-more-info-fee":
             sendTextMessage(sender, 'For The Top Fun Pass, it costs RM78 per single adult, and RM48 per child, senior citizen or people with disabilities (OKU) for MyKad holders. For the standard rate (foreigner), it costs RM99 and RM58 respectively.');
-            sendTextMessage(sender,'For MyKad holders, The Top Rainbow Skywalk costs RM48 per adult and RM28 per child, senior citizen or people with disabilities (OKU). Meanwhile, for foreigners, it costs RM68 per adult and RM48 per child, senior citizen or OKU.');
+            setTimeout(function() {
+                sendTextMessage(sender,'For MyKad holders, The Top Rainbow Skywalk costs RM48 per adult and RM28 per child, senior citizen or people with disabilities (OKU). Meanwhile, for foreigners, it costs RM68 per adult and RM48 per child, senior citizen or OKU.');
+            }, 1000);
+            //sendTextMessage(sender,'For MyKad holders, The Top Rainbow Skywalk costs RM48 per adult and RM28 per child, senior citizen or people with disabilities (OKU). Meanwhile, for foreigners, it costs RM68 per adult and RM48 per child, senior citizen or OKU.');
             setTimeout(function() {
                 let buttons = [
                     {
@@ -299,14 +303,14 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     }
                 ];
 
-                sendButtonMessage(sender, "What would you like to do next?", buttons);
-            }, 1000)
+                sendButtonMessage(sender, "Which one do you prefer?", buttons);
+            }, 1500)
             
             
             break;
 
         case "ttp-comparative":
-            ttp.readAllOpinions(function (allOpinions) { 
+           /* ttp.readAllOpinions(function (allOpinions) { 
                 let reply = `${messages[0].text.text} ${allOpinions[ttp_comparative]}`; 
                 sendTextMessage(sender, reply);
                 ttp_comparative = ttp_comparative + 1;
@@ -317,7 +321,44 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 //sendTextMessage(sender, a);
                 sendToDialogFlow(sender, 'post com');
 
-            });
+            });*/
+
+            if(touristSays ==1){
+                let touristMessage = 'A visitor mentioned that ';
+                touristSays = touristSays + 1;
+            }
+            else if (touristSays == 2){
+                let touristMessage = 'One of the travellers told us ';
+                touristSays = touristSays + 1;
+            }
+            else if (touristSays == 3){
+                let touristMessage = 'A past The Top Penang visitor explained that ';
+                touristSays = touristSays + 1;
+            }
+            else {
+                let touristMessage ='A past tourist claimed that ';
+                touristSays = touristSays + 1;
+            }
+            if (touristSays ==5){
+                touristSays =1;
+            }
+            
+            if(ttp_comparative ==0){
+                let reply = 'the views from The Top of Komtar are far better than that experienced from the top of Penang Hill.';
+                ttp_comparative = ttp_comparative + 1;
+                
+            }
+            else{
+                let reply ='there are lots of souvenir shops there but price will be a bit higher than Penang road there.';
+                ttp_comparative = ttp_comparative + 1;
+            }
+            if(ttp_comparative==2){
+                ttp_comparative = 0;
+            }
+
+            
+            
+            
             break;
 
             case "ttp-directory":
@@ -347,7 +388,13 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
 
                  sendTextMessage(sender, 'There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
-                 sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
+                 //sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
+                 setTimeout(function() {
+                    sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
+                 
+                }, 1000);
+                 
+                 
                  /*var responseText = "What do you want to do next?"
                  var replies = [{
                      "content_type": "text",
@@ -413,7 +460,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     ];
 
                     sendButtonMessage(sender, "What would you like to do next?", buttons);
-                }, 1000)
+                }, 1500)
 
 
                 break;
