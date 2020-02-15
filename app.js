@@ -1391,18 +1391,18 @@ async function greetUserText(userId) {
         user = usersMap.get(userId);
     }
     if (user) {
-        sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
+        
+        setTimeout(function() {
+            sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
             'Welcome to Talk About where you will get the summary of review ' +
             'given by the past tourists of The Top Penang.');
+        }, 1000);
+        
         setTimeout(function() {
-            //do nothing just to delay 1s. 
+            sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
         }, 2000);
-        sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
-        setTimeout(function() {
-            //do nothing just to delay 1s. 
-        }, 2000);
-        sendTextMessage(userId,'What we can do to help you today?');
-        var responseGreet = "What do you want to do next?"
+        //sendTextMessage(userId,'What we can do to help you today?');
+        var responseGreet = "What we can do to help you today?"
                  var replies = [{
                      "content_type": "text",
                      "title": "Opinion",
@@ -1430,8 +1430,8 @@ async function greetUserText(userId) {
         setTimeout(function() {
             //do nothing just to delay 1s. 
         }, 2000);
-        sendTextMessage(userId,'What we can do to help you today?');
-        var responseGreet2 = "What do you want to do next?"
+        //sendTextMessage(userId,'What we can do to help you today?');
+        var responseGreet2 = "What we can do to help you today?"
                  var replies = [{
                      "content_type": "text",
                      "title": "Opinion",
