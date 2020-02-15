@@ -1179,21 +1179,31 @@ function receivedPostback(event) {
 
 
         case 'ANOTHER_OPINION':
-            var responseText = "Choose the options"
+            var responseText = "Choose an option below :) "
             var replies = [{
                 "content_type": "text",
-                "title": "Example 1",
-                "payload": "GET_STARTED",
+                "title": "time",
+                "payload": "time",
             },
             {
                 "content_type": "text",
-                "title": "Example 2",
-                "payload": "Example 2",
+                "title": "directory",
+                "payload": "directory",
             },
             {
                 "content_type": "text",
-                "title": "Example 3",
-                "payload": "Example 3",
+                "title": "comparative",
+                "payload": "comparative",
+            },
+            {
+                "content_type": "text",
+                "title": "guidance",
+                "payload": "guidance",
+            },
+            {
+                "content_type": "text",
+                "title": "rating",
+                "payload": "rating",
             }];
             sendQuickReply(senderID, responseText, replies)
             break;
@@ -1381,13 +1391,17 @@ async function greetUserText(userId) {
         user = usersMap.get(userId);
     }
     if (user) {
-        sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
-            'I can answer questions related to certain point of interests ' +
-            'and be your travel assistant. What can I help you with?');
+        sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
+            'Welcome to Talk About where you will get the summary of review ' +
+            'given by the past tourists of The Top Penang.');
+        sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
+        sendTextMessage(userId,'What we can do to help you today?');
     } else {
-        sendTextMessage(userId, 'Welcome! ' +
-            'I can answer questions related to certain point of interests ' +
-            'and be your travel assistant. What can I help you with?');
+        sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
+            'Welcome to Talk About where you will get the summary of review ' +
+            'given by the past tourists of The Top Penang.');
+        sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
+        sendTextMessage(userId,'What we can do to help you today?');
     }
 }
 
