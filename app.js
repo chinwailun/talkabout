@@ -1418,7 +1418,7 @@ async function greetUserText(userId) {
                      "payload": "Talk to live agent",
                  }];
                  sendQuickReply(userId, responseGreet, replies)
-        }, 1000);
+        }, 2000);
 
     } else {
         sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
@@ -1448,7 +1448,7 @@ async function greetUserText(userId) {
                      "payload": "Talk to live agent",
                  }];
                  sendQuickReply(userId, responseGreet, replies)
-        }, 1000);
+        }, 2000);
         
     }
 }
