@@ -1396,12 +1396,46 @@ async function greetUserText(userId) {
             'given by the past tourists of The Top Penang.');
         sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
         sendTextMessage(userId,'What we can do to help you today?');
+        var responseGreet = "What do you want to do next?"
+                 var replies = [{
+                     "content_type": "text",
+                     "title": "Opinion",
+                     "payload": "Opinion",
+                 },
+                 {
+                     "content_type": "text",
+                     "title": "Rating",
+                     "payload": "Rating",
+                 },
+                 {
+                     "content_type": "text",
+                     "title": "Talk to live agent",
+                     "payload": "Talk to live agent",
+                 }];
+                 sendQuickReply(sender, responseGreet, replies)
     } else {
         sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
             'Welcome to Talk About where you will get the summary of review ' +
             'given by the past tourists of The Top Penang.');
         sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
         sendTextMessage(userId,'What we can do to help you today?');
+        var responseGreet2 = "What do you want to do next?"
+                 var replies = [{
+                     "content_type": "text",
+                     "title": "Opinion",
+                     "payload": "Opinion",
+                 },
+                 {
+                     "content_type": "text",
+                     "title": "Rating",
+                     "payload": "Rating",
+                 },
+                 {
+                     "content_type": "text",
+                     "title": "Talk to live agent",
+                     "payload": "Talk to live agent",
+                 }];
+                 sendQuickReply(sender, responseGreet2, replies)
     }
 }
 
