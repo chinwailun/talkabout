@@ -322,21 +322,23 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 sendToDialogFlow(sender, 'post com');
 
             });*/
+            let touristMessage ='';
+            let reply ='';
 
             if(touristSays ==1){
-                let touristMessage = 'A visitor mentioned that ';
+                touristMessage = 'A visitor mentioned that ';
                 touristSays = touristSays + 1;
             }
             else if (touristSays == 2){
-                let touristMessage = 'One of the travellers told us ';
+                touristMessage = 'One of the travellers told us ';
                 touristSays = touristSays + 1;
             }
             else if (touristSays == 3){
-                let touristMessage = 'A past The Top Penang visitor explained that ';
+                touristMessage = 'A past The Top Penang visitor explained that ';
                 touristSays = touristSays + 1;
             }
             else {
-                let touristMessage ='A past tourist claimed that ';
+                touristMessage ='A past tourist claimed that ';
                 touristSays = touristSays + 1;
             }
             if (touristSays ==5){
@@ -344,18 +346,18 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             }
             
             if(ttp_comparative ==0){
-                let reply = 'the views from The Top of Komtar are far better than that experienced from the top of Penang Hill.';
+                reply = 'the views from The Top of Komtar are far better than that experienced from the top of Penang Hill.';
                 ttp_comparative = ttp_comparative + 1;
                 
             }
             else{
-                let reply ='there are lots of souvenir shops there but price will be a bit higher than Penang road there.';
+                reply ='there are lots of souvenir shops there but price will be a bit higher than Penang road there.';
                 ttp_comparative = ttp_comparative + 1;
             }
             if(ttp_comparative==2){
                 ttp_comparative = 0;
             }
-            let replyComparative = touristSays + reply;
+            let replyComparative = touristMessage + reply;
             sendTextMessage(sender, replyComparative );
             
             
