@@ -1391,18 +1391,17 @@ async function greetUserText(userId) {
         user = usersMap.get(userId);
     }
     if (user) {
-        
-        setTimeout(function() {
-            sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
+        sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
             'Welcome to Talk About where you will get the summary of review ' +
             'given by the past tourists of The Top Penang.');
-        }, 1000);
+        
         
         setTimeout(function() {
             sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
-        }, 2000);
-        //sendTextMessage(userId,'What we can do to help you today?');
-        var responseGreet = "What we can do to help you today?"
+        }, 1000);
+
+        setTimeout(function() {
+            var responseGreet = "What we can do to help you today?"
                  var replies = [{
                      "content_type": "text",
                      "title": "Opinion",
@@ -1419,19 +1418,20 @@ async function greetUserText(userId) {
                      "payload": "Talk to live agent",
                  }];
                  sendQuickReply(userId, responseGreet, replies)
+        }, 1000);
+
     } else {
         sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
             'Welcome to Talk About where you will get the summary of review ' +
             'given by the past tourists of The Top Penang.');
+        
+        
         setTimeout(function() {
-            //do nothing just to delay 1s. 
-        }, 2000);
-        sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
+            sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
+        }, 1000);
+
         setTimeout(function() {
-            //do nothing just to delay 1s. 
-        }, 2000);
-        //sendTextMessage(userId,'What we can do to help you today?');
-        var responseGreet2 = "What we can do to help you today?"
+            var responseGreet = "What we can do to help you today?"
                  var replies = [{
                      "content_type": "text",
                      "title": "Opinion",
@@ -1447,7 +1447,9 @@ async function greetUserText(userId) {
                      "title": "Talk to live agent",
                      "payload": "Talk to live agent",
                  }];
-                 sendQuickReply(userId, responseGreet2, replies)
+                 sendQuickReply(userId, responseGreet, replies)
+        }, 1000);
+        
     }
 }
 
