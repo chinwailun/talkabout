@@ -1396,11 +1396,11 @@ async function greetUserText(userId) {
             'given by the past tourists of The Top Penang.');
         setTimeout(function() {
             //do nothing just to delay 1s. 
-        }, 1000);
+        }, 2000);
         sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
         setTimeout(function() {
             //do nothing just to delay 1s. 
-        }, 1000);
+        }, 2000);
         sendTextMessage(userId,'What we can do to help you today?');
         var responseGreet = "What do you want to do next?"
                  var replies = [{
@@ -1418,12 +1418,18 @@ async function greetUserText(userId) {
                      "title": "Talk to live agent",
                      "payload": "Talk to live agent",
                  }];
-                 sendQuickReply(sender, responseGreet, replies)
+                 sendQuickReply(userId, responseGreet, replies)
     } else {
         sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
             'Welcome to Talk About where you will get the summary of review ' +
             'given by the past tourists of The Top Penang.');
+        setTimeout(function() {
+            //do nothing just to delay 1s. 
+        }, 2000);
         sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
+        setTimeout(function() {
+            //do nothing just to delay 1s. 
+        }, 2000);
         sendTextMessage(userId,'What we can do to help you today?');
         var responseGreet2 = "What do you want to do next?"
                  var replies = [{
@@ -1441,7 +1447,7 @@ async function greetUserText(userId) {
                      "title": "Talk to live agent",
                      "payload": "Talk to live agent",
                  }];
-                 sendQuickReply(sender, responseGreet2, replies)
+                 sendQuickReply(userId, responseGreet2, replies)
     }
 }
 
