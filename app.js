@@ -1394,7 +1394,13 @@ async function greetUserText(userId) {
         sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
             'Welcome to Talk About where you will get the summary of review ' +
             'given by the past tourists of The Top Penang.');
+        setTimeout(function() {
+            //do nothing just to delay 1s. 
+        }, 1000);
         sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
+        setTimeout(function() {
+            //do nothing just to delay 1s. 
+        }, 1000);
         sendTextMessage(userId,'What we can do to help you today?');
         var responseGreet = "What do you want to do next?"
                  var replies = [{
