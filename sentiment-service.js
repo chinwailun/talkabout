@@ -35,7 +35,7 @@ module.exports = {
         snt[Math.floor(Date.now()/1000)] = sentimentResult;
 
         //add to userSentiment map whatever we got from the analysis and store it under the userId property
-        userSentiment.set(senderId,sentimentResult);
+        userSentiment.set(senderId,snt);
     },
 
     //reading out the user sentiment map

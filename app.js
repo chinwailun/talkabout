@@ -925,7 +925,7 @@ function handleDialogFlowResponse(sender, response) {
     let parameters = response.parameters; //we can also see the parameters, that were read from the conversation
 
     sendTypingOff(sender);
-/*
+
     //check sentiment before you do anything else
     let textSentiment = sentimentService.getUserSentiment(sender); //get user sentiment from userSentiment map
     let keys = Object.keys(textSentiment); //to get the last sentiment from all of them, so now read the keys of the object. Keys are timestamps of the sentiment.
@@ -949,7 +949,7 @@ function handleDialogFlowResponse(sender, response) {
 
         sendPassThread(sender);//pass the control
     }
-    else */if (isDefined(action)) { //if action is defined, then see what it is and handle it
+    else if (isDefined(action)) { //if action is defined, then see what it is and handle it
         handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
     } else if (isDefined(messages)) { //if there is no action, we need to handle messages we received from Dialogflow
         handleMessages(messages, sender);//the responses we set in dialogflow will be handle in handleMessages method
