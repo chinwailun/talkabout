@@ -950,7 +950,7 @@ function handleDialogFlowResponse(sender, response) {
         'Let me call my boss for you. He should be here ASAP.');
 
         /*console.log("lastSentiment is "+ lastSentiment);
-        console.log("lastSentiment.score is "+ lastSentiment.score);
+        console.log("lastSentiment.score is "+ lastSentiment.score); 
         console.log("beforeSentiment is "+ beforeSentiment);
         console.log("beforeSentiment.score is "+ beforeSentiment.score);
         console.log("textSentiment is "+ textSentiment);
