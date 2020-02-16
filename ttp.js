@@ -28,9 +28,9 @@ module.exports = {
                             }
                             callback(opinions); //when the query returns, it calls a callback we passed to the function, with the result
                         };
+                    done();
                     });
         });
         pool.end();
     }
-
 }

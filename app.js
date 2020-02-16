@@ -639,7 +639,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                 setTimeout(function() {
                     if (ttp_time == 25 || ttp_time == 27 || ttp_time == 29 || ttp_time == 31){
-                        var responseText = "What are the next thing that interest you?"
+                        var responseText = "What can I offer you next?"
                     }
                     else var responseText = "Do you want to know more about other opinion?";
                     
@@ -682,7 +682,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             break;
             
         case "talk.human":
-            sendPassThread(sender);
+            sendPassThread(sender); 
             break;
 
         case "get-current-weather":
