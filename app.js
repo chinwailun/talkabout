@@ -348,79 +348,88 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             if(ttp_comparative ==0){
                 reply = 'the views from The Top of Komtar are far better than that experienced from the top of Penang Hill.';
                 ttp_comparative = ttp_comparative + 1;
-                var responseText = "What do you want to do next?"
-                var replies = [{
-                     "content_type": "text",
-                     "title": "Next comparative",
-                     "payload": "Next comparative",
-                 },
-                 {
-                     "content_type": "text",
-                     "title": "guidance",
-                     "payload": "guidance",
-                 },
-                 {
-                     "content_type": "text",
-                     "title": "fee",
-                     "payload": "fee",
-                 },
-                 {
-                    "content_type": "text",
-                    "title": "time",
-                    "payload": "time",
-                },
-                {
-                    "content_type": "text",
-                    "title": "directory",
-                    "payload": "directory",
-                },
-                {
-                    "content_type": "text",
-                    "title": "rating",
-                    "payload": "rating",
-                }];
-                 sendQuickReply(sender, responseText, replies)
+                
             
             }
             else{
                 reply ='there are lots of souvenir shops there but price will be a bit higher than Penang road there.';
                 ttp_comparative = ttp_comparative + 1;
-                var responseText = "What do you want to know next?"
-                var replies = [
-                 {
-                     "content_type": "text",
-                     "title": "guidance",
-                     "payload": "guidance",
-                 },
-                 {
-                     "content_type": "text",
-                     "title": "fee",
-                     "payload": "fee",
-                 },
-                 {
-                    "content_type": "text",
-                    "title": "time",
-                    "payload": "time",
-                },
-                {
-                    "content_type": "text",
-                    "title": "directory",
-                    "payload": "directory",
-                },
-                {
-                    "content_type": "text",
-                    "title": "rating",
-                    "payload": "rating",
-                }];
-                 sendQuickReply(sender, responseText, replies)
+                
+                
             }
             if(ttp_comparative==2){
                 ttp_comparative = 0;
             }
             let replyComparative = touristMessage + reply;
             sendTextMessage(sender, replyComparative );
-            
-            
+            if(ttp_comparative ==1){
+                setTimeout(function() {
+                    var responseText = "What do you want to do next?"
+                    var replies = [{
+                        "content_type": "text",
+                        "title": "Next comparative",
+                        "payload": "Next comparative",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "guidance",
+                        "payload": "guidance",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "fee",
+                        "payload": "fee",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "time",
+                        "payload": "time",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "directory",
+                        "payload": "directory",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "rating",
+                        "payload": "rating",
+                    }];
+                sendQuickReply(sender, responseText, replies)
+                }, 2000);
+            }
+            else {
+                setTimeout(function() {
+                    var responseText = "What do you want to know next?"
+                    var replies = [
+                    {
+                        "content_type": "text",
+                        "title": "guidance",
+                        "payload": "guidance",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "fee",
+                        "payload": "fee",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "time",
+                        "payload": "time",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "directory",
+                        "payload": "directory",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "rating",
+                        "payload": "rating",
+                    }];
+                    sendQuickReply(sender, responseText, replies)
+                }, 1000);
+            }
             
             break;
 
