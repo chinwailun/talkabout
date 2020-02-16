@@ -305,8 +305,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                 sendButtonMessage(sender, "Which one do you prefer?", buttons);
             }, 1500)
-            
-            
+                        
             break;
 
         case "ttp-comparative":
@@ -1362,6 +1361,27 @@ function receivedPostback(event) {
 
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
+
+        case 'TIME':
+            ssendToDialogFlow(senderID, 'time');
+            break;
+        
+        case 'COMPARATIVE':
+            ssendToDialogFlow(senderID, 'comparative');
+            break;
+
+        case 'GUIDANCE':
+            ssendToDialogFlow(senderID, 'guidance');
+            break;
+
+        case 'FEE':
+            ssendToDialogFlow(senderID, 'fee');
+            break;
+
+        case 'DIRECTORY':
+            ssendToDialogFlow(senderID, 'directory');
+            break;
+
 
         case 'THE_TOP_FUN_PASS':
             const elementsTopFunPass = [{

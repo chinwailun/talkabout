@@ -54,31 +54,31 @@
           "call_to_actions":[
             {
               "title":"Guidance",
-              "type":"web_url",
-              "url":"http://www.myapple.com"
+              "type":"postback",
+              "payload":"GUIDANCE"
             },
             {
               "title":"Directory",
               "type":"postback",
-              "payload":"JOB_APPLY"
+              "payload":"DIRECTORY"
             }
             ,
             {
               "title":"Comparative",
               "type":"postback",
-              "payload":"JOB_APPLY"
+              "payload":"COMPARATIVE"
             }
             ,
             {
               "title":"Fee",
               "type":"postback",
-              "payload":"JOB_APPLY"
+              "payload":"FEE"
             }
             ,
             {
               "title":"Time",
               "type":"postback",
-              "payload":"JOB_APPLY"
+              "payload":"TIME"
             }
           ]
         },
