@@ -933,10 +933,16 @@ function handleDialogFlowResponse(sender, response) {
     let lastSentiment = textSentiment[keys[keys.length - 1]];//the last key is the last sentiment. Since timestamp is a number, it will be in the right order.
     let beforeSentiment = textSentiment[keys[keys.length - 2]];
 
-    //let differenceInScore = (beforeSentiment === undefined) ? 0 : Math.abs(beforeSentiment.score - lastSentiment.score)
+    let differenceInScore = (beforeSentiment === undefined) ? 0 : Math.abs(beforeSentiment.score - lastSentiment.score);
 
     //look at the score of the last sentiment, also check if the last sentiment exists
-    if (lastSentiment!==undefined && lastSentiment.score < -2){ //if the score < -2, pass the control to human
+
+    //check if there is more than one sentiment, difference is 3 or more, last sentiment is negative but still not so negative
+    if (lastSentiment!==undefined && differenceInScore.score >2 && lastSentiment.score<0 && lastSentiment.score >-3){
+        sendTextMessage(sender, 'Did I say something wrong ? ' + 
+        'Type help to find out how I can serve you better.');
+    }
+    else if(lastSentiment!==undefined && lastSentiment.score < -2){ //if the score < -2, pass the control to human
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
         'Let me call my boss for you. He should be here ASAP.');
 
