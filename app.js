@@ -578,9 +578,53 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     ttp_guidance = ttp_guidance + 1;
                     if(ttp_guidance==25){
                         ttp_guidance = 11;
-                    } 
-                    sendToDialogFlow(sender, 'post gui');
+                    }                   
                 });
+
+                setTimeout(function() {
+                    if (ttp_guidance == 11 || ttp_guidance == 14 || ttp_guidance == 17 || ttp_guidance == 20 || ttp_guidance == 23){
+                        var responseText = "Do you want to look at the next guidance or other information?"
+                    }
+                    else if (ttp_guidance == 12 || ttp_guidance == 15 || ttp_guidance == 18 || ttp_guidance == 21 || ttp_guidance == 24 ){
+                        var responseText = "Are you interested in other opinon as well?"
+
+                    } else var responseText = "Which one do you want to know next?";
+                    
+                    var replies = [
+                        {
+                            "content_type": "text",
+                            "title": "next guidance",
+                            "payload": "next guidance",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "rating",
+                            "payload": "rating",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "directory",
+                            "payload": "directory",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "comparative",
+                            "payload": "comparative",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "time",
+                            "payload": "time",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "fee",
+                            "payload": "fee",
+                        }];
+                        sendQuickReply(sender, responseText, replies)
+                }, 1000); 
+
+
                 break;
 
             case "ttp-time":
