@@ -634,9 +634,51 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     ttp_time = ttp_time + 1;
                     if(ttp_time==32){
                         ttp_time = 25;
-                    } 
-                    sendToDialogFlow(sender, 'post tim');
+                    }  
             });
+
+                setTimeout(function() {
+                    if (ttp_time == 25 || ttp_guidance == 27 || ttp_guidance == 29 || ttp_guidance == 31){
+                        var responseText = "What are the next thing that interest you?"
+                    }
+                    else var responseText = "Do you want to know more about othe opinion?";
+                    
+                    var replies = [
+                        {
+                            "content_type": "text",
+                            "title": "next time opinion",
+                            "payload": "next time opinion",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "directory",
+                            "payload": "directory",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "comparative",
+                            "payload": "comparative",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "guidance",
+                            "payload": "guidance",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "fee",
+                            "payload": "fee",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "time",
+                            "payload": "time",
+                        }];
+                        sendQuickReply(sender, responseText, replies)
+                }, 1000); 
+
+
+
             break;
             
         case "talk.human":
