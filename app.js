@@ -936,9 +936,9 @@ function handleDialogFlowResponse(sender, response) {
     let differenceInScore = (beforeSentiment === undefined) ? 0 : Math.abs(beforeSentiment.score - lastSentiment.score);
     
     //look at the score of the last sentiment, also check if the last sentiment exists
-        console.log("lastSentiment.score is "+ lastSentiment.score);
+       /* console.log("lastSentiment.score is "+ lastSentiment.score);
         console.log("differenceInScore is "+ differenceInScore);
-        console.log("beforeSentiment.score is "+ beforeSentiment.score);
+        console.log("beforeSentiment.score is "+ beforeSentiment.score);*/
 
     //check if there is more than one sentiment, difference is 3 or more, last sentiment is negative but still not so negative
     if (lastSentiment!==undefined && differenceInScore>2 && lastSentiment.score<0 && lastSentiment.score >-3){
