@@ -638,10 +638,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             });
 
                 setTimeout(function() {
-                    if (ttp_time == 25 || ttp_guidance == 27 || ttp_guidance == 29 || ttp_guidance == 31){
+                    if (ttp_time == 25 || ttp_time == 27 || ttp_time == 29 || ttp_time == 31){
                         var responseText = "What are the next thing that interest you?"
                     }
-                    else var responseText = "Do you want to know more about othe opinion?";
+                    else var responseText = "Do you want to know more about other opinion?";
                     
                     var replies = [
                         {
