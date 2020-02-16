@@ -941,7 +941,7 @@ function handleDialogFlowResponse(sender, response) {
         console.log("beforeSentiment.score is "+ beforeSentiment.score);
 
     //check if there is more than one sentiment, difference is 3 or more, last sentiment is negative but still not so negative
-    if (lastSentiment!==undefined && differenceInScore.score >2 && lastSentiment.score<0 && lastSentiment.score >-3){
+    if (lastSentiment!==undefined && differenceInScore>2 && lastSentiment.score<0 && lastSentiment.score >-3){
         sendTextMessage(sender, 'Did I say something wrong ? ' + 
         'Type help to find out how I can serve you better.');
     }
