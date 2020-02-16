@@ -38,7 +38,7 @@ module.exports = {
         userSentiment.set(senderId,snt);
     },
 
-    //reading out the user sentiment map
+    //reading out the user sentiment map            
     getUserSentiment(senderId){
         if(userSentiment.has(senderId)){
             return userSentiment.get(senderId);
