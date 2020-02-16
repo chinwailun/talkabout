@@ -1363,23 +1363,23 @@ function receivedPostback(event) {
     switch (payload) {
 
         case 'TIME':
-            ssendToDialogFlow(senderID, 'time');
+            sendToDialogFlow(senderID, 'time');
             break;
         
         case 'COMPARATIVE':
-            ssendToDialogFlow(senderID, 'comparative');
+            sendToDialogFlow(senderID, 'comparative');
             break;
 
         case 'GUIDANCE':
-            ssendToDialogFlow(senderID, 'guidance');
+            sendToDialogFlow(senderID, 'guidance');
             break;
 
         case 'FEE':
-            ssendToDialogFlow(senderID, 'fee');
+            sendToDialogFlow(senderID, 'fee');
             break;
 
         case 'DIRECTORY':
-            ssendToDialogFlow(senderID, 'directory');
+            sendToDialogFlow(senderID, 'directory');
             break;
 
 
