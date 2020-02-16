@@ -440,9 +440,43 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     ttp_directory = ttp_directory + 1;
                     if(ttp_directory==9){
                         ttp_directory = 2;
-                    } 
-                    sendToDialogFlow(sender, 'post dir');
+                    }                   
                 });
+
+                setTimeout(function() {
+                    if (ttp_directory == 2 || ttp_directory == 4 || ttp_directory == 6 ){
+                        var responseText = "What do you want to know more about?"
+                    }
+                    else var responseText = "Which one do you prefer to see next?"
+                    
+                    var replies = [
+                        {
+                            "content_type": "text",
+                            "title": "next directory",
+                            "payload": "next directory",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "rating",
+                            "payload": "rating",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "guidance",
+                            "payload": "guidance",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "time",
+                            "payload": "time",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "fee",
+                            "payload": "fee",
+                        }];
+                        sendQuickReply(sender, responseText, replies)
+                }, 1000);               
                 break;
 
             case "ttp-fee":
