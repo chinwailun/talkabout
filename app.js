@@ -152,7 +152,7 @@ app.post('/webhook/', function (req, res) {
                     console.log('message from: ', psid);
                     console.log('message to inbox: ', message);
 
-                    if(message == "pass to bot"){
+                    if(message == "aaa"){
                        // messageText("masuk this loop le");
                         sendTextMessage(psid, "masuk this loop le :)");
                         console.log("haha in hereeeeeeeeeee");
