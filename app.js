@@ -1780,6 +1780,25 @@ function takeThreadControl(senderID){
             }
         }
     );
-    sendTextMessage(senderID,"Hi, Im back");
+    sendTextMessage(senderID,"Hi, I'm back. :)");
+    setTimeout(function() {
+        var responseGreet = "What we can do to help you again?"
+             var replies = [{
+                 "content_type": "text",
+                 "title": "Opinion",
+                 "payload": "Opinion",
+             },
+             {
+                 "content_type": "text",
+                 "title": "Rating",
+                 "payload": "Rating",
+             },
+             {
+                 "content_type": "text",
+                 "title": "Talk to live agent",
+                 "payload": "Talk to live agent",
+             }];
+             sendQuickReply(senderID, responseGreet, replies)
+    }, 1000);
 
 }
