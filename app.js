@@ -165,7 +165,7 @@ app.post('/webhook/', function (req, res) {
                          
                     }
                     
-                    console.log("consoleeeeeeeeeeeeeeeee ");
+                    console.log("event :" + event);
                     sendTextMessage(psid, "send texxxxxxxxttttt :)");
                     takeThreadControl(psid);
 
