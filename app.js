@@ -1748,6 +1748,28 @@ function sendPassThread(senderID){
         }
     );
 
+    setTimeout(function() {
+        let buttons = [
+            {
+                type:"postback",
+                payload:"THE_TOP_FUN_PASS",
+                title:"The Top Fun Pass"
+            },
+            {
+                type:"postback",
+                title:"The Top Rainbow Skywalk",
+                payload:"RAINBOW_SKYWALK",
+            },
+            {
+                type:"postback",
+                title:"Another Opinion",
+                payload:"ANOTHER_OPINION"
+            }
+        ];
+
+        sendButtonMessage(sender, "Click on the button below if you want me to talk to you again instead of the live agent :) ", buttons);
+    }, 1500)
+
 }
 
 function takeThreadControl(senderID){
