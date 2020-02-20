@@ -161,9 +161,13 @@ app.post('/webhook/', function (req, res) {
                         //payload = 'pass_to_inbox';
         
         //sendQuickReply(psid, text, title, payload);
-                        takeThreadControl(psid);
+                        
                          
                     }
+                    
+                    console.log("consoleeeeeeeeeeeeeeeee ");
+                    sendTextMessage(psid, "send texxxxxxxxttttt :)");
+                    takeThreadControl(psid);
 
                 });
             }
