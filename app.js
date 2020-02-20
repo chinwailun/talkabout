@@ -973,6 +973,7 @@ function handleDialogFlowResponse(sender, response) {
         handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
     } else if (isDefined(messages)) { //if there is no action, we need to handle messages we received from Dialogflow
         handleMessages(messages, sender);//the responses we set in dialogflow will be handle in handleMessages method
+        nextPossibleQuestion(sender);
     } else if (responseText == '' && !isDefined(action)) {
         //dialogflow could not evaluate input. If there was error and we didnt get any data, than we still provide an answer to the user
         sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?"); //this will only happen if you dont hv the default fallback intent
@@ -1652,6 +1653,28 @@ function isDefined(obj) {
     }
 
     return obj != null;
+}
+
+function nextPossibleQuestion(sender){
+    setTimeout(function() {
+        var responseGreet = "What do you want to do next?"
+             var replies = [{
+                 "content_type": "text",
+                 "title": "Opinion",
+                 "payload": "Opinion",
+             },
+             {
+                 "content_type": "text",
+                 "title": "Rating",
+                 "payload": "Rating",
+             },
+             {
+                 "content_type": "text",
+                 "title": "Talk to live agent",
+                 "payload": "Talk to live agent",
+             }];
+             sendQuickReply(sender, responseGreet, replies)
+    }, 1000);
 }
 
 // Spin up the server
