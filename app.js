@@ -152,8 +152,9 @@ app.post('/webhook/', function (req, res) {
                     console.log('message from: ', psid);
                     console.log('message to inbox: ', message);
 
-                    if(message == 'pass to bot'){
-                        messageText("masuk this loop le");
+                    if(message == "pass to bot"){
+                       // messageText("masuk this loop le");
+                        sendTextMessage(psid, "masuk this loop le :)");
                         //text = 'The Primary Receiver is taking control back. \n\n Tap "Pass to Inbox" to pass thread control to the Page Inbox.';
                          //title = 'Pass to Inbox';
                         //payload = 'pass_to_inbox';
