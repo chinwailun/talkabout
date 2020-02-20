@@ -971,14 +971,17 @@ function handleDialogFlowResponse(sender, response) {
     }
     else if (isDefined(action)) { //if action is defined, then see what it is and handle it
         handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
+        nextPossibleQuestion(sender);
     } else if (isDefined(messages)) { //if there is no action, we need to handle messages we received from Dialogflow
         handleMessages(messages, sender);//the responses we set in dialogflow will be handle in handleMessages method
         nextPossibleQuestion(sender);
     } else if (responseText == '' && !isDefined(action)) {
         //dialogflow could not evaluate input. If there was error and we didnt get any data, than we still provide an answer to the user
         sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?"); //this will only happen if you dont hv the default fallback intent
+        nextPossibleQuestion(sender);
     } else if (isDefined(responseText)) {
         sendTextMessage(sender, responseText);
+        nextPossibleQuestion(sender);
     }
     /*if (lastSentiment!==undefined ){ //if the score < -2, pass the control to human
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
