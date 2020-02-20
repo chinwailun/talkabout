@@ -1675,6 +1675,7 @@ function nextPossibleQuestion(sender){
              }];
              sendQuickReply(sender, responseGreet, replies)
     }, 1000);
+    console.log("hereeeeeeeeeeeeeeee jsao");
 }
 
 // Spin up the server
