@@ -152,10 +152,10 @@ app.post('/webhook/', function (req, res) {
                     console.log('message from: ', psid);
                     console.log('message to inbox: ', message);
 
-                    if(message == "aaa"){
+                   // if(message == "aaa")
                        // messageText("masuk this loop le");
-                        sendTextMessage(psid, "masuk this loop le :)");
-                        console.log("haha in hereeeeeeeeeee");
+                      //  sendTextMessage(psid, "masuk this loop le :)");
+                       // console.log("haha in hereeeeeeeeeee");
                         //text = 'The Primary Receiver is taking control back. \n\n Tap "Pass to Inbox" to pass thread control to the Page Inbox.';
                          //title = 'Pass to Inbox';
                         //payload = 'pass_to_inbox';
@@ -163,11 +163,11 @@ app.post('/webhook/', function (req, res) {
         //sendQuickReply(psid, text, title, payload);
                         
                          
-                    }
                     
-                    console.log("event :" + event[1]);
-                    sendTextMessage(psid, "send texxxxxxxxttttt :)");
-                    takeThreadControl(psid);
+                    
+                    //console.log("event :" + event[1]);
+                   // sendTextMessage(psid, "send texxxxxxxxttttt :)");
+                    //takeThreadControl(psid);
 
                 });
             }
@@ -1382,6 +1382,11 @@ function receivedPostback(event) {
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
 
+        case 'TAKE_THREAD_CONTROL':
+            takeThreadControl(senderID);
+            break;
+
+
         case 'TIME':
             sendToDialogFlow(senderID, 'time');
             break;
@@ -1752,18 +1757,8 @@ function sendPassThread(senderID){
         let buttons = [
             {
                 type:"postback",
-                payload:"THE_TOP_FUN_PASS",
-                title:"The Top Fun Pass"
-            },
-            {
-                type:"postback",
-                title:"The Top Rainbow Skywalk",
-                payload:"RAINBOW_SKYWALK",
-            },
-            {
-                type:"postback",
-                title:"Another Opinion",
-                payload:"ANOTHER_OPINION"
+                payload:"TAKE_THREAD_CONTROL",
+                title:"Talk to bot again"
             }
         ];
 
@@ -1785,5 +1780,6 @@ function takeThreadControl(senderID){
             }
         }
     );
+    sendTextMessage(senderID,"Hi, Im back");
 
 }
