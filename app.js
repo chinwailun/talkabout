@@ -1395,7 +1395,7 @@ function receivedPostback(event) {
     switch (payload) {
 
         case 'TALK_TO_HUMAN':
-            sendPassThread(sender); 
+            sendPassThread(senderID); 
             break;
 
         case 'TAKE_THREAD_CONTROL':
