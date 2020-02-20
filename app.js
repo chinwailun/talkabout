@@ -60,15 +60,9 @@ if (!config.WEATHER_API_KEY) { //weather api key
 if (!config.PG_CONFIG) { //pg config
     throw new Error('missing PG_CONFIG');
 }
-
-
-
-
-
-
-/*if (!config.FB_PAGE_INBOX_ID) { //page inbox id - the receiver app
+if (!config.FB_PAGE_INBOX_ID) { //page inbox id - the receiver app
     throw new Error('missing FB_PAGE_INBOX_ID');
-}*/
+}
 
 //set the port to 5000
 app.set('port', (process.env.PORT || 5000))
@@ -132,7 +126,6 @@ app.get('/webhook/', function (req, res) {
  * webhook. Need to be sure to subscribe the app to the page to receive callbacks
  * for the page. 
  * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
- *
  */
  //this part is where we catch events, that will come to webhook
 app.post('/webhook/', function (req, res) {
@@ -158,6 +151,18 @@ app.post('/webhook/', function (req, res) {
                     const message = event.message;
                     console.log('message from: ', psid);
                     console.log('message to inbox: ', message);
+
+                    if(message == 'pass to bot'){
+                        messageText("masuk this loop le");
+                        //text = 'The Primary Receiver is taking control back. \n\n Tap "Pass to Inbox" to pass thread control to the Page Inbox.';
+                         //title = 'Pass to Inbox';
+                        //payload = 'pass_to_inbox';
+        
+        //sendQuickReply(psid, text, title, payload);
+                        takeThreadControl(psid);
+                         
+                    }
+
                 });
             }
 
@@ -1733,6 +1738,22 @@ function sendPassThread(senderID){
                     id: senderID
                 },
                 target_app_id: config.FB_PAGE_INBOX_ID // ID in the page inbox setting under messenger platform
+            }
+        }
+    );
+
+}
+
+function takeThreadControl(senderID){
+    request(
+        {
+            uri: "https://graph.facebook.com/v2.6/me/take_thread_control",
+            qs: { access_token: config.FB_PAGE_TOKEN },
+            method: "POST",
+            json: {
+                recipient: {
+                    id: senderID
+                }
             }
         }
     );
