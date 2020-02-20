@@ -1767,7 +1767,7 @@ function sendPassThread(senderID){
             }
         ];
 
-        sendButtonMessage(sender, "Click on the button below if you want me to talk to you again instead of the live agent :) ", buttons);
+        sendButtonMessage(senderID, "Click on the button below if you want me to talk to you again instead of the live agent :) ", buttons);
     }, 1500)
 
 }
