@@ -31,20 +31,11 @@
                 ]
             },
             {
-              "title":"Travel Assistant",
-              "type":"nested",
-                            "call_to_actions":[
-                  {
-                    "title":"Flight",
-                    "type":"web_url",
-                    "url":"http://www.myapple.com"
-                    },
-                    {
-                    "title":"Weather Forecast",
-                    "type":"web_url",
-                    "url":"http://www.myapple.com"
-                    }
-                    ]
+              "title":"Talk To Human",
+              "type":"postback",
+              "payload":"TALK_TO_HUMAN"
+                	
+                           
             }
           ]
         },
