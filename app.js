@@ -696,7 +696,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                     
                     
-            });
+            
 
                 setTimeout(function() {
                     if (ttp_time == 25 || ttp_time == 27 || ttp_time == 29 || ttp_time == 31){
