@@ -670,17 +670,20 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     console.log("timeeee 1111111" + ttp_time);
                      
             });
-                ttp.readLink(function (allLink) { 
-                    console.log("timeeee 2222222aaa" + ttp_time);
-                    let replyLink = `Original review ${allLink[ttp_time]}`; 
+                
                     setTimeout(function() {
-                        sendTextMessage(sender, replyLink);
-                    }, 1000);
+                        ttp.readLink(function (allLink) { 
+                            console.log("timeeee 2222222aaa" + ttp_time);
+                            let replyLink = `Original review ${allLink[ttp_time]}`; 
+                            sendTextMessage(sender, replyLink);
                     console.log("timeeee 2222222" + ttp_time);
                     ttp_time = ttp_time + 1;
                     if(ttp_time==32){
                         ttp_time = 25;
                     }  
+                        
+                    }, 1000);
+                    
             });
 
                 setTimeout(function() {
