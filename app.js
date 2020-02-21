@@ -415,7 +415,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "payload": "rating",
                     }];
                 sendQuickReply(sender, responseText, replies)
-                }, 2000);
+                }, 2200);
             }
             else {
                 setTimeout(function() {
@@ -447,7 +447,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "payload": "rating",
                     }];
                     sendQuickReply(sender, responseText, replies)
-                }, 2000);
+                }, 2200);
             }
             
             break;
@@ -520,7 +520,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "fee",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 2000);               
+                }, 2200);               
                 break;
 
             case "ttp-fee":
@@ -595,7 +595,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         {
                             type:"postback",
                             payload:"VIEW_MORE_INFO_FEE",
-                            title:"View More Price Info (Malaysian & Foreigner)"
+                            title:"View More Price Info"
                         },
                         {
                             type:"postback",
@@ -683,7 +683,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "fee",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 2000); 
+                }, 2200); 
 
 
                 break;
@@ -762,7 +762,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "time",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 2000); 
+                }, 2200); 
 
 
 
