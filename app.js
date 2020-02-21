@@ -454,14 +454,15 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
             case "ttp-directory":
 
-                setTimeout(function() {
+                
                     ttp.readAllOpinions(function (allOpinions) { 
                         let reply = `${messages[0].text.text} ${allOpinions[ttp_directory]}`; 
                         sendTextMessage(sender, reply);
                                           
                     });
 
-                }, 200);
+
+                
                 
 
                 setTimeout(function() {
@@ -469,9 +470,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         let replyLink = `Original review: ${allLink[ttp_directory]}`; 
                             sendTextMessage(sender, replyLink);
 
-                }, 1000);
+                
             }                   
             );
+        }, 1000);
                 
                 setTimeout(function() {
                     ttp_directory = ttp_directory + 1;
