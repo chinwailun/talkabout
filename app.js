@@ -452,6 +452,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         ttp_directory = 2;
                     }                   
                 });
+                ttp.readLink(function (allLink) { 
+                    let replyLink = `Original review: ${allLink[ttp_directory]}`; 
+                    sendTextMessage(sender, replyLink);
+                    }                   
+                );
 
                 setTimeout(function() {
                     if (ttp_directory == 2 || ttp_directory == 4 || ttp_directory == 6 ){
