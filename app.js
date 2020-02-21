@@ -357,12 +357,15 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             
             if(ttp_comparative ==0){
                 reply = 'the views from The Top of Komtar are far better than that experienced from the top of Penang Hill.';
+                replyLink = 't.ly/LX980';
                 ttp_comparative = ttp_comparative + 1;
+
                 
             
             }
             else{
                 reply ='there are lots of souvenir shops there but price will be a bit higher than Penang road there.';
+                replyLink = 't.ly/1VJdB';
                 ttp_comparative = ttp_comparative + 1;
                 
                 
@@ -371,7 +374,12 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 ttp_comparative = 0;
             }
             let replyComparative = touristMessage + reply;
+            let replyLinkComparative = "Original review: " + replyLink;
             sendTextMessage(sender, replyComparative );
+            setTimeout(function() {
+                sendTextMessage(sender, replyLinkComparative );
+            }, 1000);
+            
             if(ttp_comparative ==1){
                 setTimeout(function() {
                     var responseText = "What do you want to do next?"
@@ -447,14 +455,18 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_directory]}`; 
                     sendTextMessage(sender, reply);
-                    ttp_directory = ttp_directory + 1;
-                    if(ttp_directory==9){
-                        ttp_directory = 2;
-                    }                   
+                                      
                 });
                 ttp.readLink(function (allLink) { 
                     let replyLink = `Original review: ${allLink[ttp_directory]}`; 
-                    sendTextMessage(sender, replyLink);
+                    setTimeout(function() {
+                        sendTextMessage(sender, replyLink);
+                    }, 1000);
+                    
+                    ttp_directory = ttp_directory + 1;
+                    if(ttp_directory==9){
+                        ttp_directory = 2;
+                    } 
                     }                   
                 );
 
@@ -491,7 +503,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "fee",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 1000);               
+                }, 2000);               
                 break;
 
             case "ttp-fee":
@@ -566,7 +578,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         {
                             type:"postback",
                             payload:"VIEW_MORE_INFO_FEE",
-                            title:"View More Info"
+                            title:"View More Price Info (Malaysian & Foreigner)"
                         },
                         {
                             type:"postback",
@@ -590,6 +602,14 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_guidance]}`; 
                     sendTextMessage(sender, reply);
+                                      
+                });
+                ttp.readLink(function (allLink) { 
+                    let replyLink = `Original review: ${allLink[ttp_guidance]}`; 
+                    setTimeout(function() {
+                        sendTextMessage(sender, replyLink);
+                    }, 1000);
+                    
                     ttp_guidance = ttp_guidance + 1;
                     if(ttp_guidance==25){
                         ttp_guidance = 11;
@@ -637,7 +657,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "fee",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 1000); 
+                }, 2000); 
 
 
                 break;
@@ -646,6 +666,13 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 ttp.readAllOpinions(function (allOpinions) { 
                     let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
                     sendTextMessage(sender, reply);
+                     
+            });
+                ttp.readLink(function (allLink) { 
+                    let replyLink = `original review ${allLink[ttp_time]}`; 
+                    setTimeout(function() {
+                        sendTextMessage(sender, replyLink);
+                    }, 1000);
                     ttp_time = ttp_time + 1;
                     if(ttp_time==32){
                         ttp_time = 25;
@@ -690,7 +717,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "time",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 1000); 
+                }, 2000); 
 
 
 
