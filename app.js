@@ -663,13 +663,18 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 break;
 
             case "ttp-time":
-                ttp.readAllOpinions(function (allOpinions) { 
-                    console.log("timeeee 1111111aaaa" + ttp_time);
-                    let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
-                    sendTextMessage(sender, reply);
-                    console.log("timeeee 1111111" + ttp_time);
-                     
-            });
+
+                setTimeout(function() {
+                    ttp.readAllOpinions(function (allOpinions) { 
+                        console.log("timeeee 1111111aaaa" + ttp_time);
+                        let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
+                        sendTextMessage(sender, reply);
+                        console.log("timeeee 1111111" + ttp_time);
+                         
+                });
+
+                }, 500);
+                
                 
                     setTimeout(function() {
                         ttp.readLink(function (allLink) { 
@@ -677,9 +682,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             let replyLink = `Original review ${allLink[ttp_time]}`; 
                             sendTextMessage(sender, replyLink);
                     console.log("timeeee 2222222" + ttp_time);
-                    
-                      
-                        
+
                     }, 1000);
 
                     setTimeout(function() {
