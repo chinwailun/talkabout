@@ -457,18 +457,27 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     sendTextMessage(sender, reply);
                                       
                 });
-                ttp.readLink(function (allLink) { 
-                    let replyLink = `Original review: ${allLink[ttp_directory]}`; 
-                    setTimeout(function() {
-                        sendTextMessage(sender, replyLink);
-                    }, 1000);
-                    
+
+                setTimeout(function() {
+                    ttp.readLink(function (allLink) { 
+                        let replyLink = `Original review: ${allLink[ttp_directory]}`; 
+                            sendTextMessage(sender, replyLink);
+
+                }, 1000);
+            }                   
+            );
+                
+                setTimeout(function() {
                     ttp_directory = ttp_directory + 1;
                     if(ttp_directory==9){
                         ttp_directory = 2;
                     } 
-                    }                   
-                );
+
+                }, 1500);
+                    
+                    
+                    
+                  
 
                 setTimeout(function() {
                     if (ttp_directory == 2 || ttp_directory == 4 || ttp_directory == 6 ){
@@ -604,17 +613,26 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     sendTextMessage(sender, reply);
                                       
                 });
-                ttp.readLink(function (allLink) { 
-                    let replyLink = `Original review: ${allLink[ttp_guidance]}`; 
-                    setTimeout(function() {
-                        sendTextMessage(sender, replyLink);
-                    }, 1000);
-                    
+
+                setTimeout(function() {
+                    ttp.readLink(function (allLink) { 
+                        let replyLink = `Original review: ${allLink[ttp_guidance]}`; 
+                            sendTextMessage(sender, replyLink);
+                       
+                        
+                                        
+                    });
+
+                }, 1000);
+
+                
+
+                setTimeout(function() {
                     ttp_guidance = ttp_guidance + 1;
                     if(ttp_guidance==25){
                         ttp_guidance = 11;
-                    }                   
-                });
+                    }   
+                }, 1500);
 
                 setTimeout(function() {
                     if (ttp_guidance == 11 || ttp_guidance == 14 || ttp_guidance == 17 || ttp_guidance == 20 || ttp_guidance == 23){
@@ -666,10 +684,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                 
                     ttp.readAllOpinions(function (allOpinions) { 
-                        console.log("timeeee 1111111aaaa" + ttp_time);
+                        
                         let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
                         sendTextMessage(sender, reply);
-                        console.log("timeeee 1111111" + ttp_time);
+                        
                          
                 });
 
@@ -678,10 +696,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 
                     setTimeout(function() {
                         ttp.readLink(function (allLink) { 
-                            console.log("timeeee 2222222aaa" + ttp_time);
-                            let replyLink = `Original review ${allLink[ttp_time]}`; 
+                            
+                            let replyLink = `Original review: ${allLink[ttp_time]}`; 
                             sendTextMessage(sender, replyLink);
-                    console.log("timeeee 2222222" + ttp_time);
+                    
                 });
 
                     }, 1000);
