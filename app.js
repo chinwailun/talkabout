@@ -453,18 +453,23 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             break;
 
             case "ttp-directory":
-                ttp.readAllOpinions(function (allOpinions) { 
-                    let reply = `${messages[0].text.text} ${allOpinions[ttp_directory]}`; 
-                    sendTextMessage(sender, reply);
-                                      
-                });
+
+                setTimeout(function() {
+                    ttp.readAllOpinions(function (allOpinions) { 
+                        let reply = `${messages[0].text.text} ${allOpinions[ttp_directory]}`; 
+                        sendTextMessage(sender, reply);
+                                          
+                    });
+
+                }, 200);
+                
 
                 setTimeout(function() {
                     ttp.readLink(function (allLink) { 
                         let replyLink = `Original review: ${allLink[ttp_directory]}`; 
                             sendTextMessage(sender, replyLink);
 
-                }, 1500);
+                }, 1000);
             }                   
             );
                 
@@ -474,7 +479,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         ttp_directory = 2;
                     } 
 
-                }, 2000);
+                }, 1500);
                     
                     
                     
@@ -513,7 +518,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "fee",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 2500);               
+                }, 2000);               
                 break;
 
             case "ttp-fee":
