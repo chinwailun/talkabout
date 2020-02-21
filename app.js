@@ -334,6 +334,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             });*/
             let touristMessage ='';
             let reply ='';
+            let replyLink ='';
 
             if(touristSays ==1){
                 touristMessage = 'A visitor mentioned that ';
