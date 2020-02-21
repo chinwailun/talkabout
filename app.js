@@ -664,7 +664,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
             case "ttp-time":
 
-                setTimeout(function() {
+                
                     ttp.readAllOpinions(function (allOpinions) { 
                         console.log("timeeee 1111111aaaa" + ttp_time);
                         let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
@@ -673,7 +673,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                          
                 });
 
-                }, 500);
+                
                 
                 
                     setTimeout(function() {
@@ -682,6 +682,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             let replyLink = `Original review ${allLink[ttp_time]}`; 
                             sendTextMessage(sender, replyLink);
                     console.log("timeeee 2222222" + ttp_time);
+                });
 
                     }, 1000);
 
