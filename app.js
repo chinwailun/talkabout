@@ -447,7 +447,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "payload": "rating",
                     }];
                     sendQuickReply(sender, responseText, replies)
-                }, 1000);
+                }, 2000);
             }
             
             break;
@@ -464,7 +464,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         let replyLink = `Original review: ${allLink[ttp_directory]}`; 
                             sendTextMessage(sender, replyLink);
 
-                }, 1000);
+                }, 1500);
             }                   
             );
                 
@@ -474,7 +474,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         ttp_directory = 2;
                     } 
 
-                }, 1500);
+                }, 2000);
                     
                     
                     
@@ -513,7 +513,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "fee",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 2000);               
+                }, 2500);               
                 break;
 
             case "ttp-fee":
