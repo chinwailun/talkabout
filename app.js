@@ -291,10 +291,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "ttp-rating":
             sendTextMessage(sender, 'Traveller Overview 4.0/5.0 with 194 reviews (updated on 22 Feb 2020)');
-            sendTextMessage(sender, 'Excellent ----- 35%/n' + 
-                                    'Very good ----- 38%/n' +         
-                                    'Average ------- 16%/n' +
-                                    'Poor ----------  5%/n' +
+            sendTextMessage(sender, 'Excellent ----- 35%\n' + 
+                                    'Very good ----- 38%\n' +         
+                                    'Average ------- 16%\r\n' +
+                                    'Poor ----------  5%\r\n' +
                                     'Teribble ------  6%'
                                     )
 
