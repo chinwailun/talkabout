@@ -1293,7 +1293,7 @@ function handleDialogFlowResponse(sender, response) {
         console.log("beforeSentiment.score is "+ beforeSentiment.score);*/
 
     //check if there is more than one sentiment, difference is 3 or more, last sentiment is negative but still not so negative
-    if (lastSentiment!==undefined && differenceInScore>2 && lastSentiment.score<0 && lastSentiment.score >-4){
+    if (lastSentiment!==undefined && differenceInScore>4 && lastSentiment.score<0 && lastSentiment.score >-3){
         sendTextMessage(sender, 'Did I say something wrong ? ' + 
         'The live agent will be here ASAP to find out how we can serve you better.');
         sendPassThread(sender);//pass the control
