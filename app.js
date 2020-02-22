@@ -289,6 +289,33 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "what-people-like":
+
+            const elementsPeopleLike = [{
+                "title": "Observation Deck",
+                "subtitle": "blabla",
+                "imageUrl": "https://i.postimg.cc/hGYh6SzL/1.png",
+                "buttons": [
+                  {
+                    "postback": "t.ly/R0dOb",
+                    "text": "View review 1"
+                  }, {
+                    "text": "View review 2",
+                    "postback": "t.ly/6xO91"
+                  },
+                  {
+                    "text": "View review 3",
+                    "postback": "t.ly/9Le57"
+                                 
+                  }
+                ]
+              }];
+              
+              handleCardMessages(elementsPeopleLike, sender)
+
+
+            break;
+
         case "ttp-rating":
             sendTextMessage(sender, 'Traveller Overview 4.0/5.0 with 194 reviews (updated on 22 Feb 2020)');
             setTimeout(function() {
@@ -300,16 +327,16 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                                     )
             }, 1000);
             setTimeout(function() {
-                var responseText = "Would you be interested in the following options as well?"
+                var responseText = "Do you want to know what travellers talk about?"
                 var replies = [{
                     "content_type": "text",
-                    "title": "Things people like",
-                    "payload": "Things people like",
+                    "title": "What people like",
+                    "payload": "What people like",
                 },
                 {
                     "content_type": "text",
-                    "title": "Things people dislike",
-                    "payload": "Things people dislike",
+                    "title": "What people dislike",
+                    "payload": "What people dislike",
                 },
                 {
                     "content_type": "text",
