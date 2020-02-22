@@ -290,7 +290,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
     switch (action) {
 
         case "what-people-dislike":
-            const elementsPeopleLike = [
+            const elementsPeopleDislike = [
                 
                 {
                   "title": "Too hot",
@@ -325,7 +325,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               
               ];
                 
-                handleCardMessages(elementsPeopleLike, sender)
+                handleCardMessages(elementsPeopleDislike, sender)
 
             break;
 
