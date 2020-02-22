@@ -309,7 +309,28 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                                  
                   }
                 ]
-              }];
+              },
+              {
+                "title": "Jurassic Park",
+                "subtitle": "blabla2222",
+                "imageUrl": "https://i.postimg.cc/xCJyrt0c/1.png",
+                "buttons": [
+                  {
+                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r639465386-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
+                    "text": "View review 1"
+                  }, {
+                    "text": "View review 2",
+                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r684142386-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                  },
+                  {
+                    "text": "View review 3",
+                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r480408473-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                                 
+                  }
+                ]
+              }
+            
+            ];
               
               handleCardMessages(elementsPeopleLike, sender)
 
