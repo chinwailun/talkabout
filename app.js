@@ -294,7 +294,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 
                 {
                   "title": "Too hot",
-                  "subtitle": "blabla1",
+                  "subtitle": "It's too hot to stay in open space :(",
                   //"imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
                   "buttons": [
                     {
@@ -309,8 +309,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 ,
                 
                 {
-                  "title": "Jurassic Park",
-                  "subtitle": "blabla2222",
+                  "title": "Expensive",
+                  "subtitle": "Ticket is expensive :(",
                   //"imageUrl": "https://i.postimg.cc/T2yL9KwY/1.png",
                   "buttons": [
                     {
@@ -326,6 +326,22 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               ];
                 
                 handleCardMessages(elementsPeopleDislike, sender)
+
+                setTimeout(function() {
+                    var responseText = "Do you want to know what the past visitors like?"
+                    var replies = [{
+                        "content_type": "text",
+                        "title": "What people like",
+                        "payload": "What people like",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Opinion",
+                        "payload": "Opinion",
+                    }
+                    ];
+                sendQuickReply(sender, responseText, replies)
+                }, 2000);
 
             break;
 
