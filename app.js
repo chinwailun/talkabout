@@ -292,32 +292,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         case "what-people-like":
 
             const elementsPeopleLike = [
-                {
-                    "title": "Rainbow Walk",
-                    "subtitle": "blabla3",
-                    "imageUrl": "https://i.postimg.cc/zBfygBLW/1.png",
-                    "buttons": [
-                      {
-                        "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r734462577-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
-                        "text": "View review 1"
-                      }, {
-                        "text": "View review 2",
-                        "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r528457479-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
-                      },
-                      {
-                        "text": "View review 3",
-                        "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r522115914-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
-                                     
-                      }
-                    ]
-                  },
-
-                  
-              
+                
               {
                 "title": "Aquarium",
                 "subtitle": "blabla4",
-                "imageUrl": "https://i.postimg.cc/fLQHzGk6/1.png",
+                "imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
                 "buttons": [
                   {
                     "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r641500463-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
@@ -332,13 +311,32 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                                  
                   }
                 ]
+              }
+              ,
+              {
+                "title": "Rainbow Walk",
+                "subtitle": "blabla3",
+                "imageUrl": "https://i.postimg.cc/T3QgsZXR/1.png",
+                "buttons": [
+                  {
+                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r734462577-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
+                    "text": "View review 1"
+                  }, {
+                    "text": "View review 2",
+                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r528457479-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                  },
+                  {
+                    "text": "View review 3",
+                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r522115914-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                                 
+                  }
+                ]
               },
-                
                 
                 {
                 "title": "Observation Deck",
                 "subtitle": "blabla",
-                "imageUrl": "https://i.postimg.cc/BQCjZkQR/1.png",
+                "imageUrl": "https://i.postimg.cc/hGYh6SzL/1.png",
                 "buttons": [
                   {
                     "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r718605237-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
@@ -357,7 +355,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               {
                 "title": "Jurassic Park",
                 "subtitle": "blabla2222",
-                "imageUrl": "https://i.postimg.cc/bvwkj8x6/1.png",
+                "imageUrl": "https://i.postimg.cc/T2yL9KwY/1.png",
                 "buttons": [
                   {
                     "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r639465386-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
