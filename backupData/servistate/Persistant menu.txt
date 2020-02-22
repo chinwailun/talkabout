@@ -23,7 +23,7 @@
                     "payload":"WHAT_PEOPLE_LIKE"
                     },
                   {
-                    "title":"Things People Disike",
+                    "title":"Things People Dislike",
                     "type":"postback",
                     "payload":"WHAT_PEOPLE_DISLIKE"
                     }

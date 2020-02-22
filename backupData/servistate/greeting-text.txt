@@ -2,10 +2,10 @@
   "greeting":[
   {
     "locale":"default",
-    "text":"Hello, I'm here to assist your tour!"
+    "text":"Hello, I'm here to assist your visit to The Top Penang!"
   }, {
     "locale":"en_US",
-    "text":"Hello, I'm here to assist your tour!"
+    "text":"Hello, I'm here to assist your visit to The Top Penang!"
   }
 ]
 }

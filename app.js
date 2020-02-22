@@ -643,7 +643,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "payload": "rating",
                     }];
                     sendQuickReply(sender, responseText, replies)
-                }, 2200);
+                }, 3000);
             }
             
             break;
@@ -716,7 +716,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "fee",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 2200);               
+                }, 3000);               
                 break;
 
             case "ttp-fee":
@@ -879,7 +879,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "fee",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 2200); 
+                }, 3000); 
 
 
                 break;
@@ -958,7 +958,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "payload": "time",
                         }];
                         sendQuickReply(sender, responseText, replies)
-                }, 2200); 
+                }, 3000); 
 
 
 
@@ -1065,6 +1065,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         default:
             //unhandled action, just send back the text
             handleMessages(messages, sender);
+            sendTextMessage(sender, "walao yeah");
     }
 }
 
@@ -2003,11 +2004,14 @@ async function greetUserText(userId) {
         sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
             'Welcome to Talk About where you will get the summary of review ' +
             'given by the past tourists of The Top Penang.');
-        
+
+        setTimeout(function() {
+                sendTextMessage(userId,'I categoried the reviews into 5 groups such as guidance, comparative, directory, time and fee.');
+            }, 1000);
         
         setTimeout(function() {
             sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
-        }, 1000);
+        }, 1500);
 
         setTimeout(function() {
             var responseGreet = "What we can do to help you today?"
@@ -2037,7 +2041,7 @@ async function greetUserText(userId) {
         
         setTimeout(function() {
             sendTextMessage(userId,'At any time, use the menu below to navigate through the features.');
-        }, 1000);
+        }, 1500);
 
         setTimeout(function() {
             var responseGreet = "What we can do to help you today?"
