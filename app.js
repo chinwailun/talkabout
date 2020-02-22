@@ -351,7 +351,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 
               {
                 "title": "Aquarium",
-                "subtitle": "blabla4",
+                "subtitle": "Learn more about the underwater world and find out how we can all help to conserve and protect our aquatic friends and their homes here.",
                 "imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
                 "buttons": [
                   {
@@ -371,7 +371,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               ,
               {
                 "title": "Rainbow Walk",
-                "subtitle": "blabla3",
+                "subtitle": "Here offers visitors the thrilling experience of walking on air 816 feet above sea level!",
                 "imageUrl": "https://i.postimg.cc/T3QgsZXR/1.png",
                 "buttons": [
                   {
@@ -390,8 +390,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               },
                 
                 {
-                "title": "Observation Deck",
-                "subtitle": "blabla",
+                "title": "Observatory Deck",
+                "subtitle": "The air-conditioned Observatory Deck at Level 65 features a glass walkway that lets you watch the world go by below",
                 "imageUrl": "https://i.postimg.cc/hGYh6SzL/1.png",
                 "buttons": [
                   {
@@ -410,7 +410,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               },
               {
                 "title": "Jurassic Park",
-                "subtitle": "blabla2222",
+                "subtitle": "Here brings over 200 dinosaurs back to life to create a hands-on interactive activity center of epic proportions. Meet and frolic with these creatures from millions of years ago!",
                 "imageUrl": "https://i.postimg.cc/T2yL9KwY/1.png",
                 "buttons": [
                   {
@@ -452,7 +452,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             break;
 
         case "ttp-rating":
-            sendTextMessage(sender, 'Traveller Overview 4.0/5.0 with 194 reviews (updated on 22 Feb 2020)');
+            sendTextMessage(sender, 'Traveller Overview 4.0/5.0 with 194 reviews \n(updated on 22 Feb 2020)');
             setTimeout(function() {
             sendTextMessage(sender, '⭐⭐⭐⭐⭐ 35%\n' + 
                                     '⭐⭐⭐⭐ 38%\n' +         
