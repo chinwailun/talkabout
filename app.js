@@ -289,6 +289,46 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "what-people-dislike":
+            const elementsPeopleLike = [
+                
+                {
+                  "title": "Too hot",
+                  "subtitle": "blabla1",
+                  //"imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
+                  "buttons": [
+                    {
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r736957994-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
+                      "text": "View review 1"
+                    }, {
+                      "text": "View review 2",
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r571682753-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                    }
+                  ]
+                }
+                ,
+                
+                {
+                  "title": "Jurassic Park",
+                  "subtitle": "blabla2222",
+                  //"imageUrl": "https://i.postimg.cc/T2yL9KwY/1.png",
+                  "buttons": [
+                    {
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r533279728-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
+                      "text": "View review 1"
+                    }, {
+                      "text": "View review 2",
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r491172247-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                    }
+                  ]
+                }
+              
+              ];
+                
+                handleCardMessages(elementsPeopleLike, sender)
+
+            break;
+
         case "what-people-like":
 
             const elementsPeopleLike = [
