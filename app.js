@@ -328,7 +328,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                                  
                   }
                 ]
-              },
+              }/*,
               {
                 "title": "",
                 "subtitle": "blabla3",
@@ -350,7 +350,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               },
               {
                 "title": "",
-                "subtitle": "blabla4",
+                "subtitle": "blabla",
                 "imageUrl": "",
                 "buttons": [
                   {
@@ -366,7 +366,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                                  
                   }
                 ]
-              }
+              }*/
             
             ];
               
