@@ -1084,7 +1084,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "title": "Talk to live agent",
                         "payload": "Talk to live agent",
                     }];
-                    sendQuickReply(userId, responseGreet, replies)
+                    sendQuickReply(sender, responseGreet, replies)
                 }else if (casualQuickReplies == 2)
                 {
                     var responseGreet = "Pick one and let me clear your doubt xD"
@@ -1103,7 +1103,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "title": "Talk to live agent",
                         "payload": "Talk to live agent",
                     }];
-                    sendQuickReply(userId, responseGreet, replies)
+                    sendQuickReply(sender, responseGreet, replies)
                 }else {
 
                     var responseGreet = "Which one do you like?"
@@ -1122,9 +1122,16 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "title": "Talk to live agent",
                         "payload": "Talk to live agent",
                     }];
-                    sendQuickReply(userId, responseGreet, replies)
+                    sendQuickReply(sender, responseGreet, replies)
                 }
             }, 2000)
+
+            setTimeout(function(){
+                casualQuickReplies = casualQuickReplies + 1;
+                if(casualQuickReplies == 4 ){
+                    casualQuickReplies = 1;
+                }
+            }, 3000)
             
     }
 }
