@@ -1235,10 +1235,10 @@ function handleDialogFlowResponse(sender, response) {
 
         console.log("lastSentiment is "+ lastSentiment);
         console.log("lastSentiment.score is "+ lastSentiment.score); 
-        console.log("beforeSentiment is "+ beforeSentiment);
+        /*console.log("beforeSentiment is "+ beforeSentiment);
         console.log("beforeSentiment.score is "+ beforeSentiment.score);
         console.log("textSentiment is "+ textSentiment);
-        console.log("textSentiment.score is "+ textSentiment.score);
+        console.log("textSentiment.score is "+ textSentiment.score);*/
 
         sendPassThread(sender);//pass the control
     }
