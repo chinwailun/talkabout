@@ -351,7 +351,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 
               {
                 "title": "Aquarium",
-                "subtitle": "Learn more about help to conserve our aquatic friends and their homes here.",
+                "subtitle": "Learn more about how to conserve our aquatic friends and their homes here.",
                 "imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
                 "buttons": [
                   {
@@ -1666,6 +1666,18 @@ function receivedPostback(event) {
 
     //In this switch statement, add action for any clicks on the button, that is postbacks
     switch (payload) {
+
+        case 'RATING':
+            sendToDialogFlow(senderID,'rating');
+            break;
+
+        case 'WHAT_PEOPLE_LIKE':
+            sendToDialogFlow(senderID,'What people like');
+            break;
+
+        case 'WHAT_PEOPLE_DISLIKE':
+            sendToDialogFlow(senderID,'What people dislike');
+            break;
 
         case 'TALK_TO_HUMAN':
             sendPassThread(senderID); 

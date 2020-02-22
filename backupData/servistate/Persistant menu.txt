@@ -14,18 +14,18 @@
               "call_to_actions":[
                   {
                     "title":"Average Rating",
-                    "type":"web_url",
-                    "url":"http://www.myapple.com"
+                    "type":"postback",
+                    "payload":"RATING"
                     },
                   {
                     "title":"Things People Like",
                     "type":"postback",
-                    "payload":"JOB_APPLY"
+                    "payload":"WHAT_PEOPLE_LIKE"
                     },
                   {
                     "title":"Things People Disike",
                     "type":"postback",
-                    "payload":"JOB_APPLY"
+                    "payload":"WHAT_PEOPLE_DISLIKE"
                     }
                     
                 ]
