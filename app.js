@@ -289,6 +289,17 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "ttp-rating":
+            sendTextMessage(sender, 'Traveller Overview 4.0/5.0 with 194 reviews (updated on 22 Feb 2020)');
+            sendTextMessage(sender, 'Excellent ----- 35%/n' + 
+                                    'Very good ----- 38%/n' +         
+                                    'Average ------- 16%/n' +
+                                    'Poor ----------  5%/n' +
+                                    'Teribble ------  6%'
+                                    )
+
+            break;
+
         case "view-more-info-fee":
             sendTextMessage(sender, 'For The Top Fun Pass, it costs RM78 per single adult, and RM48 per child, senior citizen or people with disabilities (OKU) for MyKad holders. For the standard rate (foreigner), it costs RM99 and RM58 respectively.');
             setTimeout(function() {
@@ -610,7 +621,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     ];
 
                     sendButtonMessage(sender, "What would you like to do next?", buttons);
-                }, 1500)
+                }, 2000)
 
 
                 break;
