@@ -26,6 +26,7 @@ var ttp_fee =9;
 var ttp_guidance = 11; 
 var ttp_time =25; 
 var touristSays = 1;
+var casualQuickReplies = 1;
 
 
 // Messenger API parameters
@@ -1065,7 +1066,66 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         default:
             //unhandled action, just send back the text
             handleMessages(messages, sender);
-            sendTextMessage(sender, "walao yeah");
+            setTimeout(function() {
+                if (casualQuickReplies == 1){
+                    var responseGreet = "What would you choose next? :)"
+                    var replies = [{
+                        "content_type": "text",
+                        "title": "Opinion",
+                        "payload": "Opinion",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Rating",
+                        "payload": "Rating",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Talk to live agent",
+                        "payload": "Talk to live agent",
+                    }];
+                    sendQuickReply(userId, responseGreet, replies)
+                }else if (casualQuickReplies == 2)
+                {
+                    var responseGreet = "Pick one and let me clear your doubt xD"
+                    var replies = [{
+                        "content_type": "text",
+                        "title": "Opinion",
+                        "payload": "Opinion",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Rating",
+                        "payload": "Rating",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Talk to live agent",
+                        "payload": "Talk to live agent",
+                    }];
+                    sendQuickReply(userId, responseGreet, replies)
+                }else {
+
+                    var responseGreet = "Which one do you like?"
+                    var replies = [{
+                        "content_type": "text",
+                        "title": "Opinion",
+                        "payload": "Opinion",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Rating",
+                        "payload": "Rating",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Talk to live agent",
+                        "payload": "Talk to live agent",
+                    }];
+                    sendQuickReply(userId, responseGreet, replies)
+                }
+            }, 2000)
+            
     }
 }
 
