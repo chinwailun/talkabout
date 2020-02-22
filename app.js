@@ -297,15 +297,15 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 "imageUrl": "https://i.postimg.cc/hGYh6SzL/1.png",
                 "buttons": [
                   {
-                    "postback": "t.ly/R0dOb",
+                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r718605237-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
                     "text": "View review 1"
                   }, {
                     "text": "View review 2",
-                    "postback": "t.ly/6xO91"
+                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r631161230-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
                   },
                   {
                     "text": "View review 3",
-                    "postback": "t.ly/9Le57"
+                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r619064422-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
                                  
                   }
                 ]
