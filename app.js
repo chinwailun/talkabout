@@ -351,7 +351,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 
               {
                 "title": "Aquarium",
-                "subtitle": "Learn more about the underwater world and find out how we can all help to conserve and protect our aquatic friends and their homes here.",
+                "subtitle": "Learn more about help to conserve our aquatic friends and their homes here.",
                 "imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
                 "buttons": [
                   {
@@ -371,7 +371,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               ,
               {
                 "title": "Rainbow Walk",
-                "subtitle": "Here offers visitors the thrilling experience of walking on air 816 feet above sea level!",
+                "subtitle": "Get the thrilling experience of walking on air 816 feet above sea level!",
                 "imageUrl": "https://i.postimg.cc/T3QgsZXR/1.png",
                 "buttons": [
                   {
@@ -391,7 +391,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 
                 {
                 "title": "Observatory Deck",
-                "subtitle": "The air-conditioned Observatory Deck at Level 65 features a glass walkway that lets you watch the world go by below",
+                "subtitle": "Here features a glass walkway that lets you watch the world go by below.",
                 "imageUrl": "https://i.postimg.cc/hGYh6SzL/1.png",
                 "buttons": [
                   {
@@ -410,7 +410,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               },
               {
                 "title": "Jurassic Park",
-                "subtitle": "Here brings over 200 dinosaurs back to life to create a hands-on interactive activity center of epic proportions. Meet and frolic with these creatures from millions of years ago!",
+                "subtitle": "Meet and frolic with over 200 dinosaurs from millions of years ago!",
                 "imageUrl": "https://i.postimg.cc/T2yL9KwY/1.png",
                 "buttons": [
                   {
