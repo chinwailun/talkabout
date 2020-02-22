@@ -1233,12 +1233,12 @@ function handleDialogFlowResponse(sender, response) {
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
         'Let me call the live agent for you. He should be here ASAP.');
 
-        /*console.log("lastSentiment is "+ lastSentiment);
+        console.log("lastSentiment is "+ lastSentiment);
         console.log("lastSentiment.score is "+ lastSentiment.score); 
         console.log("beforeSentiment is "+ beforeSentiment);
         console.log("beforeSentiment.score is "+ beforeSentiment.score);
         console.log("textSentiment is "+ textSentiment);
-        console.log("textSentiment.score is "+ textSentiment.score);*/
+        console.log("textSentiment.score is "+ textSentiment.score);
 
         sendPassThread(sender);//pass the control
     }
@@ -2078,6 +2078,12 @@ function sendPassThread(senderID){
     );
 
     setTimeout(function() {
+        sendTextMessage(senderID,"I'll take a rest and let the live agent to engage with you xD")
+    }, 1000)
+
+    
+
+    setTimeout(function() {
         let buttons = [
             {
                 type:"postback",
@@ -2087,7 +2093,7 @@ function sendPassThread(senderID){
         ];
 
         sendButtonMessage(senderID, "Click on the button below if you want me to talk to you again instead of the live agent :) ", buttons);
-    }, 1500)
+    }, 2000)
 
 }
 
