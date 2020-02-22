@@ -291,12 +291,34 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "ttp-rating":
             sendTextMessage(sender, 'Traveller Overview 4.0/5.0 with 194 reviews (updated on 22 Feb 2020)');
+            setTimeout(function() {
             sendTextMessage(sender, '⭐⭐⭐⭐⭐ 35%\n' + 
-                                    'Very good ⭐⭐⭐⭐ 38%\n' +         
-                                    'Average ⭐⭐⭐ 16%\n' +
-                                    'Poor ⭐⭐  5%\n' +
-                                    'Teribble ⭐  6%'
+                                    '⭐⭐⭐⭐ 38%\n' +         
+                                    '⭐⭐⭐ 16%\n' +
+                                    '⭐⭐ 5%\n' +
+                                    '⭐ 6%'
                                     )
+            }, 1000);
+            setTimeout(function() {
+                var responseText = "Would you be interested in the following options as well?"
+                var replies = [{
+                    "content_type": "text",
+                    "title": "Things people like",
+                    "payload": "Things people like",
+                },
+                {
+                    "content_type": "text",
+                    "title": "Things people dislike",
+                    "payload": "Things people dislike",
+                },
+                {
+                    "content_type": "text",
+                    "title": "Opinion",
+                    "payload": "Opinion",
+                }
+                ];
+            sendQuickReply(sender, responseText, replies)
+            }, 2000);
 
             break;
 
