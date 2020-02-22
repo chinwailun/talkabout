@@ -376,6 +376,22 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               
               handleCardMessages(elementsPeopleLike, sender)
 
+              setTimeout(function() {
+                var responseText = "Do you want to see what people dislike as well?"
+                var replies = [{
+                    "content_type": "text",
+                    "title": "What people dislike",
+                    "payload": "What people dislike",
+                },
+                {
+                    "content_type": "text",
+                    "title": "Opinion",
+                    "payload": "Opinion",
+                }
+                ];
+            sendQuickReply(sender, responseText, replies)
+            }, 2000);
+
 
             break;
 
