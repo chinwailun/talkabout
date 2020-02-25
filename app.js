@@ -875,7 +875,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     
                    // let reply = `${messages[0].text.text} ${allOpinions[ttp_guidance]}`; 
 
-                let reply = `${allOpinions[ttp_directory]}`;
+                let reply = `${allOpinions[ttp_guidance]}`;
                 let reply2 = ps_guidance + reply + emoji_guidance;
                 sendTextMessage(sender, reply2);
                                       
@@ -956,7 +956,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     ttp.readAllOpinions(function (allOpinions) { 
                         
                         //let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
-                        let reply = `${allOpinions[ttp_directory]}`;
+                        let reply = `${allOpinions[ttp_time]}`;
                         let reply2 = ps_time + reply + emoji_time;
                         sendTextMessage(sender, reply2);
                         
