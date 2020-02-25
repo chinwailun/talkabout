@@ -45,7 +45,7 @@ class Dog extends Persona {
       };
     };
 // Create and set the vocab for Dog.
-vocab = this.createVocab();
+//vocab = this.createVocab();
 }
 }
 
