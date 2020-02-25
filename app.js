@@ -34,18 +34,21 @@ class Dog extends Persona {
             // Return an object containing strings mapped to functions,
             // which return the text.
             return {
-                people: () => choose("a tourist", "one of the tourists", "based on my database, a traveller", 
+               /* people: () => choose("a tourist", "one of the tourists", "based on my database, a traveller", 
+                "one of the travellers","one of the past visitors","a The Top Penang visitor","a journeyer"),*/
+
+                people: () => cycle({group:"people"},"a tourist", "one of the tourists", "based on my database, a traveller", 
                 "one of the travellers","one of the past visitors","a The Top Penang visitor","a journeyer"),
-                mention:()=>choose("said","mentioned","would like to express","told","claimed","explained","stated","conveyed"),
+                mention:()=> cycle({group:"cycle"},"said","mentioned","would like to express","told","claimed","explained","stated","conveyed"),
                 //master: () => ifElse("name", capitalize(param("name")), "bringer of food"),
                 emoji: () => cycle({ group: "emoji" }, "😀", "😍", "😎", "😉", "😆", "😁‍"),
-                haha:()=>cycle({group:"haha"},"1","2","3","4","5"),
+               // haha:()=>cycle({group:"haha"},"1","2","3","4","5"),
                 // This concept cross-references greet, master, and emoji using say().
                 preSentence: () => capSay("people") + " " + say("mention") + 
-                    " that " +
+                    " that " 
                   //  say("master") + 
                    // "! " +
-                    say("emoji")  + say("haha")
+                  //  say("emoji")  + say("haha")
       };
     };
 // Create and set the vocab for Dog.
@@ -374,7 +377,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 handleCardMessages(elementsPeopleDislike, sender)
 
                 setTimeout(function() {
-                    var responseText = "Do you want to know what the past visitors like?"
+                    var responseText = "Do you want to know what are the things that past visitors like?"
                     var replies = [{
                         "content_type": "text",
                         "title": "What people like",
@@ -696,11 +699,14 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             break;
 
             case "ttp-directory":
-
+                var ps_directory = max.articulate("preSentence");
+                //sendTextMessage(sender, a5);
                 
                     ttp.readAllOpinions(function (allOpinions) { 
-                        let reply = `${messages[0].text.text} ${allOpinions[ttp_directory]}`; 
-                        sendTextMessage(sender, reply);
+                        //let reply = `${messages[0].text.text} ${allOpinions[ttp_directory]}`; 
+                        let reply = `${allOpinions[ttp_directory]}`;
+                        let reply2 = ps_directory + reply;
+                        sendTextMessage(sender, reply2);
                                           
                     });
 
@@ -1182,8 +1188,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             // Create "max", a new Dog persona.
         //let max = new Dog();
         //console.log("hihihihihihihihihihihihihihhihihijihih");
-        var a5 = max.articulate("preSentence");
-        sendTextMessage(sender, a5);
+        
             
     }
 }
