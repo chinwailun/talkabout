@@ -33,7 +33,7 @@ class Dog extends Persona {
             // Return an object containing strings mapped to functions,
             // which return the text.
             return {
-                greet: () => choose("aaa", "bbb", "ccc", "ddd"),
+                greet: () => choose("aaa", "bbb", "ccc", "ddd","eee","fff","ggg","hhh","iii","jjj"),
                 master: () => ifElse("name", capitalize(param("name")), "bringer of food"),
                 emoji: () => cycle({ group: "emoji" }, "👅", "🐶", "🐾", "💩", "🐩", "🐕‍"),
                 // This concept cross-references greet, master, and emoji using say().
@@ -388,10 +388,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "what-people-like":
 
-        // Create "max", a new Dog persona.
-        let max = new Dog();
-        console.log("hihihihihihihihihihihihihihhihihijihih");
-        console.log(max.articulate("welcomeHome"));
+        
 
             const elementsPeopleLike = [
                 
@@ -1176,6 +1173,12 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     casualQuickReplies = 1;
                 }
             }, 3000)
+
+            // Create "max", a new Dog persona.
+        let max = new Dog();
+        //console.log("hihihihihihihihihihihihihihhihihijihih");
+        var a5 = max.articulate("welcomeHome");
+        sendTextMessage(sender, a5);
             
     }
 }
