@@ -16,7 +16,7 @@ pg.defaults.ssl = true;
 const userService = require('./user');
 
 const Persona = require("articulate-nlg").default;
-let max = new Dog();
+
 
 class Dog extends Persona {
     constructor() {
@@ -52,6 +52,7 @@ class Dog extends Persona {
 this.vocab = this.createVocab();
 }
 }
+let max = new Dog();
 
 
 
