@@ -15,6 +15,47 @@ pg.defaults.ssl = true;
 
 const userService = require('./user');
 
+const Persona = require("articulate-nlg").default;
+
+class Dog extends Persona {
+    createVocab = () => {
+      // Persona helper functions, for convenience.
+      const say = this.say;
+      const capitalize = this.capitalize;
+      const capSay = this.capSay;
+      const choose = this.choose;
+      const chance = this.chance;
+      const cycle = this.cycle;
+      const param = this.param;
+      const ifElse = this.ifElse;
+   
+      // Return an object containing strings mapped to functions,
+      // which return the text.
+      return {
+        greet: () => choose("woof", "bark", "sniff sniff", "wag tail"),
+        master: () =>
+          ifElse("name", capitalize(param("name")), "bringer of food"),
+        emoji: () =>
+          cycle({ group: "emoji" }, "👅", "🐶", "🐾", "💩", "🐩", "🐕‍"),
+        // This concept cross-references greet, master, and emoji using say().
+        welcomeHome: () =>
+          capSay("greet") +
+          "! Welcome home, " +
+          say("master") +
+          "! " +
+          say("emoji")
+      };
+    };
+// Create and set the vocab for Dog.
+vocab = this.createVocab();
+}
+ 
+
+
+
+
+
+
 
 let sentimentService = require('./sentiment-service');
 
@@ -270,7 +311,7 @@ function receivedMessage(event) {
 
 function handleMessageAttachments(messageAttachments, senderID){
     //send back to user's response 'attachment received'
-    sendTextMessage(senderID, "Attachment received. Thank you :)");
+    sendTextMessage(senderID, "Attachment received. I will let my human teammates have a look on it. Thank you :)");
 }
 
 //send the quick reply to Dialogflow to handle it for us
@@ -348,6 +389,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             break;
 
         case "what-people-like":
+
+        // Create "max", a new Dog persona.
+        let max = new Dog();
+        console.log("hihihihihihihihihihihihihihhihihijihih");
+        console.log(max.articulate("welcomeHome"));
 
             const elementsPeopleLike = [
                 
