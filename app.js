@@ -578,11 +578,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 sendToDialogFlow(sender, 'post com');
 
             });*/
-            let touristMessage ='';
+            //let touristMessage ='';
             let reply ='';
             let replyLink ='';
 
-            if(touristSays ==1){
+           /* if(touristSays ==1){
                 touristMessage = 'A visitor mentioned that ';
                 touristSays = touristSays + 1;
             }
@@ -600,18 +600,20 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             }
             if (touristSays ==5){
                 touristSays =1;
-            }
+            }*/
+            var touristMessage = max.articulate("preSentence");
+            //var emoji_directory = max.articulate("emoji");
             
             if(ttp_comparative ==0){
-                reply = 'the views from The Top of Komtar are far better than that experienced from the top of Penang Hill.';
+                reply = 'the views from The Top of Komtar are far better than that experienced from the top of Penang Hill.🌆';
                 replyLink = 't.ly/LX980';
                 ttp_comparative = ttp_comparative + 1;
 
-                
+                //Ajaj🌅🎁jkJks🌆🌄jsjka
             
             }
             else{
-                reply ='there are lots of souvenir shops there but price will be a bit higher than Penang road there.';
+                reply ='there are lots of souvenir shops there but price will be a bit higher than Penang road there.🎁';
                 replyLink = 't.ly/1VJdB';
                 ttp_comparative = ttp_comparative + 1;
                 
@@ -866,9 +868,16 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 break;
 
             case "ttp-guidance":
+                var ps_guidance = max.articulate("preSentence");
+                var emoji_guidance = max.articulate("emoji");
+
                 ttp.readAllOpinions(function (allOpinions) { 
-                    let reply = `${messages[0].text.text} ${allOpinions[ttp_guidance]}`; 
-                    sendTextMessage(sender, reply);
+                    
+                   // let reply = `${messages[0].text.text} ${allOpinions[ttp_guidance]}`; 
+
+                let reply = `${allOpinions[ttp_directory]}`;
+                let reply2 = ps_guidance + reply + emoji_guidance;
+                sendTextMessage(sender, reply2);
                                       
                 });
 
@@ -940,11 +949,16 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
             case "ttp-time":
 
+                var ps_time = max.articulate("preSentence");
+                var emoji_time = max.articulate("emoji");
+
                 
                     ttp.readAllOpinions(function (allOpinions) { 
                         
-                        let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
-                        sendTextMessage(sender, reply);
+                        //let reply = `${messages[0].text.text} ${allOpinions[ttp_time]}`; 
+                        let reply = `${allOpinions[ttp_directory]}`;
+                        let reply2 = ps_time + reply + emoji_time;
+                        sendTextMessage(sender, reply2);
                         
                          
                 });
