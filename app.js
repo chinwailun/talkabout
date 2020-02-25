@@ -1210,7 +1210,7 @@ function handleMessage(message, sender) {
 
 
 function handleCardMessages(messages, sender) {
-    console.log("here hereeeeeeeeeeeeeeee2");
+    //console.log("here hereeeeeeeeeeeeeeee2");
     /*let elements = [];
     for (var m = 0; m < messages.length; m++) {
         let message = messages[m];
@@ -1273,7 +1273,7 @@ function handleCardMessages(messages, sender) {
     };
     elements.push(element);
   }
-    console.log("here hereeeeeeeeeeeeeeee3");
+    //console.log("here hereeeeeeeeeeeeeeee3");
     sendGenericMessage(sender, elements);
 }
 
@@ -1358,7 +1358,7 @@ function handleDialogFlowResponse(sender, response) {
     else if (isDefined(action)) { //if action is defined, then see what it is and handle it
         handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
        // nextPossibleQuestion(sender);
-        console.log("1111111111111");
+        //console.log("1111111111111");
         //hi
         //haha
         //time, fee
@@ -1366,16 +1366,16 @@ function handleDialogFlowResponse(sender, response) {
     } else if (isDefined(messages)) { //if there is no action, we need to handle messages we received from Dialogflow
         handleMessages(messages, sender);//the responses we set in dialogflow will be handle in handleMessages method
       //  nextPossibleQuestion(sender);
-        console.log("2222222222222222");
+        //console.log("2222222222222222");
     } else if (responseText == '' && !isDefined(action)) {
         //dialogflow could not evaluate input. If there was error and we didnt get any data, than we still provide an answer to the user
         sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?"); //this will only happen if you dont hv the default fallback intent
        // nextPossibleQuestion(sender);
-        console.log("333333333333333");
+        //console.log("333333333333333");
     } else if (isDefined(responseText)) {
         sendTextMessage(sender, responseText);
         //nextPossibleQuestion(sender);
-        console.log("444444444444444");
+       // console.log("444444444444444");
     }
     /*if (lastSentiment!==undefined ){ //if the score < -2, pass the control to human
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
@@ -1591,7 +1591,7 @@ function sendGenericMessage(recipientId, elements) {
             }
         }
     };
-    console.log("here hereeeeeeeeeeeeeeee4");
+    //console.log("here hereeeeeeeeeeeeeeee4");
 
     callSendAPI(messageData);
 }
