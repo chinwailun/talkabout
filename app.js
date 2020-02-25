@@ -16,6 +16,7 @@ pg.defaults.ssl = true;
 const userService = require('./user');
 
 const Persona = require("articulate-nlg").default;
+let max = new Dog();
 
 class Dog extends Persona {
     constructor() {
@@ -1178,7 +1179,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             }, 3000)
 
             // Create "max", a new Dog persona.
-        let max = new Dog();
+        //let max = new Dog();
         //console.log("hihihihihihihihihihihihihihhihihijihih");
         var a5 = max.articulate("preSentence");
         sendTextMessage(sender, a5);
