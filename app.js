@@ -34,16 +34,17 @@ class Dog extends Persona {
             // which return the text.
             return {
                 people: () => choose("a tourist", "one of the tourists", "based on my database, a traveller", 
-                "one of the travellers","one of the past visitors","a The Top Penang visitor","another visitor","a journeyer"),
+                "one of the travellers","one of the past visitors","a The Top Penang visitor","a journeyer"),
                 mention:()=>choose("said","mentioned","would like to express","told","claimed","explained","stated","conveyed"),
                 //master: () => ifElse("name", capitalize(param("name")), "bringer of food"),
                 emoji: () => cycle({ group: "emoji" }, "😀", "😍", "😎", "😉", "😆", "😁‍"),
+                haha:()=>cycle({group:"haha"},"1","2","3","4","5"),
                 // This concept cross-references greet, master, and emoji using say().
                 preSentence: () => capSay("people") + " " + say("mention") + 
                     " that " +
                   //  say("master") + 
                    // "! " +
-                    say("emoji") 
+                    say("emoji")  + say("haha")
       };
     };
 // Create and set the vocab for Dog.
