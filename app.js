@@ -18,38 +18,36 @@ const userService = require('./user');
 const Persona = require("articulate-nlg").default;
 
 class Dog extends Persona {
-    createVocab = () => {
-      // Persona helper functions, for convenience.
-      const say = this.say;
-      const capitalize = this.capitalize;
-      const capSay = this.capSay;
-      const choose = this.choose;
-      const chance = this.chance;
-      const cycle = this.cycle;
-      const param = this.param;
-      const ifElse = this.ifElse;
-   
-      // Return an object containing strings mapped to functions,
-      // which return the text.
-      return {
-        greet: () => choose("woof", "bark", "sniff sniff", "wag tail"),
-        master: () =>
-          ifElse("name", capitalize(param("name")), "bringer of food"),
-        emoji: () =>
-          cycle({ group: "emoji" }, "👅", "🐶", "🐾", "💩", "🐩", "🐕‍"),
-        // This concept cross-references greet, master, and emoji using say().
-        welcomeHome: () =>
-          capSay("greet") +
-          "! Welcome home, " +
-          say("master") +
-          "! " +
-          say("emoji")
+    constructor() {
+        super(...arguments);
+        this.createVocab = () => {
+            // Persona helper functions, for convenience.
+            const say = this.say;
+            const capitalize = this.capitalize;
+            const capSay = this.capSay;
+            const choose = this.choose;
+            const chance = this.chance;
+            const cycle = this.cycle;
+            const param = this.param;
+            const ifElse = this.ifElse;
+            // Return an object containing strings mapped to functions,
+            // which return the text.
+            return {
+                greet: () => choose("woof", "bark", "sniff sniff", "wag tail"),
+                master: () => ifElse("name", capitalize(param("name")), "bringer of food"),
+                emoji: () => cycle({ group: "emoji" }, "👅", "🐶", "🐾", "💩", "🐩", "🐕‍"),
+                // This concept cross-references greet, master, and emoji using say().
+                welcomeHome: () => capSay("greet") +
+                    "! Welcome home, " +
+                    say("master") +
+                    "! " +
+                    say("emoji")
       };
     };
 // Create and set the vocab for Dog.
 vocab = this.createVocab();
 }
- 
+}
 
 
 
