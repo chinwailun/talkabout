@@ -33,14 +33,16 @@ class Dog extends Persona {
             // Return an object containing strings mapped to functions,
             // which return the text.
             return {
-                greet: () => choose("aaa", "bbb", "ccc", "ddd","eee","fff","ggg","hhh","iii","jjj"),
-                master: () => ifElse("name", capitalize(param("name")), "bringer of food"),
+                people: () => choose("a tourist", "one of the tourists", "based on my database, a traveller", 
+                "one of the travellers","one of the past visitors","a The Top Penang visitor","another visitor","a journeyer","Another past The Top Penang visitor"),
+                mention:()=>choose("said","mentioned","would like to express","told","claimed","explained","stated","conveyed"),
+                //master: () => ifElse("name", capitalize(param("name")), "bringer of food"),
                 emoji: () => cycle({ group: "emoji" }, "👅", "🐶", "🐾", "💩", "🐩", "🐕‍"),
                 // This concept cross-references greet, master, and emoji using say().
-                welcomeHome: () => capSay("greet") +
-                    "! Welcome home, " +
-                    say("master") +
-                    "! " +
+                welcomeHome: () => capSay("people") + " " + say("mention") + 
+                    " that " +
+                  //  say("master") + 
+                   // "! " +
                     say("emoji")
       };
     };
