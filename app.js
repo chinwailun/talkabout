@@ -700,12 +700,13 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
             case "ttp-directory":
                 var ps_directory = max.articulate("preSentence");
+                var emoji_directory = max.articulate("emoji");
                 //sendTextMessage(sender, a5);
                 
                     ttp.readAllOpinions(function (allOpinions) { 
                         //let reply = `${messages[0].text.text} ${allOpinions[ttp_directory]}`; 
                         let reply = `${allOpinions[ttp_directory]}`;
-                        let reply2 = ps_directory + reply;
+                        let reply2 = ps_directory + reply + emoji_directory;
                         sendTextMessage(sender, reply2);
                                           
                     });
