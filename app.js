@@ -403,7 +403,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 {
                   "title": "Aquarium",
                   "subtitle": "Learn more about how to conserve our aquatic friends and their homes here.",
-                  "imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
+                  "imageUrl": "https://i.postimg.cc/1tfNsbDJ/aquarium.jpg",
                   "buttons": [
                     {
                       "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r641500463-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
@@ -423,7 +423,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 {
                   "title": "Rainbow Walk",
                   "subtitle": "Get the thrilling experience of walking on air 816 feet above sea level!",
-                  "imageUrl": "https://i.postimg.cc/T3QgsZXR/1.png",
+                  "imageUrl": "https://i.postimg.cc/mk7kr4kN/penang-skywalk-night.jpg",
                   "buttons": [
                     {
                       "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r734462577-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
