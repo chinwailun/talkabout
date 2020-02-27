@@ -319,6 +319,25 @@ function receivedMessage(event) {
 function handleMessageAttachments(messageAttachments, senderID){
     //send back to user's response 'attachment received'
     sendTextMessage(senderID, "Attachment received. I will let my human teammates have a look on it. Thank you :)");
+    setTimeout(function() {
+        var responseNext = "What I can do to help you next?"
+             var replies = [{
+                 "content_type": "text",
+                 "title": "Opinion",
+                 "payload": "Opinion",
+             },
+             {
+                 "content_type": "text",
+                 "title": "Rating",
+                 "payload": "Rating",
+             },
+             {
+                 "content_type": "text",
+                 "title": "Talk to live agent",
+                 "payload": "Talk to live agent",
+             }];
+             sendQuickReply(senderID, responseNext, replies)
+    }, 2000);
 }
 
 //send the quick reply to Dialogflow to handle it for us
@@ -2158,7 +2177,7 @@ async function greetUserText(userId) {
     }
     if (user) {
         sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
-            'Welcome to Talk About where you will get the summary of review ' +
+            'Welcome to Talk About where you will get the summary reviews ' +
             'given by the past tourists of The Top Penang.');
 
         setTimeout(function() {
