@@ -74,6 +74,7 @@ var ttp_guidance = 11;
 var ttp_time =25; 
 var touristSays = 1;
 var casualQuickReplies = 1;
+var peopleLike = 1;
 
 
 // Messenger API parameters
@@ -396,50 +397,59 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "what-people-like":
 
+                if (peopleLike == 1){
+            const elementsPeopleLike = [
+                
+                {
+                  "title": "Aquarium",
+                  "subtitle": "Learn more about how to conserve our aquatic friends and their homes here.",
+                  "imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
+                  "buttons": [
+                    {
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r641500463-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
+                      "text": "View review 1"
+                    }, {
+                      "text": "View review 2",
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r680744437-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                    },
+                    {
+                      "text": "View review 3",
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r581214428-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                                   
+                    }
+                  ]
+                }
+                ,
+                {
+                  "title": "Rainbow Walk",
+                  "subtitle": "Get the thrilling experience of walking on air 816 feet above sea level!",
+                  "imageUrl": "https://i.postimg.cc/T3QgsZXR/1.png",
+                  "buttons": [
+                    {
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r734462577-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
+                      "text": "View review 1"
+                    }, {
+                      "text": "View review 2",
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r528457479-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                    },
+                    {
+                      "text": "View review 3",
+                      "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r522115914-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
+                                   
+                    }
+                  ]
+                }
+ 
+              
+              ];
+              handleCardMessages(elementsPeopleLike, sender)
+            }else {
+            
+
         
 
             const elementsPeopleLike = [
-                
-              {
-                "title": "Aquarium",
-                "subtitle": "Learn more about how to conserve our aquatic friends and their homes here.",
-                "imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
-                "buttons": [
-                  {
-                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r641500463-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
-                    "text": "View review 1"
-                  }, {
-                    "text": "View review 2",
-                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r680744437-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
-                  },
-                  {
-                    "text": "View review 3",
-                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r581214428-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
-                                 
-                  }
-                ]
-              }
-              ,
-              {
-                "title": "Rainbow Walk",
-                "subtitle": "Get the thrilling experience of walking on air 816 feet above sea level!",
-                "imageUrl": "https://i.postimg.cc/T3QgsZXR/1.png",
-                "buttons": [
-                  {
-                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r734462577-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
-                    "text": "View review 1"
-                  }, {
-                    "text": "View review 2",
-                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r528457479-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
-                  },
-                  {
-                    "text": "View review 3",
-                    "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r522115914-The_TOP_Penang-George_Town_Penang_Island_Penang.html"
-                                 
-                  }
-                ]
-              },
-                
+                     
                 {
                 "title": "Observatory Deck",
                 "subtitle": "Here features a glass walkway that lets you watch the world go by below.",
@@ -480,8 +490,15 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
               }
             
             ];
+            handleCardMessages(elementsPeopleLike, sender)
+        }
+            peopleLike = peopleLike + 1;
+            if(peopleLike == 3){
+                peopleLike =1;
+            }
+            
               
-              handleCardMessages(elementsPeopleLike, sender)
+              
 
               setTimeout(function() {
                 var responseText = "Do you want to see what people dislike as well?"
