@@ -877,8 +877,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     let buttons = [
                         {   
                             type:"postback",
-                            payload:"💵VIEW_MORE_INFO_FEE",
-                            title:"View More Price Info"
+                            payload:"VIEW_MORE_INFO_FEE",
+                            title:"💵View More Price Info"
                         },
                         {
                             type:"postback",
