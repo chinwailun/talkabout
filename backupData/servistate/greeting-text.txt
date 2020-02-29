@@ -2,13 +2,16 @@
   "greeting":[
   {
     "locale":"default",
-    "text":"Hello, I'm here to assist your visit to The Top Penang!"
+    "text":"Hello, I'm here to assist you to make decision prior to visiting The Top Penang. I'd summarized the reviews given by the past visitors and categorized them into 5 opinion types."
   }, {
     "locale":"en_US",
-    "text":"Hello, I'm here to assist your visit to The Top Penang!"
+    "text":"Hello, I'm here to assist you to make decision prior to visiting The Top Penang. I'd summarized the reviews given by the past visitors and categorized them into 5 opinion types."
   }
 ]
 }
 
+
 Use chrome extension: Servistate
 access_token EAAGPnjwktEsBAJkbDI3g35gZA5YHMy5jPrxahhT7V2skesAXKA3WD8LzqIZCwTyrMxMvjUiRUy9Js7c01ZAFlH49PQyF4E9GHVtizuSZCZByseJB4cRYhlYcZAdPSu0P6bO8gmBKAB6kmFZBbkdPRDY3gWQ0wFl51GnIvX8Hciaytrh4VLpxaRRqZBi1ofZCDRHUZD
+
+https://graph.facebook.com/v2.6/me/messenger_profile

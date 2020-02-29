@@ -22,7 +22,7 @@ class Dog extends Persona {
     constructor() {
         super(...arguments);
         this.createVocab = () => {
-            // Persona helper functions, for convenience.
+            //Persona helper functions, for convenience.
             const say = this.say;
             const capitalize = this.capitalize;
             const capSay = this.capSay;
@@ -31,24 +31,19 @@ class Dog extends Persona {
             const cycle = this.cycle;
             const param = this.param;
             const ifElse = this.ifElse;
-            // Return an object containing strings mapped to functions,
-            // which return the text.
+            //Return an object containing strings mapped to functions,
+            //which return the text.
             return {
-               /* people: () => choose("a tourist", "one of the tourists", "based on my database, a traveller", 
-                "one of the travellers","one of the past visitors","a The Top Penang visitor","a journeyer"),*/
 
                 people: () => cycle({group:"people"},"a tourist", "one of the tourists", "based on my database, a traveller", 
                 "one of the travellers","one of the past visitors","a The Top Penang visitor","a journeyer"),
+                
                 mention:()=> cycle({group:"cycle"},"said","mentioned","would like to express","told","claimed","explained","stated","conveyed"),
-                //master: () => ifElse("name", capitalize(param("name")), "bringer of food"),
+              
                 emoji: () => cycle({ group: "emoji" }, "😀", "😍", "😎", "😉", "😆", "😁‍"),
-               // haha:()=>cycle({group:"haha"},"1","2","3","4","5"),
-                // This concept cross-references greet, master, and emoji using say().
+              
                 preSentence: () => capSay("people") + " " + say("mention") + 
-                    " that " 
-                  //  say("master") + 
-                   // "! " +
-                  //  say("emoji")  + say("haha")
+                    " that "                 
       };
     };
 // Create and set the vocab for Dog.
@@ -658,8 +653,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             if(ttp_comparative==2){
                 ttp_comparative = 0;
             }
-            let replyComparative = touristMessage + reply;
-            let replyLinkComparative = "Original review: " + replyLink;
+            let replyComparative = touristMessage + reply; 
+            let replyLinkComparative = "🔗Original review: " + replyLink;
             sendTextMessage(sender, replyComparative );
             setTimeout(function() {
                 sendTextMessage(sender, replyLinkComparative );
@@ -755,7 +750,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                 setTimeout(function() {
                     ttp.readLink(function (allLink) { 
-                        let replyLink = `Original review: ${allLink[ttp_directory]}`; 
+                        let replyLink = `🔗Original review: ${allLink[ttp_directory]}`; 
                             sendTextMessage(sender, replyLink);
 
                 
@@ -919,7 +914,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                 setTimeout(function() {
                     ttp.readLink(function (allLink) { 
-                        let replyLink = `Original review: ${allLink[ttp_guidance]}`; 
+                        let replyLink = `🔗Original review: ${allLink[ttp_guidance]}`; 
                             sendTextMessage(sender, replyLink);
                        
                         
@@ -1005,7 +1000,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     setTimeout(function() {
                         ttp.readLink(function (allLink) { 
                             
-                            let replyLink = `Original review: ${allLink[ttp_time]}`; 
+                            let replyLink = `🔗Original review: ${allLink[ttp_time]}`; 
                             sendTextMessage(sender, replyLink);
                     
                 });
@@ -2189,7 +2184,7 @@ async function greetUserText(userId) {
         }, 1500);
 
         setTimeout(function() {
-            var responseGreet = "What we can do to help you today?"
+            var responseGreet = "What I can do to help you today?"
                  var replies = [{
                      "content_type": "text",
                      "title": "Opinion",
@@ -2219,7 +2214,7 @@ async function greetUserText(userId) {
         }, 1500);
 
         setTimeout(function() {
-            var responseGreet = "What we can do to help you today?"
+            var responseGreet = "What I can do to help you today?"
                  var replies = [{
                      "content_type": "text",
                      "title": "Opinion",
