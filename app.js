@@ -878,7 +878,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         {   
                             type:"postback",
                             payload:"VIEW_MORE_INFO_FEE",
-                            title:"💵View More Price Info"
+                            title:"💵More Price Info"
                         },
                         {
                             type:"postback",
@@ -1053,8 +1053,8 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         },
                         {
                             "content_type": "text",
-                            "title": "time",
-                            "payload": "time",
+                            "title": "rating",
+                            "payload": "rating",
                         }];
                         sendQuickReply(sender, responseText, replies)
                 }, 3000); 
