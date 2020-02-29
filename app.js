@@ -359,7 +359,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 {
                   "title": "Too hot",
                   "subtitle": "It's too hot to stay in open space :(",
-                  //"imageUrl": "https://i.postimg.cc/HktRhsxV/1.png",
+                  "imageUrl": "https://i.postimg.cc/Y9kmVzBw/hot.png",
                   "buttons": [
                     {
                       "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r736957994-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
@@ -375,7 +375,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 {
                   "title": "Expensive",
                   "subtitle": "Ticket is expensive :(",
-                  //"imageUrl": "https://i.postimg.cc/T2yL9KwY/1.png",
+                  "imageUrl": "https://i.postimg.cc/CxS5wL6j/Too-Expensive-Emoji.jpg",
                   "buttons": [
                     {
                       "postback": "https://www.tripadvisor.com.my/ShowUserReviews-g298303-d12206157-r533279728-The_TOP_Penang-George_Town_Penang_Island_Penang.html",
@@ -875,19 +875,19 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 */
                 setTimeout(function() {
                     let buttons = [
-                        {
+                        {   
                             type:"postback",
-                            payload:"VIEW_MORE_INFO_FEE",
+                            payload:"💵VIEW_MORE_INFO_FEE",
                             title:"View More Price Info"
                         },
                         {
                             type:"postback",
-                            title:"Another Opinion",
+                            title:"💡Another Opinion",
                             payload:"ANOTHER_OPINION",
                         },
                         {
                             type:"postback",
-                            title:"Rating",
+                            title:"⭐Rating",
                             payload:"RATING"
                         }
                     ];
@@ -2261,9 +2261,9 @@ function sendPassThread(senderID){
     setTimeout(function() {
         let buttons = [
             {
-                type:"postback",
+                type:"postback", 
                 payload:"TAKE_THREAD_CONTROL",
-                title:"Talk to bot again"
+                title:"🤖Talk to bot again"
             }
         ];
 
