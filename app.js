@@ -1865,6 +1865,7 @@ function receivedPostback(event) {
             break;
         
         case 'COMPARATIVE':
+            sentimentService.addUserSentiment(senderID, 'comparative');
             sendToDialogFlow(senderID, 'comparative');
             break;
 
