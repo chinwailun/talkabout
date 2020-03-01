@@ -1840,18 +1840,22 @@ function receivedPostback(event) {
     switch (payload) {
 
         case 'RATING':
+            sentimentService.addUserSentiment(senderID, 'rating');
             sendToDialogFlow(senderID,'rating');
             break;
 
         case 'WHAT_PEOPLE_LIKE':
+            sentimentService.addUserSentiment(senderID, 'what poeple like');
             sendToDialogFlow(senderID,'What people like');
             break;
 
         case 'WHAT_PEOPLE_DISLIKE':
+            sentimentService.addUserSentiment(senderID, 'what poeple dislike');
             sendToDialogFlow(senderID,'What people dislike');
             break;
 
         case 'TALK_TO_HUMAN':
+            sentimentService.addUserSentiment(senderID, 'talk to human');
             sendPassThread(senderID); 
             break;
 
@@ -1861,6 +1865,7 @@ function receivedPostback(event) {
 
 
         case 'TIME':
+            sentimentService.addUserSentiment(senderID, 'time');
             sendToDialogFlow(senderID, 'time');
             break;
         
@@ -1870,19 +1875,23 @@ function receivedPostback(event) {
             break;
 
         case 'GUIDANCE':
+            sentimentService.addUserSentiment(senderID, 'guidance');
             sendToDialogFlow(senderID, 'guidance');
             break;
 
         case 'FEE':
+            sentimentService.addUserSentiment(senderID, 'fee');
             sendToDialogFlow(senderID, 'fee');
             break;
 
         case 'DIRECTORY':
+            sentimentService.addUserSentiment(senderID, 'directory');
             sendToDialogFlow(senderID, 'directory');
             break;
 
 
         case 'THE_TOP_FUN_PASS':
+            sentimentService.addUserSentiment(senderID, 'fun');
             const elementsTopFunPass = [{
                 "title": "The Top Fun Pass",
                 "subtitle": "Discover more than 18 themed attractions in one iconic destination!",
@@ -1907,6 +1916,7 @@ function receivedPostback(event) {
             break;
 
         case 'RAINBOW_SKYWALK':
+            sentimentService.addUserSentiment(senderID, 'rainbow');
             const elementsRainbowSkywalk = [{
                 "title": "The Top Rainbow Skywalk",
                 "subtitle": "Here offers stunning seamless views of George Town and beyond!",
@@ -1932,11 +1942,13 @@ function receivedPostback(event) {
 
 
         case 'VIEW_MORE_INFO_FEE':
+            sentimentService.addUserSentiment(senderID, 'more price info');
             sendToDialogFlow(senderID, 'vmif123');
             break;
 
 
         case 'ANOTHER_OPINION':
+            sentimentService.addUserSentiment(senderID, 'opinion');
             var responseText = "Choose an option below :) "
             var replies = [{
                 "content_type": "text",
@@ -1967,6 +1979,7 @@ function receivedPostback(event) {
             break;
 
         case 'GET_STARTED':
+            sentimentService.addUserSentiment(senderID, 'start');
             greetUserText(senderID);
             break;
 
