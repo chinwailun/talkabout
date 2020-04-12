@@ -830,11 +830,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                 setTimeout(function() {
                     if(fee_opinion == 1)
-                    sendTextMessage(sender, 'A1 past visitor expressed that their price is quite reasonable.');
+                    sendTextMessage(sender, 'A past visitor expressed that their price is quite reasonable.');
                     else if(fee_opinion == 2)
-                    sendTextMessage(sender, 'A2 ');
+                    sendTextMessage(sender, 'One of the tourists mentioned that ticket price is reasonable enough for ordinary people to afford.');
                     else 
-                    sendTextMessage(sender, 'A3');
+                    sendTextMessage(sender, 'A traveller said this is an affordable place to visit.');
                     fee_opinion=fee_opinion + 1;
                     if(fee_opinion==4)
                     fee_opinion=1;
