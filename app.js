@@ -70,6 +70,7 @@ var ttp_time =25;
 var touristSays = 1;
 var casualQuickReplies = 1;
 var peopleLike = 1;
+var fee_opinion = 1;
 
 
 // Messenger API parameters
@@ -827,6 +828,17 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                  
                 }, 1000);
 
+                setTimeout(function() {
+                    if(fee_opinion == 1)
+                    sendTextMessage(sender, 'A1 past visitor expressed that their price is quite reasonable.');
+                    else if(fee_opinion == 2)
+                    sendTextMessage(sender, 'A2 ');
+                    else 
+                    sendTextMessage(sender, 'A3');
+                    fee_opinion=fee_opinion + 1;
+                    if(fee_opinion==4)
+                    fee_opinion=1;
+                }, 1500);
                  
                  
                  /*var responseText = "What do you want to do next?"
