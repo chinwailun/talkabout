@@ -823,9 +823,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                  sendTextMessage(sender, 'There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
                  //sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
                  setTimeout(function() {
-                    sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
+                    sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang.');
                  
                 }, 1000);
+
                  
                  
                  /*var responseText = "What do you want to do next?"
@@ -983,6 +984,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 var ps_time = max.articulate("preSentence");
                 var emoji_time = max.articulate("emoji");
 
+                   /* setTimeout(function() {
+                        
+                    }, 1500);*/
+                    sendTextMessage(sender, "Operation hours: 11.00am to 11.00pm daily⏰");
                 
                     ttp.readAllOpinions(function (allOpinions) { 
                         
@@ -1983,15 +1988,6 @@ function receivedPostback(event) {
             greetUserText(senderID);
             break;
 
-        case 'JOB_APPLY':
-            //get feedback with new jobs
-			sendToDialogFlow(senderID, 'job openings');
-            break;
-
-        case 'CHAT':
-            //user wants to chat
-            sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
-            break;
 
         default:
             //unindentified payload
