@@ -354,8 +354,23 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "ttp-location":
+            
+                let button = [
+                    {
+                        type:"postback", 
+                        payload:"https://www.google.com/maps/place/The+Top+Penang/@5.4149899,100.3278325,17z/data=!4m12!1m6!3m5!1s0x304ac395ce63cafb:0x786a38ba7f1ba486!2sThe+Top+Penang!8m2!3d5.4145785!4d100.3299332!3m4!1s0x304ac395ce63cafb:0x786a38ba7f1ba486!8m2!3d5.4145785!4d100.3299332",
+                        title:"See Map"
+                    }
+                ];
+        
+                sendButtonMessage(senderID, "Click on the button above to see the map:) ", button);
+            
+
+        break;
+
         case "implict-word":
-            sendTextMessage(sender, "I've tried to improve myself to serve you better.");
+            sendTextMessage(sender, "Sorry for disappointing you. I've tried to improve myself to serve you better.");
             sendPassThread(sender); 
             
         break;
@@ -856,7 +871,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
 
 
-                 sendTextMessage(sender, 'There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
+                 sendTextMessage(sender, 'You can can your ticket at level 5 or purchase it online. There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
                  //sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
                  setTimeout(function() {
                     sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang.');
