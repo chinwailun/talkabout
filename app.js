@@ -357,10 +357,10 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         case "ttp-food":
 
             sendTextMessage(sender,"Feeling hungry already? ");
-            setTimeout(function() {
+            
             var imgUrl = "https://i.postimg.cc/PrY9KHpw/top-view-english-tea-nov2019.jpg";
             sendImageMessage(sender, imgUrl);
-            }, 1500);
+            
 
             setTimeout(function() {
             var afterFood = "What do you want to know next? :)"
