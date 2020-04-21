@@ -354,6 +354,12 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "implict-word":
+            sendTextMessage(sender, "I've tried to improve myself to serve you better.");
+            sendPassThread(sender); 
+            
+        break;
+
         case "ttp-food":
 
             sendTextMessage(sender,"Feeling hungry already? ");
@@ -2235,7 +2241,7 @@ async function greetUserText(userId) {
         }, 1500);
 
         setTimeout(function() {
-            var responseGreet = "What I can do to help you today?"
+            var responseGreet = "How can I help you today?"
                  var replies = [{
                      "content_type": "text",
                      "title": "Opinion",
