@@ -364,7 +364,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     }
                 ];
         
-                sendButtonMessage(senderID, "Click on the button above to see the map:) ", button);
+                sendButtonMessage(sender, "Click on the button above to see the map:) ", button);
             
 
         break;
