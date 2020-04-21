@@ -354,6 +354,38 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "intro":
+
+        sendTextMessage(sender, "I provide the summary reviews given by the past tourists of The Top Penang.");
+        setTimeout(function() {
+                sendTextMessage(userId,'I categoried the reviews into 5 groups such as guidance, comparative, directory, time and fee.');
+            }, 1000);
+        
+
+        setTimeout(function() {
+            var ff = "At any time, try me by clicking on the menu below😊"
+                    var replies = [{
+                        "content_type": "text",
+                        "title": "Opinion",
+                        "payload": "Opinion",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Rating",
+                        "payload": "Rating",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Talk to live agent",
+                        "payload": "Talk to live agent",
+                    }];
+                    sendQuickReply(sender, ff, replies)
+                }, 2000);
+
+
+            break;
+
+
         case "family-friends":
 
             sendTextMessage(sender,"Do come with your close ones! You all will definitely enjoy the day.");
@@ -428,7 +460,9 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         case "ttp-food":
 
             sendTextMessage(sender,"Feeling hungry already? ");
+            setTimeout(function() {
             sendTextMessage(sender,"The food here will make you happy!");
+            }, 1000);
             
             var imgUrl = "https://i.postimg.cc/PrY9KHpw/top-view-english-tea-nov2019.jpg";
             sendImageMessage(sender, imgUrl);
