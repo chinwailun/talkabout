@@ -358,12 +358,12 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         sendTextMessage(sender, "I provide the summary reviews given by the past tourists of The Top Penang.");
         setTimeout(function() {
-                sendTextMessage(userId,'I categoried the reviews into 5 groups such as guidance, comparative, directory, time and fee.');
+                sendTextMessage(sender,'I categoried the reviews into 5 groups such as guidance, comparative, directory, time and fee.');
             }, 1000);
         
 
         setTimeout(function() {
-            var ff = "At any time, try me by clicking on the menu below😊"
+            var intro = "At any time, try me by clicking on the menu below😊"
                     var replies = [{
                         "content_type": "text",
                         "title": "Opinion",
@@ -379,7 +379,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "title": "Talk to live agent",
                         "payload": "Talk to live agent",
                     }];
-                    sendQuickReply(sender, ff, replies)
+                    sendQuickReply(sender, intro, replies)
                 }, 2000);
 
 
