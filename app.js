@@ -355,7 +355,9 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
     switch (action) {
 
         case "ttp-food":
-            const sendImageMessage = async (recipientId, imageUrl) => {
+            var imgUrl = "https://postimg.cc/XpNs7Tgj";
+            sendImageMessage(sender, imgUrl);
+            /*const sendImageMessage = async (recipientId, imageUrl) => {
                 var messageData = {
                   recipient: {
                     id: recipientId
@@ -364,13 +366,13 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     attachment: {
                       type: "image",
                       payload: {
-                        url: "https://postimg.cc/XpNs7Tgj"
+                        url: imageUrl
                       }
                     }
                   }
                 };
                   await callSendAPI(messageData);
-              }
+              }*/
             break;
 
         case "what-people-dislike":
