@@ -355,25 +355,32 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
     switch (action) {
 
         case "ttp-food":
+
+            sendTextMessage(sender,"Feeling hungry already? ");
+            setTimeout(function() {
             var imgUrl = "https://i.postimg.cc/PrY9KHpw/top-view-english-tea-nov2019.jpg";
             sendImageMessage(sender, imgUrl);
-            sendTextMessage(sender,"woe");
-            /*const sendImageMessage = async (recipientId, imageUrl) => {
-                var messageData = {
-                  recipient: {
-                    id: recipientId
-                  },
-                  message: {
-                    attachment: {
-                      type: "image",
-                      payload: {
-                        url: imageUrl
-                      }
-                    }
-                  }
-                };
-                  await callSendAPI(messageData);
-              }*/
+            }, 1500);
+
+            setTimeout(function() {
+            var afterFood = "What do you want to know next? :)"
+                    var replies = [{
+                        "content_type": "text",
+                        "title": "Opinion",
+                        "payload": "Opinion",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Rating",
+                        "payload": "Rating",
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "Talk to live agent",
+                        "payload": "Talk to live agent",
+                    }];
+                    sendQuickReply(sender, afterFood, replies)
+                }, 2500);
             break;
 
         case "what-people-dislike":
