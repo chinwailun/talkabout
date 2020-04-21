@@ -354,6 +354,31 @@ function handleEcho(messageId, appId, metadata) {
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
     switch (action) {
 
+        case "family-friends":
+
+            sendTextMessage(sender,"Do come with your close ones! You all will definitely enjoy the day.");
+            
+            setTimeout(function() {
+                var ff = "Would you like to know more? :)"
+                        var replies = [{
+                            "content_type": "text",
+                            "title": "Opinion",
+                            "payload": "Opinion",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "Rating",
+                            "payload": "Rating",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "Talk to live agent",
+                            "payload": "Talk to live agent",
+                        }];
+                        sendQuickReply(sender, ff, replies)
+                    }, 1500);
+            break;
+
         case "ttp-location":
             
             const locationTTP = [{
@@ -395,7 +420,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         break;
 
         case "implict-word":
-            sendTextMessage(sender, "Sorry for disappointing you. I've tried to improve myself to serve you better.");
+            sendTextMessage(sender, "Sorry for disappointing you. I'm still learning.");
             sendPassThread(sender); 
             
         break;
