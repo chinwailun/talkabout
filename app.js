@@ -355,7 +355,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
     switch (action) {
 
         case "ttp-food":
-            var imgUrl = "https://postimg.cc/XpNs7Tgj";
+            var imgUrl = "https://i.postimg.cc/PrY9KHpw/top-view-english-tea-nov2019.jpg";
             sendImageMessage(sender, imgUrl);
             sendTextMessage(sender,"woe");
             /*const sendImageMessage = async (recipientId, imageUrl) => {
