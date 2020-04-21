@@ -356,15 +356,40 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
         case "ttp-location":
             
-                let button = [
-                    {
-                        type:"postback", 
-                        payload:"https://www.google.com/maps/place/The+Top+Penang/@5.4149899,100.3278325,17z/data=!4m12!1m6!3m5!1s0x304ac395ce63cafb:0x786a38ba7f1ba486!2sThe+Top+Penang!8m2!3d5.4145785!4d100.3299332!3m4!1s0x304ac395ce63cafb:0x786a38ba7f1ba486!8m2!3d5.4145785!4d100.3299332",
-                        title:"See Map"
-                    }
-                ];
-        
-                sendButtonMessage(sender, "Click on the button above to see the map:) ", button);
+            const locationTTP = [{
+                "title": "The Top Penang",
+                "subtitle": "Click on the button below to have a look on the map.",
+                "imageUrl": "https://i.postimg.cc/v8jXtF2d/location.png",
+                "buttons": [
+                  {
+                    "postback": "https://www.google.com/maps/place/The+Top+Penang/@5.4149899,100.3278325,17z/data=!4m12!1m6!3m5!1s0x304ac395ce63cafb:0x786a38ba7f1ba486!2sThe+Top+Penang!8m2!3d5.4145785!4d100.3299332!3m4!1s0x304ac395ce63cafb:0x786a38ba7f1ba486!8m2!3d5.4145785!4d100.3299332",
+                    "text": "View Map"
+                  }
+                ]
+              }];
+              
+              handleCardMessages(locationTTP, sender)
+
+
+              setTimeout(function() {
+                var afterFood = "How can I help you today? :)"
+                        var replies = [{
+                            "content_type": "text",
+                            "title": "Opinion",
+                            "payload": "Opinion",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "Rating",
+                            "payload": "Rating",
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "Talk to live agent",
+                            "payload": "Talk to live agent",
+                        }];
+                        sendQuickReply(sender, afterFood, replies)
+                    }, 2500);
             
 
         break;
