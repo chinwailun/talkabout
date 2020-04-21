@@ -397,7 +397,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
 
               setTimeout(function() {
-                var afterFood = "How can I help you today? :)"
+                var afterLocation = "How can I help you today? :)"
                         var replies = [{
                             "content_type": "text",
                             "title": "Opinion",
@@ -413,7 +413,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                             "title": "Talk to live agent",
                             "payload": "Talk to live agent",
                         }];
-                        sendQuickReply(sender, afterFood, replies)
+                        sendQuickReply(sender, afterLocation, replies)
                     }, 2500);
             
 
@@ -428,6 +428,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         case "ttp-food":
 
             sendTextMessage(sender,"Feeling hungry already? ");
+            sendTextMessage(sender,"The food here will make you happy!");
             
             var imgUrl = "https://i.postimg.cc/PrY9KHpw/top-view-english-tea-nov2019.jpg";
             sendImageMessage(sender, imgUrl);
@@ -921,7 +922,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
 
 
-                 sendTextMessage(sender, 'You can can your ticket at level 5 or purchase it online. There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
+                 sendTextMessage(sender, 'You can get your ticket at level 5 or purchase it online. There are two types of tickets, such as The Top Fun Pass (Multiple Entries) and The Top Rainbow Skywalk (Single Entry).');
                  //sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang except Augmented Reality Virtual, Formula One, The Gravityz & TOP Capsule.');
                  setTimeout(function() {
                     sendTextMessage(sender, 'The Top Fun Pass allows multiple entries on a same-day visit to all attractions in the Avenue of Adventures and Rainbow Skywalk at The Top Penang.');
