@@ -358,7 +358,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             
             const locationTTP = [{
                 "title": "The Top Penang",
-                "subtitle": "Click on the button below to have a look on the map.",
+                "subtitle": "Click on the button below to get more information.",
                 "imageUrl": "https://i.postimg.cc/v8jXtF2d/location.png",
                 "buttons": [
                   {
