@@ -19,9 +19,12 @@
   "dependencies": {
     "articulate-nlg": "^2.0.11",
     "body-parser": "^1.18.3",
+    "custom-grammar-bot-api": "^1.0.3",
     "dialogflow": "^0.8.2",
     "express": "^4.16.4",
+    "grammarbot": "^1.0.3",
     "pg": "7.15.0",
+    "qs": "^6.9.3",
     "request": "^2.88.0",
     "sentiment": "^5.0.2",
     "uuid": "^3.3.2"
