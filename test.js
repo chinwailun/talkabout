@@ -1,16 +1,19 @@
-/*const Grammarbot = require('grammarbot');
+const Grammarbot = require('grammarbot');
  
 const bot = new Grammarbot({
-  'api_key' : 'node_default',      // (Optional) defaults to node_default
-  'language': 'en-US',         // (Optional) defaults to en-US
-  'base_uri': 'api.grammarbot.io', // (Optional) defaults to api.grammarbot.io
+  'api_key' : 'node_default',      
+  'language': 'en-US',         
+  'base_uri': 'api.grammarbot.io', 
 });
  
-// Callback style
-bot.check("I has a book", function(error, result) {
-  if (!error) console.log(JSON.stringify(result));
+
+bot.check("You can knew more of the history and many information about Penang", function(error, result) {
+  console.log("Original sentence: You can knew more of the history and many information about Penang.");
+  console.log("Suggested sentence: You can know more of the history and much information about Penang.");
+  if (!error) {console.log(JSON.stringify(result.matches[0].message));
+    console.log(JSON.stringify(result.matches[1].message));
+    //console.log(JSON.stringify(result.matches[2].message));
+  }
+  //console.log(JSON.stringify(result));
+  //if (!error) console.log(JSON.stringify(result.matches[0].message));
 });
- 
-// Async/Await style
-const result = bot.checkAsync("I has a book.");
-console.log(JSON.stringify(result));*/
