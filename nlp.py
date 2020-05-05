@@ -36,35 +36,40 @@ def analyze_text(text):
 def main():
         """Summary and Entity Checker"""
 
-        st.title("Summary and Entity Checker")
-        activities = ["Text Summarizer","NER Checker"]
-        choice = st.sidebar.selectbox("Select Activity", activities)
+        st.title("Text Summarization")
+        #activities = ["Text Summarizer","NER Checker"]
+        #choice = st.sidebar.selectbox("Select Activity", activities)
 
-
-
-        if choice == 'Text Summarizer': 
-                st.subheader("Summary with NLP")
-                raw_text = st.text_area("Enter Text Here", "Type Here")
+        st.subheader("Summary with NLP")
+        raw_text = st.text_area("Enter Text Here", "Type Here")
+        #summary_choice = st.selectbox("Summary Choice",["Gensim","Sumy Lex Rank"])
+        if st.button("Summarize"):
+                summary_result = sumy_summarizer(raw_text)
+                st.write(summary_result)
+        
+        #if choice == 'Text Summarizer': 
+               # st.subheader("Summary with NLP")
+               # raw_text = st.text_area("Enter Text Here", "Type Here")
                 #summary_choice = st.selectbox("Summary Choice",["Gensim","Sumy Lex Rank"])
-                if st.button("Summarize"):
-                        summary_result = sumy_summarizer(raw_text)
-                        st.write(summary_result)
+               # if st.button("Summarize"):
+                        #summary_result = sumy_summarizer(raw_text)
+                       # st.write(summary_result)
                         
                         #if summary_choice == 'Gensim':
                          #       summary_result = summarize (raw_text)
-                        #elif summary_choice == 'Sumy Lex Rank':
+                        #elif summary_choice == 'Sumy Lex Rank':"""
                                 
                         
-
-        if choice == 'NER Checker':
-                st.subheader("Named Entity Recognition")
-                raw_text = st.text_area("Enter Text Here","Type Here")
-                if st.button("Analyze"):
+        
+        #if choice == 'NER Checker':
+              #  st.subheader("Named Entity Recognition")
+              #  raw_text = st.text_area("Enter Text Here","Type Here")
+               # if st.button("Analyze"):
                         #NLP
-                        docx = analyze_text(raw_text)
-                        html = displacy.render(docx,style="ent")
-                        html = html.replace("\n\n","\n")
-                        st.write(HTML_WRAPPER.format(html),unsafe_allow_html=True)
+                      #  docx = analyze_text(raw_text)
+                       # html = displacy.render(docx,style="ent")
+                       # html = html.replace("\n\n","\n")
+                       # st.write(HTML_WRAPPER.format(html),unsafe_allow_html=True)
                         
 
 
