@@ -74,7 +74,7 @@ def main():
 
 
       
-
+#streamlit run nlp.py
 
                 
 if __name__ == '__main__':

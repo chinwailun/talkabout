@@ -486,7 +486,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "payload": "Talk to live agent",
                     }];
                     sendQuickReply(sender, afterFood, replies)
-                }, 2500);
+                }, 3000);
             break;
 
         case "what-people-dislike":
@@ -1134,7 +1134,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                    /* setTimeout(function() {
                         
                     }, 1500);*/
-                    sendTextMessage(sender, "Operation hours: 11.00am to 11.00pm daily⏰");
+                    sendTextMessage(sender, "Operation hours: 11.00am to 11.00pm (everyday)⏰ 10.00am to 10.00pm (Malaysia School and Public Holiday)⏰");
                 
                     ttp.readAllOpinions(function (allOpinions) { 
                         
@@ -2358,7 +2358,7 @@ async function greetUserText(userId) {
                      "payload": "Talk to live agent",
                  }];
                  sendQuickReply(userId, responseGreet, replies)
-        }, 2000);
+        }, 2300);
 
     } else {
         sendTextMessage(userId, 'Good day, ' + user.first_name + '! ' +
