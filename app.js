@@ -486,7 +486,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                         "payload": "Talk to live agent",
                     }];
                     sendQuickReply(sender, afterFood, replies)
-                }, 3000);
+                }, 4000);
             break;
 
         case "what-people-dislike":
