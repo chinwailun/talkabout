@@ -45,6 +45,7 @@ def main():
         #summary_choice = st.selectbox("Summary Choice",["Gensim","Sumy Lex Rank"])
         if st.button("Summarize"):
                 summary_result = sumy_summarizer(raw_text)
+				#summary_result = summarize (raw_text)
                 st.write(summary_result)
         
         #if choice == 'Text Summarizer': 

@@ -670,7 +670,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
             break;
 
         case "ttp-rating":
-            sendTextMessage(sender, 'Traveller Overview 4.0/5.0 with 194 reviews \n(updated on 22 Feb 2020)');
+            sendTextMessage(sender, 'Traveller Overview 4.0/5.0 with 194 reviews.');
             setTimeout(function() {
             sendTextMessage(sender, '⭐⭐⭐⭐⭐ 35%\n' + 
                                     '⭐⭐⭐⭐ 38%\n' +         
