@@ -1,3 +1,3 @@
-# Initial code for Udemy course [ChatBots: Messenger ChatBot - DialogFlow and nodejs](https://www.udemy.com/chatbots/?couponCode=GITHUB)
+# Talk About - Chatbot for Tourism Point of Interest
 
 
