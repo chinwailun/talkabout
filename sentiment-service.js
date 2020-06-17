@@ -3,8 +3,8 @@ const sentiment = new Sentiment();
 
 //store all user sentiments into a map so each user will have its data of sentiment analysis
 const userSentiment = new Map();
-
-module.exports = {
+//
+module.exports = { 
     //adding calculating the sentiment and adding it to userSentiment map
     addUserSentiment(senderId, messageText){
 

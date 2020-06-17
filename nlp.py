@@ -1,15 +1,15 @@
 import streamlit as st 
 
-#Summary Pakages
+#Summary Pakages 
 from gensim.summarization import summarize
-
+#
 # Sumy Summary Pkg
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lex_rank import LexRankSummarizer
 
 
-#NLP
+#NLP 
 import spacy
 nlp = spacy.load('en')
 from spacy import displacy

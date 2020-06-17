@@ -4,9 +4,9 @@ const config = require('./config');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
+//
 
-
-module.exports = {
+module.exports = { 
 
     //this function read all the opinions from database
     readAllOpinions: function(callback) {
