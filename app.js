@@ -1,6 +1,6 @@
 'use strict';
 
-/*loading up the modules that will need  */
+/*loading up the modules that will need  */  
 const dialogflow = require('dialogflow');
 const config = require('./config'); //load the config file that is in the same directory as app.js
 const express = require('express');
@@ -12,7 +12,7 @@ const uuid = require('uuid');
  
 const pg = require('pg');
 pg.defaults.ssl = true;
-
+ 
 const userService = require('./user');
 
 
