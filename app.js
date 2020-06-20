@@ -1554,20 +1554,34 @@ function handleDialogFlowResponse(sender, response) {
         'The live agent will be here ASAP to find out how we can serve you better.');
         sendPassThread(sender);//pass the control
     }
-    else */if(lastSentiment!==undefined && lastSentiment.score < -4){ //if the score < -2, pass the control to human
+    else */
+    
+    
+    // ==================================testing start here==================================
+
+    /*if(lastSentiment!==undefined && lastSentiment.score < -4){ //if the score < -2, pass the control to human
         sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
         'Let me call the live agent for you. He should be here ASAP.');
 
         console.log("lastSentiment is "+ lastSentiment);
-        console.log("lastSentiment.score is "+ lastSentiment.score); 
+        console.log("lastSentiment.score is "+ lastSentiment.score);
+        sendPassThread(sender);//pass the control} */
+
         /*console.log("beforeSentiment is "+ beforeSentiment);
         console.log("beforeSentiment.score is "+ beforeSentiment.score);
         console.log("textSentiment is "+ textSentiment);
         console.log("textSentiment.score is "+ textSentiment.score);*/
 
-        sendPassThread(sender);//pass the control
-    }
-    else if (isDefined(action)) { //if action is defined, then see what it is and handle it
+        
+    
+    //else 
+    
+    // ==================================testing end here==================================
+    
+    
+    
+    
+    if (isDefined(action)) { //if action is defined, then see what it is and handle it
         handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
        // nextPossibleQuestion(sender);
         //console.log("1111111111111");
