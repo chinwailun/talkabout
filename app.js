@@ -1555,9 +1555,7 @@ function handleDialogFlowResponse(sender, response) {
         sendPassThread(sender);//pass the control
     }
     else */
-    function lowSentimentPassControl (){
-        
-    }
+    
     
     // ==================================testing start here==================================
 
@@ -1580,10 +1578,19 @@ function handleDialogFlowResponse(sender, response) {
     
     // ==================================testing end here==================================
     
+        /*if (lastSentiment!==undefined ){ //if the score < -2, pass the control to human
+        sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
+        'Let me call my boss for you. He should be here ASAP.');
+        console.log("lastSentiment is " + lastSentiment);
+        console.log("sssssssssssentiment score is " + lastSentiment.score);
+        console.log("textSentiment is " + textSentiment.score);
+        sendPassThread(sender);//pass the control
+    }*/
+
     
+    if(lastSentiment!==undefined && lastSentiment.score < -4){}
     
-    
-    if (isDefined(action)) { //if action is defined, then see what it is and handle it
+    else if (isDefined(action)) { //if action is defined, then see what it is and handle it
         handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
        // nextPossibleQuestion(sender);
         //console.log("1111111111111");
@@ -1605,14 +1612,10 @@ function handleDialogFlowResponse(sender, response) {
         //nextPossibleQuestion(sender);
        // console.log("444444444444444");
     }
-    /*if (lastSentiment!==undefined ){ //if the score < -2, pass the control to human
-        sendTextMessage(sender, 'I sense you are not satisfied with my answer. ' + 
-        'Let me call my boss for you. He should be here ASAP.');
-        console.log("lastSentiment is " + lastSentiment);
-        console.log("sssssssssssentiment score is " + lastSentiment.score);
-        console.log("textSentiment is " + textSentiment.score);
-        sendPassThread(sender);//pass the control
-    }*/
+
+    function lowSentimentPassControl (){
+        
+    }
 }
 
 //function that makes a request to dialogflow
