@@ -1609,7 +1609,7 @@ function handleDialogFlowResponse(sender, response) {
         //console.log("333333333333333");
     } else if (isDefined(responseText)) {
         sendTextMessage(sender, responseText);
-        //nextPossibleQuestion(sender);
+        //nextPossibleQuestion(sender); 
        // console.log("444444444444444");
     }
 
