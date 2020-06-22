@@ -1587,8 +1587,10 @@ function handleDialogFlowResponse(sender, response) {
         sendPassThread(sender);//pass the control
     }*/
 
-    
-    if(lastSentiment!==undefined && lastSentiment.score < -4){}
+
+    if(lastSentiment!==undefined && lastSentiment.score < -4){
+        console.log("nothing here");
+    }
     
     else if (isDefined(action)) { //if action is defined, then see what it is and handle it
         handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
