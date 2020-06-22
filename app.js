@@ -2479,3 +2479,10 @@ function takeThreadControl(senderID){
     }, 1000);
 
 }
+
+function sentimentTooLow(lastSentiment, differenceInScore){
+    if (lastSentiment!==undefined && differenceInScore>4 && lastSentiment.score<0 && lastSentiment.score >-3){
+        sendTextMessage(sender, 'Did I say something wrong ? ' + 
+        'The live agent will be here ASAP to find out how we can serve you better.');
+        sendPassThread(sender);
+}
