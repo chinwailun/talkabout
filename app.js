@@ -1555,7 +1555,9 @@ function handleDialogFlowResponse(sender, response) {
         sendPassThread(sender);//pass the control
     }
     else */
-    
+    function lowSentimentPassControl (){
+        
+    }
     
     // ==================================testing start here==================================
 
