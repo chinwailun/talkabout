@@ -1588,11 +1588,9 @@ function handleDialogFlowResponse(sender, response) {
     }*/
 
 
-    if(lastSentiment!==undefined && lastSentiment.score < -4){
-        console.log("nothing here");
-    }
+ 
     
-    else if (isDefined(action)) { //if action is defined, then see what it is and handle it
+    if (isDefined(action)) { //if action is defined, then see what it is and handle it
         handleDialogFlowAction(sender, action, messages, contexts, parameters); //if dialogflow returns an intent, that has an action set, then call the handleDialogFlowAction
        // nextPossibleQuestion(sender);
         //console.log("1111111111111");
@@ -1616,7 +1614,7 @@ function handleDialogFlowResponse(sender, response) {
     }
 
     function lowSentimentPassControl (){
-        
+        //to pass conversation control from chatbot to a live agent
     }
 }
 
